@@ -1,12 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="e0f2b44a-ee8d-426d-989e-c6ba80dea4e3" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/yoke/backend/Jaccount/Config.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/yoke/backend/Jaccount/JaccountController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/yoke/backend/Jaccount/JaccountForm.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/yoke/backend/BackendApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/yoke/backend/BackendApplication.java" afterDir="false" />
-    </list>
+    <list default="true" id="e0f2b44a-ee8d-426d-989e-c6ba80dea4e3" name="Default Changelist" comment="" />
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -240,6 +235,9 @@
       </pane>
       <pane id="PackagesPane" />
     </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
