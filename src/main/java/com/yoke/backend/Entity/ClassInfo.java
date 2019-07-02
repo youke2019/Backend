@@ -3,14 +3,21 @@ package com.yoke.backend.Entity;
 import java.util.List;
 
 public class ClassInfo {
+    private String course_id;
     private String classname;
     private String teacher_id;
     private String teacher_name;
     private String teachers;
-    private int course_participants;
-    private int begin_week;
-    private int end_week;
+    private Integer course_participants;
     private List<ClassSegment> classSegments;
+
+    public String getCourse_id() {
+        return course_id;
+    }
+
+    public void setCourse_id(String course_id) {
+        this.course_id = course_id;
+    }
 
     public String getClassname() {
         return classname;
@@ -44,28 +51,12 @@ public class ClassInfo {
         this.teachers = teachers;
     }
 
-    public int getCourse_participants() {
+    public Integer getCourse_participants() {
         return course_participants;
     }
 
-    public void setCourse_participants(int course_participants) {
+    public void setCourse_participants(Integer course_participants) {
         this.course_participants = course_participants;
-    }
-
-    public int getBegin_week() {
-        return begin_week;
-    }
-
-    public void setBegin_week(int begin_week) {
-        this.begin_week = begin_week;
-    }
-
-    public int getEnd_week() {
-        return end_week;
-    }
-
-    public void setEnd_week(int end_week) {
-        this.end_week = end_week;
     }
 
     public List<ClassSegment> getClassSegments() {

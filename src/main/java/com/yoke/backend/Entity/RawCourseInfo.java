@@ -57,8 +57,20 @@ public class RawCourseInfo {
     @JSONField(name = "sftsk")
     private String general_course;
 
+    @JSONField(name="kzmc")
+    private String general_type;
+
     @JSONField(name = "totalresult")
     private int total_result;
+
+    public String getGeneral_type() {
+        return general_type;
+    }
+
+    public void setGeneral_type(String general_type) {
+        this.general_type = general_type;
+    }
+
 
     public int getDepartment_id() {
         return department_id;

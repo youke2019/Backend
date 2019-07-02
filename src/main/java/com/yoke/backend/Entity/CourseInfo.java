@@ -1,21 +1,27 @@
 package com.yoke.backend.Entity;
 
+import sun.swing.plaf.windows.ClassicSortArrowIcon;
+
+import java.util.ArrayList;
 import java.util.List;
 
 public class CourseInfo {
-    private int course_id;
+    private String course_id;
     private String course_name;
-    private int course_hours;
+    private Integer course_hours;
     private float course_credits;
     private boolean general;
     private String general_type;
     private List<ClassInfo> classes;
 
-    public int getCourse_id() {
+    public CourseInfo() {
+    }
+
+    public String getCourse_id() {
         return course_id;
     }
 
-    public void setCourse_id(int course_id) {
+    public void setCourse_id(String course_id) {
         this.course_id = course_id;
     }
 
@@ -27,11 +33,11 @@ public class CourseInfo {
         this.course_name = course_name;
     }
 
-    public int getCourse_hours() {
+    public Integer getCourse_hours() {
         return course_hours;
     }
 
-    public void setCourse_hours(int course_hours) {
+    public void setCourse_hours(Integer course_hours) {
         this.course_hours = course_hours;
     }
 
