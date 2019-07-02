@@ -10,9 +10,4 @@ public class Config {
     public RestTemplate restTemplate() {
         return new RestTemplate();
     }
-
-    @Bean
-    public JaccountForm jaccountForm() {
-        return new JaccountForm();
-    }
 }

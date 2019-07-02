@@ -1,11 +1,22 @@
 package com.yoke.backend.Entity;
 
-import sun.swing.plaf.windows.ClassicSortArrowIcon;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
-import java.util.ArrayList;
+import javax.persistence.*;
 import java.util.List;
 
+@Entity
+@Table(name="course",schema = "yoke1",catalog = "")
+@JsonIgnoreProperties(value = {"handler","hibernateLazyInitializer","fieldHandler"})
+@JsonIdentityInfo(
+        generator = ObjectIdGenerators.PropertyGenerator.class,
+        property = "course_id"
+)
 public class CourseInfo {
+
+
     private String course_id;
     private String course_name;
     private Integer course_hours;
@@ -17,6 +28,8 @@ public class CourseInfo {
     public CourseInfo() {
     }
 
+    @Id
+    @Column(name="course_id")
     public String getCourse_id() {
         return course_id;
     }
@@ -25,14 +38,19 @@ public class CourseInfo {
         this.course_id = course_id;
     }
 
+    @Basic
+    @Column(name = "course_name")
     public String getCourse_name() {
         return course_name;
     }
+
 
     public void setCourse_name(String course_name) {
         this.course_name = course_name;
     }
 
+    @Basic
+    @Column(name="course_hours")
     public Integer getCourse_hours() {
         return course_hours;
     }
@@ -41,6 +59,8 @@ public class CourseInfo {
         this.course_hours = course_hours;
     }
 
+    @Basic
+    @Column(name="course_credits")
     public float getCourse_credits() {
         return course_credits;
     }
@@ -49,6 +69,8 @@ public class CourseInfo {
         this.course_credits = course_credits;
     }
 
+    @Basic
+    @Column(name="general")
     public boolean isGeneral() {
         return general;
     }
@@ -57,6 +79,8 @@ public class CourseInfo {
         this.general = general;
     }
 
+    @Basic()
+    @Column(name="general_type")
     public String getGeneral_type() {
         return general_type;
     }
@@ -65,6 +89,8 @@ public class CourseInfo {
         this.general_type = general_type;
     }
 
+    @OneToMany(fetch = FetchType.LAZY)
+    @JoinTable(name="course_class",joinColumns = @JoinColumn(name="course_id"),inverseJoinColumns = @JoinColumn(name="classname"))
     public List<ClassInfo> getClasses() {
         return classes;
     }

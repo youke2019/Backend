@@ -2,12 +2,13 @@ package com.yoke.backend.Controller;
 
 
 import com.alibaba.fastjson.JSON;
+import com.yoke.backend.Entity.RawCourseInfo;
+import com.yoke.backend.Entity.RawCourseResponse;
 import com.alibaba.fastjson.JSONReader;
 import com.yoke.backend.Entity.*;
 import org.bson.json.JsonReader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.PostConstruct;
@@ -15,7 +16,6 @@ import javax.sound.midi.SysexMessage;
 import java.io.*;
 import java.lang.reflect.Array;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;

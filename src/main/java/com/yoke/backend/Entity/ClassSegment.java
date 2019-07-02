@@ -1,5 +1,18 @@
 package com.yoke.backend.Entity;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
+import javax.persistence.*;
+
+@Entity
+@Table(name="class_segments",schema = "yoke1",catalog = "")
+@JsonIgnoreProperties(value = {"handler","hibernateLazyInitializer","fieldHandler"})
+@JsonIdentityInfo(
+        generator = ObjectIdGenerators.PropertyGenerator.class,
+        property = "classname"
+)
 public class ClassSegment {
     private String classname;
     private String classroom;
@@ -54,6 +67,18 @@ public class ClassSegment {
         this.classname = classname;
     }
 
+    @Id
+    @Column(name = "class_name")
+    public String getClassname() {
+        return classname;
+    }
+
+    public void setClassname(String classname) {
+        this.classname = classname;
+    }
+
+    @Basic
+    @Column(name = "class_room")
     public String getClassroom() {
         return classroom;
     }
@@ -62,6 +87,8 @@ public class ClassSegment {
         this.classroom = classroom;
     }
 
+    @Basic
+    @Column(name = "begin_sec")
     public Integer getBegin_sec() {
         return begin_sec;
     }
@@ -70,6 +97,8 @@ public class ClassSegment {
         this.begin_sec = begin_sec;
     }
 
+    @Basic
+    @Column(name = "end_sec")
     public Integer getEnd_sec() {
         return end_sec;
     }
@@ -78,6 +107,8 @@ public class ClassSegment {
         this.end_sec = end_sec;
     }
 
+    @Basic
+    @Column(name = "week")
     public Integer getWeek() {
         return week;
     }
