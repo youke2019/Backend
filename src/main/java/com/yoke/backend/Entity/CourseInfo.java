@@ -19,11 +19,14 @@ public class CourseInfo {
 
     private String course_id;
     private String course_name;
-    private int course_hours;
+    private Integer course_hours;
     private float course_credits;
     private boolean general;
     private String general_type;
     private List<ClassInfo> classes;
+
+    public CourseInfo() {
+    }
 
     @Id
     @Column(name="course_id")
@@ -48,11 +51,11 @@ public class CourseInfo {
 
     @Basic
     @Column(name="course_hours")
-    public int getCourse_hours() {
+    public Integer getCourse_hours() {
         return course_hours;
     }
 
-    public void setCourse_hours(int course_hours) {
+    public void setCourse_hours(Integer course_hours) {
         this.course_hours = course_hours;
     }
 
