@@ -33,9 +33,6 @@ public class ClassInfo {
         return course_id;
     }
 
-    public void setCourse_id(String course_id) {
-        this.course_id = course_id;
-    }
 
     @Id
     @Column(name = "class_name")
@@ -87,25 +84,6 @@ public class ClassInfo {
         this.course_participants = course_participants;
     }
 
-    @Basic
-    @Column(name="begin_week")
-    public Integer getBegin_week() {
-        return begin_week;
-    }
-
-    public void setBegin_week(int begin_week) {
-        this.begin_week = begin_week;
-    }
-
-    @Basic
-    @Column(name="end_week")
-    public int getEnd_week() {
-        return end_week;
-    }
-
-    public void setEnd_week(int end_week) {
-        this.end_week = end_week;
-    }
 
     @OneToMany(fetch = FetchType.LAZY)
     @JoinTable(name="class_segments",joinColumns = @JoinColumn(name = "classname"),inverseJoinColumns = @JoinColumn(name="classname"))

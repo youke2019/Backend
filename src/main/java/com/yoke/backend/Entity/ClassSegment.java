@@ -59,14 +59,6 @@ public class ClassSegment {
         this.end_week = end_week;
     }
 
-    public String getClassname() {
-        return classname;
-    }
-
-    public void setClassname(String classname) {
-        this.classname = classname;
-    }
-
     @Id
     @Column(name = "class_name")
     public String getClassname() {
