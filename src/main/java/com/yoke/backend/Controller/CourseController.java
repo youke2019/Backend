@@ -2,6 +2,7 @@ package com.yoke.backend.Controller;
 
 
 import com.alibaba.fastjson.JSON;
+import com.yoke.backend.Entity.CourseInfo;
 import com.yoke.backend.Entity.RawCourseInfo;
 import com.yoke.backend.Entity.RawCourseResponse;
 import org.springframework.web.bind.annotation.RequestMapping;
