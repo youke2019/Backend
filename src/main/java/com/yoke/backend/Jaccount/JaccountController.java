@@ -1,9 +1,10 @@
 package com.yoke.backend.Jaccount;
 
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
@@ -26,7 +27,7 @@ public class JaccountController {
 
     @ResponseBody
     @RequestMapping(value = "/info", method = RequestMethod.GET)
-    public ResponseEntity<String> getInfo(@RequestParam("code")String code) {
+    public User getInfo(@RequestParam("code")String code) {
         System.out.println(code);
         MultiValueMap<String,String> param = new LinkedMultiValueMap<>();
         param.add("code",code);
@@ -40,6 +41,22 @@ public class JaccountController {
         HttpEntity<MultiValueMap<String,String>> request = new HttpEntity<>(param,headers);
         ResponseEntity<String> responseEntity = restTemplate.postForEntity("https://jaccount.sjtu.edu.cn/oauth2/token",request,String.class);
         System.out.println(responseEntity);
-        return responseEntity;
+
+        JSONObject responseJson = JSONObject.parseObject(responseEntity.getBody());
+        String token = responseJson.getString("access_token");
+        responseEntity = restTemplate.getForEntity("https://api.sjtu.edu.cn/v1/me/profile?access_token="+token, String.class);
+
+        responseJson = JSONObject.parseObject(responseEntity.getBody());
+        System.out.println(responseJson.get("entities"));
+
+        JSONArray array = JSONArray.parseArray(responseJson.get("entities").toString());
+        JSONObject object = JSONObject.parseObject(array.get(0).toString());
+        System.out.println(object);
+
+        User userinfo = new User();
+        userinfo.setName(object.getString("name"));
+        userinfo.setDepartment(object.getJSONObject("organize").getString("name"));
+        userinfo.setMajor(object.getJSONArray("identities").getJSONObject(0).getJSONObject("major").getString("name"));
+        return userinfo;
     }
 }
