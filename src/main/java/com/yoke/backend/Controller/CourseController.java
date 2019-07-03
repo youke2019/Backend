@@ -17,7 +17,7 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-@RequestMapping(value = "/course")
+@RequestMapping(value = "/courses")
 public class CourseController {
 
     @PostConstruct

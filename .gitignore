@@ -25,7 +25,7 @@
 hs_err_pid*
 
 ### Maven template
-target/
+
 pom.xml.tag
 pom.xml.releaseBackup
 pom.xml.versionsBackup
@@ -36,10 +36,6 @@ buildNumber.properties
 .mvn/timing.properties
 .mvn/wrapper/maven-wrapper.jar
 
-target/generated-sources/
-target/generated-test-sources/
-target/test-classes/com/yoke/backend/Entity/
+target/
 .idea/
-
-### properties
-src/main/resources/application.properties
+/src/main/resources/application.properties
