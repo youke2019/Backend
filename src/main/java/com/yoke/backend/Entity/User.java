@@ -1,4 +1,4 @@
-package com.yoke.backend.Jaccount;
+package com.yoke.backend.Entity;
 
 public class User {
     private String name;
