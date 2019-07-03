@@ -10,6 +10,8 @@ import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
+import javax.servlet.http.HttpServletResponse;
+
 @RestController
 @RequestMapping(value = "/jaccount")
 public class JaccountController {
@@ -24,7 +26,7 @@ public class JaccountController {
 
     @ResponseBody
     @RequestMapping(value = "/login", method = RequestMethod.GET)
-    public User login(@RequestParam("code")String code) {
+    public User login(@RequestParam("code")String code, HttpServletResponse response) {
         ResponseEntity<String> responseEntity;
 
         // post header
@@ -37,7 +39,7 @@ public class JaccountController {
         param.add("client_id",client_id);
         param.add("client_secret",client_secret);
         param.add("grant_type",grant_type);
-        param.add("redirect_uri","http://localhost:8080/jaccount/login");
+        param.add("redirect_uri","http://10.0.2.2:8080/jaccount/login");
 
         // request for access token with http request
         HttpEntity<MultiValueMap<String,String>> request = new HttpEntity<>(param,headers);
@@ -56,6 +58,16 @@ public class JaccountController {
         userinfo.setName(responseJson.getJSONArray("entities").getJSONObject(0).getString("name"));
         userinfo.setDepartment(responseJson.getJSONArray("entities").getJSONObject(0).getJSONObject("organize").getString("name"));
         userinfo.setMajor(responseJson.getJSONArray("entities").getJSONObject(0).getJSONArray("identities").getJSONObject(0).getJSONObject("major").getString("name"));
+        try {
+            String name = userinfo.getName();
+            String department = userinfo.getDepartment();
+            String major = userinfo.getMajor();
+            String app_url = "yoke://?name="+name+"&department="+department+"&major="+major;
+            response.sendRedirect(app_url);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
         return userinfo;
     }
 }
