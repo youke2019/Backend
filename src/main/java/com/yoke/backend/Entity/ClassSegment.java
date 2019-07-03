@@ -14,7 +14,7 @@ import javax.persistence.*;
         property = "class_sec_id"
 )
 public class ClassSegment {
-    private Integer class_sec_id;
+    private Integer class_sec_id = 0;
     private String classname;
     private String classroom;
     private Integer begin_week;
@@ -77,8 +77,8 @@ public class ClassSegment {
         this.end_week = end_week;
     }
 
-    @Basic
-    @Column(name = "classname")
+
+    @JoinColumn(name = "classname")
     public String getClassname() {
         return classname;
     }

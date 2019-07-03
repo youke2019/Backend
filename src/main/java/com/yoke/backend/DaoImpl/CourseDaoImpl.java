@@ -20,7 +20,7 @@ public class CourseDaoImpl implements CourseDao {
     private CourseRepository courseRepository;
 
     @Override
-    public List<CourseInfo> findall()
+    public List<CourseInfo> findAll()
     {
         return courseRepository.findAll();
     }

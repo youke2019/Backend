@@ -3,6 +3,8 @@ package com.yoke.backend.Controller;
 
 import com.yoke.backend.Entity.*;
 import com.alibaba.fastjson.JSON;
+import com.yoke.backend.repository.CourseRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -96,6 +98,9 @@ public class CourseController {
         }
     }
 
+    @Autowired
+    CourseRepository repository;
+
     /**
      * transform Object RawCourseInfo to Object CourseInfo
      */
@@ -136,12 +141,14 @@ public class CourseController {
             /* 新纪录 或 修改过的记录  写回map*/
             map.put(courseID,courseInfo);
         }
+        /* 将map中保存的数据转成 List */
         ArrayList<CourseInfo> courseInfos = new ArrayList<>();
         for(CourseInfo info : map.values()){
             courseInfos.add(info);
         }
         return courseInfos;
     }
+
     /**
      *
      * @param requestUrl
@@ -165,7 +172,7 @@ public class CourseController {
         conn.setRequestProperty("Cookie", Cookie);
         conn.setRequestProperty("Host","i.sjtu.edu.cn");
         OutputStreamWriter osw = new OutputStreamWriter(conn.getOutputStream(),"UTF-8");
-        osw.write("xnm=2018&_search=false&nd=1561987754238&queryModel.showCount=1000&queryModel.currentPage=1&queryModel.sortName=&queryModel.sortOrder=asc");
+        osw.write("xnm=2018&_search=false&nd=1561987754238&queryModel.showCount=10000&queryModel.currentPage=1&queryModel.sortName=&queryModel.sortOrder=asc");
         osw.flush(); //不flush 发生了bug，等下试试\n
 
         // get response stream save to res
@@ -181,6 +188,8 @@ public class CourseController {
         // parse String res to JSON object
         RawCourseResponse response = JSON.parseObject(res,RawCourseResponse.class);
         List<CourseInfo> courseInfos = parseRawCourseInfo(response.getRawCourseInfo());
+        for (CourseInfo courseInfo : courseInfos)
+            repository.save(courseInfo);
 
         String jsonString = JSON.toJSONString(courseInfos);
         //System.out.println(response.getRawCourseInfo().size());

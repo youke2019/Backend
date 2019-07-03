@@ -11,5 +11,5 @@ import java.util.List;
  **/
 
 public interface CourseDao {
-    List<CourseInfo> findall();
+    List<CourseInfo> findAll();
 }
