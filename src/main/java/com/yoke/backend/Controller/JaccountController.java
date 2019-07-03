@@ -1,6 +1,7 @@
-package com.yoke.backend.Jaccount;
+package com.yoke.backend.Controller;
 
 import com.alibaba.fastjson.JSONObject;
+import com.yoke.backend.Entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -49,25 +50,34 @@ public class JaccountController {
         // use access token to get user profile with http request
         JSONObject responseJson = JSONObject.parseObject(responseEntity.getBody());
         String token = responseJson.getString("access_token");
-        String url = profileApi
-                +"?access_token="+token;
-        responseEntity = restTemplate.getForEntity(url, String.class);
-
-        // parse response
-        responseJson = JSONObject.parseObject(responseEntity.getBody());
-        String name = responseJson.getJSONArray("entities").getJSONObject(0).getString("name");
-        String department = responseJson.getJSONArray("entities").getJSONObject(0).getJSONObject("organize").getString("name");
-        String major = responseJson.getJSONArray("entities").getJSONObject(0).getJSONArray("identities").getJSONObject(0).getJSONObject("major").getString("name");
         try {
-            name = URLEncoder.encode(name, "utf-8");
-            major = URLEncoder.encode(major, "utf-8");
-            department = URLEncoder.encode(department, "utf-8");
-            String app_url = "yoke://?name="+name+"&department="+department+"&major="+major;
+            String app_url = "yoke://profile?access_token="+token;
             response.sendRedirect(app_url);
         } catch (Exception e) {
             e.printStackTrace();
         }
 
         return "redirecting";
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/profile", method = RequestMethod.GET)
+    public User getProfile(@RequestParam("access_token")String token) {
+        String url = profileApi
+                +"?access_token="+token;
+        ResponseEntity<String> responseEntity = restTemplate.getForEntity(url, String.class);
+
+        // parse response
+        JSONObject responseJson = JSONObject.parseObject(responseEntity.getBody());
+        String name = responseJson.getJSONArray("entities").getJSONObject(0).getString("name");
+        String department = responseJson.getJSONArray("entities").getJSONObject(0).getJSONObject("organize").getString("name");
+        String major = responseJson.getJSONArray("entities").getJSONObject(0).getJSONArray("identities").getJSONObject(0).getJSONObject("major").getString("name");
+
+        // build response json
+        User user = new User();
+        user.setName(name);
+        user.setDepartment(department);
+        user.setMajor(major);
+        return user;
     }
 }

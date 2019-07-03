@@ -40,3 +40,6 @@ target/generated-sources/
 target/generated-test-sources/
 target/test-classes/com/yoke/backend/Entity/
 .idea/
+
+### properties
+src/main/resources/application.properties
