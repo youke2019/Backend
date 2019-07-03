@@ -1,8 +1,8 @@
 package com.yoke.backend.Controller;
 
 
-import com.alibaba.fastjson.JSON;
 import com.yoke.backend.Entity.*;
+import com.alibaba.fastjson.JSON;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -109,11 +109,13 @@ public class CourseController {
                 courseInfo = new CourseInfo();
                 courseInfo.setCourse_id(courseID);
                 courseInfo.setCourse_name(info.getCourse_name());
+                courseInfo.setCourse_hours(info.getHours());
                 courseInfo.setCourse_credits(info.getCredits());
+                courseInfo.setCourse_hours(info.getHours());
                 courseInfo.setGeneral(info.getGeneral_course().equals("是"));
                 courseInfo.setGeneral_type(info.getGeneral_type());
                 courseInfo.setClasses(new ArrayList<>());
-            } else courseInfo = (CourseInfo) map.get(courseID); /* 存在就读取现有记录*/
+            } else courseInfo = map.get(courseID); /* 存在就读取现有记录*/
 
             /* 分析教学班信息 */
             ClassInfo classInfo = new ClassInfo();
@@ -146,7 +148,7 @@ public class CourseController {
      * @param Cookie
      * @return
      */
-    @RequestMapping(value = "/update", method = RequestMethod.POST)
+    @RequestMapping(value = "/update", method = RequestMethod.GET)
     public String updateCourseTable(String requestUrl ,String Cookie) throws IOException {
         String res = "";
         StringBuffer buffer = new StringBuffer();
@@ -163,7 +165,7 @@ public class CourseController {
         conn.setRequestProperty("Cookie", Cookie);
         conn.setRequestProperty("Host","i.sjtu.edu.cn");
         OutputStreamWriter osw = new OutputStreamWriter(conn.getOutputStream(),"UTF-8");
-        osw.write("xnm=2018&_search=false&nd=1561987754238&queryModel.showCount=7500&queryModel.currentPage=1&queryModel.sortName=&queryModel.sortOrder=asc");
+        osw.write("xnm=2018&_search=false&nd=1561987754238&queryModel.showCount=1000&queryModel.currentPage=1&queryModel.sortName=&queryModel.sortOrder=asc");
         osw.flush(); //不flush 发生了bug，等下试试\n
 
         // get response stream save to res
@@ -179,11 +181,26 @@ public class CourseController {
         // parse String res to JSON object
         RawCourseResponse response = JSON.parseObject(res,RawCourseResponse.class);
         List<CourseInfo> courseInfos = parseRawCourseInfo(response.getRawCourseInfo());
+
         String jsonString = JSON.toJSONString(courseInfos);
         //System.out.println(response.getRawCourseInfo().size());
         //System.out.println(courseInfos.size());
 
         return jsonString;
+    }
+
+    /**
+     * @param CourseID
+     * @return
+     */
+    @RequestMapping(value = "/", method = RequestMethod.GET)
+    public String getCourseDetail(String CourseID) {
+        return "not implemented.";
+    }
+
+    @RequestMapping(value = "/", method = RequestMethod.POST)
+    public String searchCourse() {
+        return "not implemented.";
     }
 
 }

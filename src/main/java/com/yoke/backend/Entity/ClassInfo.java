@@ -7,11 +7,11 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import javax.persistence.*;
 import java.util.List;
 @Entity
-@Table(name="course_class",schema = "yoke2",catalog = "")
+@Table(name="course_class",schema = "yoke",catalog = "")
 @JsonIgnoreProperties(value = {"handler","hibernateLazyInitializer","fieldHandler"})
 @JsonIdentityInfo(
         generator = ObjectIdGenerators.PropertyGenerator.class,
-        property = "class_name"
+        property = "classname"
 )
 public class ClassInfo {
     private String course_id;
@@ -35,7 +35,7 @@ public class ClassInfo {
 
 
     @Id
-    @Column(name = "class_name")
+    @Column(name = "classname")
     public String getClassname() {
         return classname;
     }
@@ -86,7 +86,7 @@ public class ClassInfo {
 
 
     @OneToMany(fetch = FetchType.LAZY)
-    @JoinTable(name="class_segments",joinColumns = @JoinColumn(name = "classname"),inverseJoinColumns = @JoinColumn(name="classname"))
+    @JoinTable(name="class_segments",joinColumns = @JoinColumn(name = "classname"),inverseJoinColumns = @JoinColumn(name="class_sec_id"))
     public List<ClassSegment> getClassSegments() {
         return classSegments;
     }
