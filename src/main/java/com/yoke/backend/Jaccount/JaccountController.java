@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
 import javax.servlet.http.HttpServletResponse;
+import java.net.URLEncoder;
 
 @RestController
 @RequestMapping(value = "/jaccount")
@@ -26,7 +27,7 @@ public class JaccountController {
 
     @ResponseBody
     @RequestMapping(value = "/login", method = RequestMethod.GET)
-    public User login(@RequestParam("code")String code, HttpServletResponse response) {
+    public String login(@RequestParam("code")String code, HttpServletResponse response) {
         ResponseEntity<String> responseEntity;
 
         // post header
@@ -53,21 +54,20 @@ public class JaccountController {
         responseEntity = restTemplate.getForEntity(url, String.class);
 
         // parse response
-        User userinfo = new User();
         responseJson = JSONObject.parseObject(responseEntity.getBody());
-        userinfo.setName(responseJson.getJSONArray("entities").getJSONObject(0).getString("name"));
-        userinfo.setDepartment(responseJson.getJSONArray("entities").getJSONObject(0).getJSONObject("organize").getString("name"));
-        userinfo.setMajor(responseJson.getJSONArray("entities").getJSONObject(0).getJSONArray("identities").getJSONObject(0).getJSONObject("major").getString("name"));
+        String name = responseJson.getJSONArray("entities").getJSONObject(0).getString("name");
+        String department = responseJson.getJSONArray("entities").getJSONObject(0).getJSONObject("organize").getString("name");
+        String major = responseJson.getJSONArray("entities").getJSONObject(0).getJSONArray("identities").getJSONObject(0).getJSONObject("major").getString("name");
         try {
-            String name = userinfo.getName();
-            String department = userinfo.getDepartment();
-            String major = userinfo.getMajor();
+            name = URLEncoder.encode(name, "utf-8");
+            major = URLEncoder.encode(major, "utf-8");
+            department = URLEncoder.encode(department, "utf-8");
             String app_url = "yoke://?name="+name+"&department="+department+"&major="+major;
             response.sendRedirect(app_url);
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-        return userinfo;
+        return "redirecting";
     }
 }
