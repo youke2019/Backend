@@ -12,4 +12,5 @@ import java.util.List;
 
 public interface CourseDao {
     List<CourseInfo> findAll();
+    void save(CourseInfo courseInfo);
 }

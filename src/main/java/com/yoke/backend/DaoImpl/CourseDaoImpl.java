@@ -25,4 +25,11 @@ public class CourseDaoImpl implements CourseDao {
         return courseRepository.findAll();
     }
 
+    @Override
+    public void save(CourseInfo courseInfo)
+    {
+        courseRepository.save(courseInfo);
+    }
+
+
 }
