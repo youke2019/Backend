@@ -111,6 +111,7 @@ public class CourseController {
                 courseInfo.setCourse_name(info.getCourse_name());
                 courseInfo.setCourse_hours(info.getHours());
                 courseInfo.setCourse_credits(info.getCredits());
+                courseInfo.setCourse_hours(info.getHours());
                 courseInfo.setGeneral(info.getGeneral_course().equals("是"));
                 courseInfo.setGeneral_type(info.getGeneral_type());
                 courseInfo.setClasses(new ArrayList<>());
@@ -180,6 +181,7 @@ public class CourseController {
         // parse String res to JSON object
         RawCourseResponse response = JSON.parseObject(res,RawCourseResponse.class);
         List<CourseInfo> courseInfos = parseRawCourseInfo(response.getRawCourseInfo());
+
         String jsonString = JSON.toJSONString(courseInfos);
         //System.out.println(response.getRawCourseInfo().size());
         //System.out.println(courseInfos.size());

@@ -7,13 +7,14 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import javax.persistence.*;
 
 @Entity
-@Table(name="class_segments",schema = "yoke1",catalog = "")
+@Table(name="class_segments",schema = "yoke",catalog = "")
 @JsonIgnoreProperties(value = {"handler","hibernateLazyInitializer","fieldHandler"})
 @JsonIdentityInfo(
         generator = ObjectIdGenerators.PropertyGenerator.class,
-        property = "classname"
+        property = "class_sec_id"
 )
 public class ClassSegment {
+    private Integer class_sec_id;
     private String classname;
     private String classroom;
     private Integer begin_week;
@@ -35,10 +36,25 @@ public class ClassSegment {
         this.week = week;
     }
 
+    @Id
+    @Column(name="class_sec_id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    public Integer getClass_sec_id() {
+        return class_sec_id;
+    }
+
+    public void setClass_sec_id(Integer class_sec_id) {
+        this.class_sec_id = class_sec_id;
+    }
+
+    @Basic
+    @Column(name="begin_week")
     public Integer getBegin_week() {
         return begin_week;
     }
 
+    @Basic
+    @Column(name = "odd_or_even")
     public Character getOddOrEven() {
         return oddOrEven;
     }
@@ -51,6 +67,8 @@ public class ClassSegment {
         this.begin_week = begin_week;
     }
 
+    @Basic
+    @Column(name = "end_week")
     public Integer getEnd_week() {
         return end_week;
     }
@@ -59,8 +77,8 @@ public class ClassSegment {
         this.end_week = end_week;
     }
 
-    @Id
-    @Column(name = "class_name")
+    @Basic
+    @Column(name = "classname")
     public String getClassname() {
         return classname;
     }
@@ -70,7 +88,7 @@ public class ClassSegment {
     }
 
     @Basic
-    @Column(name = "class_room")
+    @Column(name = "classroom")
     public String getClassroom() {
         return classroom;
     }
@@ -108,4 +126,6 @@ public class ClassSegment {
     public void setWeek(Integer week) {
         this.week = week;
     }
+
+
 }
