@@ -34,5 +34,13 @@ public class CourseController {
         courseService.GetCourseFromJWC(url,cookies);
     }
 
+
+    @RequestMapping(value = "/search", method= RequestMethod.POST)
+    @ResponseBody
+    public List<CourseInfo> SearchCourseInfo(@RequestBody SearchCourseInfoParams searchCourseInfoParams)
+    {
+        return courseService.SearchCourseInfo(searchCourseInfoParams);
+    }
+
 }
 

@@ -13,4 +13,7 @@ import java.util.List;
 public interface CourseDao {
     List<CourseInfo> findAll();
     void save(CourseInfo courseInfo);
+    List<CourseInfo> findCourseInfoByCourseId(String cours_id);
+    /*List<CourseInfo> findCourseInfoByCourseName(String course_name);
+    List<CourseInfo> findCourseInfoByTeacherName(String teacher_name);*/
 }

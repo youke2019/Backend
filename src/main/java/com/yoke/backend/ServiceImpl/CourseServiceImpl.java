@@ -25,12 +25,26 @@ import java.util.Map;
 public class CourseServiceImpl implements CourseService {
     @Autowired
     CourseDao courseDao;
+
+    @Override
     public void GetCourseFromJWC(String url,String cookies) throws IOException {
         List<CourseInfo> courseInfoList=updateCourseTable(url,cookies);
         for(int i=0;i<courseInfoList.size();++i)
         {
             courseDao.save(courseInfoList.get(i));
         }
+    }
+
+    @Override
+    public List<CourseInfo> SearchCourseInfo(SearchCourseInfoParams searchCourseInfoParams)
+    {
+        List<CourseInfo> courseInfoList=new ArrayList<>();
+        if(searchCourseInfoParams.getCourse_id()!="")
+            courseInfoList = courseDao.findCourseInfoByCourseId(searchCourseInfoParams.getCourse_id());
+        /*else
+            if(searchCourseInfoParams.getCourse_name()!="")
+                courseInfoList=courseDao.findCourseInfoB*/
+        return courseInfoList;
     }
 
     /**
@@ -106,8 +120,6 @@ public class CourseServiceImpl implements CourseService {
         }
     }
 
-    @Autowired
-    CourseRepository repository;
 
     /**
      * transform Object RawCourseInfo to Object CourseInfo

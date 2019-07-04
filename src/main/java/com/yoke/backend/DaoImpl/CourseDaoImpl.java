@@ -31,5 +31,8 @@ public class CourseDaoImpl implements CourseDao {
         courseRepository.save(courseInfo);
     }
 
-
+    @Override
+    public List<CourseInfo> findCourseInfoByCourseId(String course_id){
+        return courseRepository.findCourseByCourse_id(course_id);
+    }
 }
