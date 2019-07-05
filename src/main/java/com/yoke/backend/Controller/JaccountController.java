@@ -1,7 +1,7 @@
 package com.yoke.backend.Controller;
 
 import com.alibaba.fastjson.JSONObject;
-import com.yoke.backend.Entity.User;
+import com.yoke.backend.Entity.User.User;
 import com.yoke.backend.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
 import javax.servlet.http.HttpServletResponse;
-import java.net.URLEncoder;
 
 @RestController
 @RequestMapping(value = "/jaccount")
@@ -81,6 +80,8 @@ public class JaccountController {
         user.setName(name);
         user.setDepartment(department);
         user.setMajor(major);
+
+        // save user data into database.
         userService.generateUserIfNoUserLike(user);
         return user;
     }
