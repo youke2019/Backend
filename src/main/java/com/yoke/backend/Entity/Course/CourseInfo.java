@@ -1,4 +1,4 @@
-package com.yoke.backend.Entity;
+package com.yoke.backend.Entity.Course;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -15,8 +15,6 @@ import java.util.List;
         property = "course_id"
 )
 public class CourseInfo {
-
-
     private String course_id;
     private String course_name;
     private Integer course_hours;
@@ -89,8 +87,7 @@ public class CourseInfo {
         this.general_type = general_type;
     }
 
-    @OneToMany(fetch = FetchType.LAZY)
-    @JoinTable(name="course_class",joinColumns = @JoinColumn(name="course_id"),inverseJoinColumns = @JoinColumn(name="classname"))
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "course_id", cascade = CascadeType.ALL)
     public List<ClassInfo> getClasses() {
         return classes;
     }

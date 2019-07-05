@@ -1,4 +1,4 @@
-package com.yoke.backend.Entity;
+package com.yoke.backend.Entity.Course;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -27,8 +27,8 @@ public class ClassInfo {
         this.course_id = course_id;
     }
 
-    @Basic
-    @Column(name = "course_id")
+
+    @JoinColumn(name = "course_id")
     public String getCourse_id() {
         return course_id;
     }
@@ -85,8 +85,7 @@ public class ClassInfo {
     }
 
 
-    @OneToMany(fetch = FetchType.LAZY)
-    @JoinTable(name="class_segments",joinColumns = @JoinColumn(name = "classname"),inverseJoinColumns = @JoinColumn(name="class_sec_id"))
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "classname", cascade = CascadeType.ALL)
     public List<ClassSegment> getClassSegments() {
         return classSegments;
     }

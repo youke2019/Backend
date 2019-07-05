@@ -1,4 +1,4 @@
-package com.yoke.backend.Entity;
+package com.yoke.backend.Entity.Course;
 
 import com.alibaba.fastjson.annotation.JSONField;
 
