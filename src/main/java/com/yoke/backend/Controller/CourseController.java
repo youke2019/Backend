@@ -1,11 +1,14 @@
 package com.yoke.backend.Controller;
 
 
+import com.yoke.backend.Entity.Course.CourseInfo;
+import com.yoke.backend.Entity.Course.SearchCourseInfoParams;
 import com.yoke.backend.Service.CourseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.*;
+import java.util.List;
 
 @RestController
 @RequestMapping(value = "/courses")
