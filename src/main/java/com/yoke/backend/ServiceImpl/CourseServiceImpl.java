@@ -108,6 +108,7 @@ public class CourseServiceImpl implements CourseService {
         for(String time : strs[0].split(";")){
             ClassSegment segment = new ClassSegment();
             parseCourseTime(time,segment);
+            segment.setClassroom("未知");
             segments.add(segment);
         }
         if(strs.length == 1) {
@@ -137,7 +138,10 @@ public class CourseServiceImpl implements CourseService {
                 courseInfo.setCourse_credits(info.getCredits());
                 courseInfo.setCourse_hours(info.getHours());
                 courseInfo.setGeneral(info.getGeneral_course().equals("是"));
-                courseInfo.setGeneral_type(info.getGeneral_type());
+                if(info.getGeneral_course().equals("是"))
+                    courseInfo.setGeneral_type(info.getGeneral_type());
+                else
+                    courseInfo.setGeneral_type("");             //设置非通识课的general_type为"",而不是null
                 courseInfo.setClasses(new ArrayList<>());
             } else courseInfo = map.get(courseID); /* 存在就读取现有记录*/
 
