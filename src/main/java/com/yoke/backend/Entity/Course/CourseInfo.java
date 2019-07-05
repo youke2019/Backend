@@ -1,4 +1,4 @@
-package com.yoke.backend.Entity;
+package com.yoke.backend.Entity.Course;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;

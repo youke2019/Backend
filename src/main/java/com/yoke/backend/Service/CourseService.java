@@ -1,7 +1,7 @@
 package com.yoke.backend.Service;
 
-import com.yoke.backend.Entity.CourseInfo;
-import com.yoke.backend.Entity.SearchCourseInfoParams;
+import com.yoke.backend.Entity.Course.CourseInfo;
+import com.yoke.backend.Entity.Course.SearchCourseInfoParams;
 
 import java.io.IOException;
 import java.util.List;

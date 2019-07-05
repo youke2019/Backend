@@ -1,6 +1,6 @@
 package com.yoke.backend.repository;
 
-import com.yoke.backend.Entity.ClassInfo;
+import com.yoke.backend.Entity.Course.ClassInfo;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**

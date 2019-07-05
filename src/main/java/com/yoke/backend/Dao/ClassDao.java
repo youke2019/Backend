@@ -1,6 +1,6 @@
 package com.yoke.backend.Dao;
 
-import com.yoke.backend.Entity.ClassInfo;
+import com.yoke.backend.Entity.Course.ClassInfo;
 
 import java.util.List;
 

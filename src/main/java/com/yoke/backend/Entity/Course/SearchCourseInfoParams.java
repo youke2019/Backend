@@ -1,4 +1,4 @@
-package com.yoke.backend.Entity;
+package com.yoke.backend.Entity.Course;
 
 import java.util.ArrayList;
 import java.util.Arrays;
