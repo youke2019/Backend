@@ -25,8 +25,6 @@ public class CourseServiceImpl implements CourseService {
     @Autowired
     CourseDao courseDao;
 
-    @Autowired
-    CourseRepository courseRepository;
 
     final private int receive_course_number_limit = 10000;
     final private int search_course_year = 2018;
@@ -44,16 +42,7 @@ public class CourseServiceImpl implements CourseService {
     @Override
     public List<CourseInfo> SearchCourseInfo(SearchCourseInfoParams searchCourseInfoParams)
     {
-        List<CourseInfo> courseInfoList=new ArrayList<>();
-        System.out.println(searchCourseInfoParams.getCourse_id());
-        courseInfoList=courseRepository.findCourse(searchCourseInfoParams.getCourse_id(),
-                searchCourseInfoParams.getCourse_name(),searchCourseInfoParams.getTeacher_name(),
-                searchCourseInfoParams.getCourse_types(),searchCourseInfoParams.getGeneral_types(),
-                searchCourseInfoParams.getWeekdays(),searchCourseInfoParams.getBegin_secs(),
-                searchCourseInfoParams.getEnd_secs(),searchCourseInfoParams.getBuilding(),
-                searchCourseInfoParams.getCourse_credits());
-        System.out.println(courseInfoList.size());
-        return courseInfoList;
+        return courseDao.findCourse(searchCourseInfoParams);
     }
 
     /**

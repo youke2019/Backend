@@ -2,6 +2,7 @@ package com.yoke.backend.DaoImpl;
 
 import com.yoke.backend.Dao.CourseDao;
 import com.yoke.backend.Entity.Course.CourseInfo;
+import com.yoke.backend.Entity.Course.SearchCourseInfoParams;
 import com.yoke.backend.repository.CourseRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -32,20 +33,14 @@ public class CourseDaoImpl implements CourseDao {
     }
 
     @Override
-    public List<CourseInfo> findCourseInfoByCourseId(String course_id){
-        return courseRepository.findCourseByCourse_id(course_id);
-    }
-
-    @Override
-    public List<CourseInfo> findCourseInfoByCourseName(String course_name)
+    public List<CourseInfo> findCourse(SearchCourseInfoParams searchCourseInfoParams)
     {
-        return courseRepository.findCourseByCourseName(course_name);
-    }
-
-    @Override
-    public List<CourseInfo> findCourseInfoByTeacherName(String teacher_name)
-    {
-        return courseRepository.findCourseByTeacherName(teacher_name);
+        return courseRepository.findCourse(searchCourseInfoParams.getCourse_id(),
+                searchCourseInfoParams.getCourse_name(),searchCourseInfoParams.getTeacher_name(),
+                searchCourseInfoParams.getCourse_types(),searchCourseInfoParams.getGeneral_types(),
+                searchCourseInfoParams.getWeekdays(),searchCourseInfoParams.getBegin_secs(),
+                searchCourseInfoParams.getEnd_secs(),searchCourseInfoParams.getBuilding(),
+                searchCourseInfoParams.getCourse_credits());
     }
 
 
