@@ -26,6 +26,9 @@ public class CourseServiceImpl implements CourseService {
     @Autowired
     CourseDao courseDao;
 
+    @Autowired
+    CourseRepository courseRepository;
+
     @Override
     public void GetCourseFromJWC(String url,String cookies) throws IOException {
         List<CourseInfo> courseInfoList=updateCourseTable(url,cookies);
@@ -39,11 +42,14 @@ public class CourseServiceImpl implements CourseService {
     public List<CourseInfo> SearchCourseInfo(SearchCourseInfoParams searchCourseInfoParams)
     {
         List<CourseInfo> courseInfoList=new ArrayList<>();
-        if(searchCourseInfoParams.getCourse_id()!="")
-            courseInfoList = courseDao.findCourseInfoByCourseId(searchCourseInfoParams.getCourse_id());
-        /*else
-            if(searchCourseInfoParams.getCourse_name()!="")
-                courseInfoList=courseDao.findCourseInfoB*/
+        System.out.println(searchCourseInfoParams.getCourse_id());
+        courseInfoList=courseRepository.findCourse(searchCourseInfoParams.getCourse_id(),
+                searchCourseInfoParams.getCourse_name(),searchCourseInfoParams.getTeacher_name(),
+                searchCourseInfoParams.getCourse_types(),searchCourseInfoParams.getGeneral_types(),
+                searchCourseInfoParams.getWeekdays(),searchCourseInfoParams.getBegin_secs(),
+                searchCourseInfoParams.getEnd_secs(),searchCourseInfoParams.getBuilding(),
+                searchCourseInfoParams.getCourse_credits());
+        System.out.println(courseInfoList.size());
         return courseInfoList;
     }
 
