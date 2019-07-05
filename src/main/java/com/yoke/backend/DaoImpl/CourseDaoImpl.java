@@ -35,4 +35,18 @@ public class CourseDaoImpl implements CourseDao {
     public List<CourseInfo> findCourseInfoByCourseId(String course_id){
         return courseRepository.findCourseByCourse_id(course_id);
     }
+
+    @Override
+    public List<CourseInfo> findCourseInfoByCourseName(String course_name)
+    {
+        return courseRepository.findCourseByCourseName(course_name);
+    }
+
+    @Override
+    public List<CourseInfo> findCourseInfoByTeacherName(String teacher_name)
+    {
+        return courseRepository.findCourseByTeacherName(teacher_name);
+    }
+
+
 }

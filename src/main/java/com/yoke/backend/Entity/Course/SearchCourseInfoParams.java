@@ -1,5 +1,7 @@
 package com.yoke.backend.Entity.Course;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -8,15 +10,21 @@ import java.util.List;
  * @description:
  **/
 public class SearchCourseInfoParams {
-    private String course_id;
-    private String course_name;
-    private String teachaer_name;
-    private List<String> course_types;
-    private List<String> general_types;
-    private List<Integer> weekdays;
-    private List<Integer> class_secs;
-    private List<String> buildings;
-    private List<Integer> course_credits;
+    private String course_id="";
+    private String course_name="";
+    private String teacher_name="";
+    private List<Integer> course_types=Arrays.asList(0,1);
+    private List<String> general_types=Arrays.asList("社会学科","人文学科","自然学科","工程科学与技术","");  /*
+    需要将数据库中general_types为null的课程的general_types设为""*/
+    private List<Integer> weekdays=Arrays.asList(1,2,3,4,5,6,7);
+    private List<Integer> begin_secs=Arrays.asList(1,2,3,4,5,6,7,8,9,10,11,12,13,14);
+    private List<Integer> end_secs=Arrays.asList(1,2,3,4,5,6,7,8,9,10,11,12,13,14);
+    private String building="";
+    private List<Double> course_credits=new ArrayList<Double>(Arrays.asList(0.5,1.0,1.5,2.0,2.5,3.0,3.5,
+            4.0,4.5,5.0,5.5,6.0,6.5,7.0,7.5,8.0,8.5,9.0,9.5,10.0,10.5,11.5,12.0,12.5,13.0,14.0,15.0,16.0,17.0,18.0,19.0,
+            20.0,21.0,22.0,23.0,24.0,25.0));
+    /*需要将数据库中的classroom 为空的值设置为未知*/
+    /*将数据库中teacher_id,teacher_name为空的值设置为未知*/
 
     public String getCourse_id() {
         return course_id;
@@ -34,12 +42,8 @@ public class SearchCourseInfoParams {
         this.course_name = course_name;
     }
 
-    public List<String> getCourse_types() {
+    public List<Integer> getCourse_types() {
         return course_types;
-    }
-
-    public void setCourse_types(List<String> course_types) {
-        this.course_types = course_types;
     }
 
     public List<String> getGeneral_types() {
@@ -58,35 +62,47 @@ public class SearchCourseInfoParams {
         this.weekdays = weekdays;
     }
 
-    public List<Integer> getClass_secs() {
-        return class_secs;
+    public List<Integer> getBegin_secs() {
+        return begin_secs;
     }
 
-    public void setClass_secs(List<Integer> class_secs) {
-        this.class_secs = class_secs;
+    public void setCourse_types(List<Integer> course_types) {
+        this.course_types = course_types;
     }
 
-    public List<String> getBuildings() {
-        return buildings;
+    public List<Integer> getEnd_secs() {
+        return end_secs;
     }
 
-    public void setBuildings(List<String> buildings) {
-        this.buildings = buildings;
+    public void setBegin_secs(List<Integer> begin_secs) {
+        this.begin_secs = begin_secs;
     }
 
-    public String getTeachaer_name() {
-        return teachaer_name;
+    public void setEnd_secs(List<Integer> end_secs) {
+        this.end_secs = end_secs;
     }
 
-    public void setTeachaer_name(String teachaer_name) {
-        this.teachaer_name = teachaer_name;
+    public String getBuilding() {
+        return building;
     }
 
-    public List<Integer> getCourse_credits() {
+    public void setBuilding(String building) {
+        this.building = building;
+    }
+
+    public String getTeacher_name() {
+        return teacher_name;
+    }
+
+    public void setTeacher_name(String teacher_name) {
+        this.teacher_name = teacher_name;
+    }
+
+    public List<Double> getCourse_credits() {
         return course_credits;
     }
 
-    public void setCourse_credits(List<Integer> course_credits) {
+    public void setCourse_credits(List<Double> course_credits) {
         this.course_credits = course_credits;
     }
 }

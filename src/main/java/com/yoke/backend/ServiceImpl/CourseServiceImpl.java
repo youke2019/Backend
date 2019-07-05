@@ -25,6 +25,9 @@ public class CourseServiceImpl implements CourseService {
     @Autowired
     CourseDao courseDao;
 
+    @Autowired
+    CourseRepository courseRepository;
+
     final private int receive_course_number_limit = 10000;
     final private int search_course_year = 2018;
     final private int search_course_semester = 3; //   1:3 ,   2:12,   夏季学期:16
@@ -42,11 +45,14 @@ public class CourseServiceImpl implements CourseService {
     public List<CourseInfo> SearchCourseInfo(SearchCourseInfoParams searchCourseInfoParams)
     {
         List<CourseInfo> courseInfoList=new ArrayList<>();
-        if(searchCourseInfoParams.getCourse_id()!="")
-            courseInfoList = courseDao.findCourseInfoByCourseId(searchCourseInfoParams.getCourse_id());
-        /*else
-            if(searchCourseInfoParams.getCourse_name()!="")
-                courseInfoList=courseDao.findCourseInfoB*/
+        System.out.println(searchCourseInfoParams.getCourse_id());
+        courseInfoList=courseRepository.findCourse(searchCourseInfoParams.getCourse_id(),
+                searchCourseInfoParams.getCourse_name(),searchCourseInfoParams.getTeacher_name(),
+                searchCourseInfoParams.getCourse_types(),searchCourseInfoParams.getGeneral_types(),
+                searchCourseInfoParams.getWeekdays(),searchCourseInfoParams.getBegin_secs(),
+                searchCourseInfoParams.getEnd_secs(),searchCourseInfoParams.getBuilding(),
+                searchCourseInfoParams.getCourse_credits());
+        System.out.println(courseInfoList.size());
         return courseInfoList;
     }
 
