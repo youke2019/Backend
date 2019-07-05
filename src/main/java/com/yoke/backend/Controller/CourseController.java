@@ -18,6 +18,14 @@ public class CourseController {
     CourseService courseService;
 
     /**
+     * @api {get} /courses/update
+     * @apiDescription 拉取并更新教务处数据
+     * @apiName updateCourseInfoFromJWC
+     * @apiGroup courses
+     * @apiVersion 1.0.0
+     *
+     * @apiParam {String} url
+     * @apiParam {String} Cookies
      *
      * @param url
      * @param cookies
@@ -28,7 +36,14 @@ public class CourseController {
 
     }
 
-
+    /**
+     * @api {get} /courses/search
+     * @apiDescription 根据条件搜索课程
+     * @apiName SearchCourseInfo
+     * @apiGroup courses
+     * @apiVersion 1.0.0
+     * @apiParams 很多, 懒得写了
+     */
     @RequestMapping(value = "/search", method= RequestMethod.POST)
     @ResponseBody
     public List<CourseInfo> SearchCourseInfo(@RequestBody SearchCourseInfoParams searchCourseInfoParams)
