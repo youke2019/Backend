@@ -1,7 +1,7 @@
 package com.yoke.backend.DaoImpl;
 
 import com.yoke.backend.Dao.CourseDao;
-import com.yoke.backend.Entity.CourseInfo;
+import com.yoke.backend.Entity.Course.CourseInfo;
 import com.yoke.backend.repository.CourseRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;

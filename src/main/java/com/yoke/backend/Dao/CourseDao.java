@@ -1,6 +1,6 @@
 package com.yoke.backend.Dao;
 
-import com.yoke.backend.Entity.CourseInfo;
+import com.yoke.backend.Entity.Course.CourseInfo;
 
 import java.util.List;
 
@@ -13,4 +13,5 @@ import java.util.List;
 public interface CourseDao {
     List<CourseInfo> findAll();
     void save(CourseInfo courseInfo);
+
 }

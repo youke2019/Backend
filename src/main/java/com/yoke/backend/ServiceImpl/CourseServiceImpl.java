@@ -2,9 +2,8 @@ package com.yoke.backend.ServiceImpl;
 
 import com.alibaba.fastjson.JSON;
 import com.yoke.backend.Dao.CourseDao;
-import com.yoke.backend.Entity.*;
+import com.yoke.backend.Entity.Course.*;
 import com.yoke.backend.Service.CourseService;
-import com.yoke.backend.repository.CourseRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -25,8 +24,12 @@ import java.util.Map;
 public class CourseServiceImpl implements CourseService {
     @Autowired
     CourseDao courseDao;
+
+    final private int receive_course_number_limit = 10000;
+    final private int search_course_year = 2018;
+    final private int search_course_semester = 3; //   1:3 ,   2:12,   夏季学期:16
     public void GetCourseFromJWC(String url,String cookies) throws IOException {
-        List<CourseInfo> courseInfoList=updateCourseTable(url,cookies);
+        List<CourseInfo> courseInfoList = updateCourseTable(url, cookies);
         for(int i=0;i<courseInfoList.size();++i)
         {
             courseDao.save(courseInfoList.get(i));
@@ -106,8 +109,6 @@ public class CourseServiceImpl implements CourseService {
         }
     }
 
-    @Autowired
-    CourseRepository repository;
 
     /**
      * transform Object RawCourseInfo to Object CourseInfo
@@ -157,9 +158,10 @@ public class CourseServiceImpl implements CourseService {
         return courseInfos;
     }
 
-    public List<CourseInfo> updateCourseTable(String requestUrl ,String Cookie) throws IOException {
+    private List<CourseInfo> updateCourseTable(String requestUrl, String Cookie) throws IOException {//TODO post-form like LZW
         String res = "";
         StringBuffer buffer = new StringBuffer();
+
         // set request url & Cookie & other request headlines.
         URL url = new URL(requestUrl.replace("\"",""));
         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
@@ -173,7 +175,9 @@ public class CourseServiceImpl implements CourseService {
         conn.setRequestProperty("Cookie", Cookie);
         conn.setRequestProperty("Host","i.sjtu.edu.cn");
         OutputStreamWriter osw = new OutputStreamWriter(conn.getOutputStream(),"UTF-8");
-        osw.write("xnm=2018&_search=false&nd=1561987754238&queryModel.showCount=10000&queryModel.currentPage=1&queryModel.sortName=&queryModel.sortOrder=asc");
+        String postBody = "xnm=" + search_course_year + "&xqm=" + search_course_semester +
+                "&_search=false&nd=1561987754238&queryModel.showCount=" + receive_course_number_limit + "&queryModel.currentPage=1&queryModel.sortName=&queryModel.sortOrder=asc";
+        osw.write(postBody);
         osw.flush(); //不flush 发生了bug，等下试试\n
 
         // get response stream save to res

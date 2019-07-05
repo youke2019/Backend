@@ -1,8 +1,7 @@
 package com.yoke.backend.repository;
-import com.yoke.backend.Entity.CourseInfo;
-import org.springframework.context.annotation.Bean;
+
+import com.yoke.backend.Entity.Course.CourseInfo;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
 
 /**
  * @AUTHOR: Guozhi
