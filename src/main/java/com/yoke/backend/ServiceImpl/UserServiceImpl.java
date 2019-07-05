@@ -41,7 +41,7 @@ public class UserServiceImpl implements UserService {
             userByJaccountID.setMajor(user.getMajor());
             userByJaccountID.setDepartment(user.getDepartment());
             userByJaccountID.setName(user.getName());
-            userDao.save(user); //Is it necessary to Update Infomation ?
+            userDao.save(user); //Is it necessary to Update Information ?
         }
     }
 }
