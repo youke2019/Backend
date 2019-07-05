@@ -1,4 +1,4 @@
-package com.yoke.backend.Entity;
+package com.yoke.backend.Entity.User;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -11,10 +11,9 @@ import javax.persistence.*;
 @JsonIgnoreProperties(value = {"handler", "hibernateLazyInitializer", "fieldHandler"})
 @JsonIdentityInfo(
         generator = ObjectIdGenerators.PropertyGenerator.class,
-        property = "id"
+        property = "jaccount"
 )
 public class User {
-    private String id;
     private String jaccount;
     private String nickname;
     private String name;
@@ -22,17 +21,6 @@ public class User {
     private String major;
     private Character sex;  /*m,f,u*/
     private Integer grade;
-    private String password;
-
-    @Id
-    @Column(name = "user_id", nullable = false)
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
 
     @Basic
     @Column(name = "nickname")
@@ -44,8 +32,8 @@ public class User {
         this.nickname = nickname;
     }
 
-    @Basic
-    @Column(name = "jaccount_id", nullable = false)
+    @Id
+    @Column(name = "jaccount", nullable = false)
     public String getJaccount() {
         return jaccount;
     }
@@ -72,16 +60,6 @@ public class User {
 
     public void setGrade(Integer grade) {
         this.grade = grade;
-    }
-
-    @Basic
-    @Column(name = "password")
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
     }
 
     @Basic

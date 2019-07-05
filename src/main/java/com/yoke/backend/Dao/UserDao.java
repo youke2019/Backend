@@ -1,11 +1,9 @@
 package com.yoke.backend.Dao;
 
-import com.yoke.backend.Entity.User;
+import com.yoke.backend.Entity.User.User;
 
 public interface UserDao {
-    User findUserByJaccountID(String jaccount);
-
-    User findUserByID(String id);
+    User findUserByJaccount(String jaccount);
 
     void save(User user);
 }
