@@ -46,6 +46,13 @@ public class CourseServiceImpl implements CourseService {
         return courseDao.findCourse(searchCourseInfoParams);
     }
 
+    @Override
+    public CourseInfo findCourseInfoByCourseId(String course_id)
+    {
+
+        return courseDao.findCourseInfoByCourseId(course_id);
+    }
+
     /**
      * parse String unparsed containing Teacher_id & Teacher_name
      * unparsed = "teacher_id|teacher_name"

@@ -21,4 +21,6 @@ public interface CourseRepository extends JpaRepository<CourseInfo,Integer> {
     List<CourseInfo> findCourse(String course_id,String course_name,String teacher_name,List<Integer> course_types,List<String> general_types,
                                 List<Integer> weekdays,List<Integer> begin_secs,List<Integer> end_secs,String building,List<Double> course_credits);
 
+    @Query(value="select * from course where course_id=?1",nativeQuery = true)
+    CourseInfo findByCourse_id(String course_id);
 }

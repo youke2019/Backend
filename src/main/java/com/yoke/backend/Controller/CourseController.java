@@ -63,66 +63,9 @@ public class CourseController {
      *         "course_hours": 80,
      *         "course_credits": 5,
      *         "general": false,
-     *         "general_type": "",
-     *         "classes": [
-     *             {
-     *                 "classname": "2018-2019-1-SE101-392689",
-     *                 "course_id": "SE101",
-     *                 "teacher_id": "11145",
-     *                 "teacher_name": "臧斌宇",
-     *                 "teachers": "11145/臧斌宇/教授[电子信息与电气工程学院];10886/陈榕/副教授[电子信息与电气工程学院]",
-     *                 "course_participants": 48,
-     *                 "classSegments": [
-     *                     {
-     *                         "class_sec_id": 9250,
-     *                         "classname": "2018-2019-1-SE101-392689",
-     *                         "classroom": "东上院102",
-     *                         "begin_week": 1,
-     *                         "end_week": 16,
-     *                         "begin_sec": 7,
-     *                         "end_sec": 8,
-     *                         "week": 2,
-     *                         "oddOrEven": "b"
-     *                     },
-     *                     {
-     *                         "class_sec_id": 9251,
-     *                         "classname": "2018-2019-1-SE101-392689",
-     *                         "classroom": "东上院102",
-     *                         "begin_week": 1,
-     *                         "end_week": 16,
-     *                         "begin_sec": 7,
-     *                         "end_sec": 8,
-     *                         "week": 2,
-     *                         "oddOrEven": "b"
-     *                     },
-     *                     {
-     *                         "class_sec_id": 9252,
-     *                         "classname": "2018-2019-1-SE101-392689",
-     *                         "classroom": "东上院102",
-     *                         "begin_week": 1,
-     *                         "end_week": 16,
-     *                         "begin_sec": 3,
-     *                         "end_sec": 4,
-     *                         "week": 5,
-     *                         "oddOrEven": "b"
-     *                     },
-     *                     {
-     *                         "class_sec_id": 9253,
-     *                         "classname": "2018-2019-1-SE101-392689",
-     *                         "classroom": "东上院102",
-     *                         "begin_week": 1,
-     *                         "end_week": 16,
-     *                         "begin_sec": 3,
-     *                         "end_sec": 4,
-     *                         "week": 5,
-     *                         "oddOrEven": "b"
-     *                     }
-     *                 ]
-     *             }
-     *         ]
+     *         "general_type": ""
      *     }
      * ]
-     *
      *
      */
     @RequestMapping(value = "/search", method= RequestMethod.POST)
@@ -130,6 +73,88 @@ public class CourseController {
     public List<CourseInfo> SearchCourseInfo(@RequestBody SearchCourseInfoParams searchCourseInfoParams)
     {
         return courseService.SearchCourseInfo(searchCourseInfoParams);
+    }
+
+
+    /**
+     *@api {get} /courses/specific
+     *@apiDescription 获取课程的具体信息
+     *@apiName SpecificCourseInfo
+     *@apiGroup courses
+     *@apiVersion 1.0.0
+     *@apiParam {String} course_id
+     *@apiHeaderExample {json} Response-Example:
+     * {
+     *     "course_id": "SE101",
+     *     "course_name": "计算机系统基础（1）",
+     *     "course_hours": 80,
+     *     "course_credits": 5,
+     *     "general": false,
+     *     "general_type": "",
+     *     "classes": [
+     *         {
+     *             "classname": "2018-2019-1-SE101-392689",
+     *             "course_id": "SE101",
+     *             "teacher_id": "11145",
+     *             "teacher_name": "臧斌宇",
+     *             "teachers": "11145/臧斌宇/教授[电子信息与电气工程学院];10886/陈榕/副教授[电子信息与电气工程学院]",
+     *             "course_participants": 48,
+     *             "classSegments": [
+     *                 {
+     *                     "class_sec_id": 9250,
+     *                     "classname": "2018-2019-1-SE101-392689",
+     *                     "classroom": "东上院102",
+     *                     "begin_week": 1,
+     *                     "end_week": 16,
+     *                     "begin_sec": 7,
+     *                     "end_sec": 8,
+     *                     "week": 2,
+     *                     "oddOrEven": "b"
+     *                 },
+     *                 {
+     *                     "class_sec_id": 9251,
+     *                     "classname": "2018-2019-1-SE101-392689",
+     *                     "classroom": "东上院102",
+     *                     "begin_week": 1,
+     *                     "end_week": 16,
+     *                     "begin_sec": 7,
+     *                     "end_sec": 8,
+     *                     "week": 2,
+     *                     "oddOrEven": "b"
+     *                 },
+     *                 {
+     *                     "class_sec_id": 9252,
+     *                     "classname": "2018-2019-1-SE101-392689",
+     *                     "classroom": "东上院102",
+     *                     "begin_week": 1,
+     *                     "end_week": 16,
+     *                     "begin_sec": 3,
+     *                     "end_sec": 4,
+     *                     "week": 5,
+     *                     "oddOrEven": "b"
+     *                 },
+     *                 {
+     *                     "class_sec_id": 9253,
+     *                     "classname": "2018-2019-1-SE101-392689",
+     *                     "classroom": "东上院102",
+     *                     "begin_week": 1,
+     *                     "end_week": 16,
+     *                     "begin_sec": 3,
+     *                     "end_sec": 4,
+     *                     "week": 5,
+     *                     "oddOrEven": "b"
+     *                 }
+     *             ]
+     *         }
+     *     ]
+     * }
+     * @param course_id
+     * @return
+     */
+    @RequestMapping(value="/specific",method = RequestMethod.GET)
+    public CourseInfo SpecificCourseInfo(String course_id)
+    {
+        return courseService.findCourseInfoByCourseId(course_id);
     }
 
 }
