@@ -39,6 +39,7 @@ buildNumber.properties
 target/
 .idea/
 /src/main/resources/application.properties
+/src/main/resources/application.yml
 /src/main/java/resources/application.properties
 src/main/java/resources/
 src/test/java/com/yoke/backend/Controller/

@@ -53,7 +53,7 @@ public class JaccountController {
         JSONObject responseJson = JSONObject.parseObject(responseEntity.getBody());
         String token = responseJson.getString("access_token");
         try {
-            String app_url = "yoke://profile?access_token="+token;
+            String app_url = "yoke://app/home?access_token="+token;
             response.sendRedirect(app_url);
         } catch (Exception e) {
             e.printStackTrace();
