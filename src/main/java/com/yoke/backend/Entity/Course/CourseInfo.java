@@ -2,6 +2,7 @@ package com.yoke.backend.Entity.Course;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import javax.persistence.*;
@@ -9,11 +10,12 @@ import java.util.List;
 
 @Entity
 @Table(name="course",schema = "yoke",catalog = "")
-@JsonIgnoreProperties(value = {"handler","hibernateLazyInitializer","fieldHandler"})
+@JsonIgnoreProperties(value = {"handler","hibernateLazyInitializer","fieldHandler"},ignoreUnknown = true)
 @JsonIdentityInfo(
         generator = ObjectIdGenerators.PropertyGenerator.class,
         property = "course_id"
 )
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class CourseInfo {
     private String course_id;
     private String course_name;
@@ -21,6 +23,7 @@ public class CourseInfo {
     private float course_credits;
     private boolean general;
     private String general_type;
+
     private List<ClassInfo> classes;
 
     public CourseInfo() {

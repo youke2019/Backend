@@ -35,13 +35,24 @@ public class CourseDaoImpl implements CourseDao {
     @Override
     public List<CourseInfo> findCourse(SearchCourseInfoParams searchCourseInfoParams)
     {
-        return courseRepository.findCourse(searchCourseInfoParams.getCourse_id(),
+        List<CourseInfo> courseInfoList= courseRepository.findCourse(searchCourseInfoParams.getCourse_id(),
                 searchCourseInfoParams.getCourse_name(),searchCourseInfoParams.getTeacher_name(),
                 searchCourseInfoParams.getCourse_types(),searchCourseInfoParams.getGeneral_types(),
                 searchCourseInfoParams.getWeekdays(),searchCourseInfoParams.getBegin_secs(),
                 searchCourseInfoParams.getEnd_secs(),searchCourseInfoParams.getBuilding(),
                 searchCourseInfoParams.getCourse_credits());
+        for(int i=0;i<courseInfoList.size();++i)
+        {
+            courseInfoList.get(i).setClasses(null);
+        }
+        return courseInfoList;
+
     }
 
-
+    @Override
+    public CourseInfo findCourseInfoByCourseId(String course_id)
+    {
+        return courseRepository.findByCourse_id(course_id);
+        //return courseRepository.findCouresInfoByCourseId(course_id);
+    }
 }

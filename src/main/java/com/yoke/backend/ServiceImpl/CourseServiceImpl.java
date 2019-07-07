@@ -5,6 +5,7 @@ import com.yoke.backend.Dao.CourseDao;
 import com.yoke.backend.Entity.Course.*;
 import com.yoke.backend.Service.CourseService;
 import com.yoke.backend.repository.CourseRepository;
+import org.apache.commons.text.StringEscapeUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -44,6 +45,13 @@ public class CourseServiceImpl implements CourseService {
     public List<CourseInfo> SearchCourseInfo(SearchCourseInfoParams searchCourseInfoParams)
     {
         return courseDao.findCourse(searchCourseInfoParams);
+    }
+
+    @Override
+    public CourseInfo findCourseInfoByCourseId(String course_id)
+    {
+
+        return courseDao.findCourseInfoByCourseId(course_id);
     }
 
     /**
@@ -133,7 +141,9 @@ public class CourseServiceImpl implements CourseService {
             if (!map.containsKey(courseID)) { /* 不存在相关Course记录就创建新的。*/
                 courseInfo = new CourseInfo();
                 courseInfo.setCourse_id(courseID);
-                courseInfo.setCourse_name(info.getCourse_name());
+                courseInfo.setCourse_name(
+                        StringEscapeUtils.unescapeHtml4(info.getCourse_name())
+                );
                 courseInfo.setCourse_hours(info.getHours());
                 courseInfo.setCourse_credits(info.getCredits());
                 courseInfo.setCourse_hours(info.getHours());

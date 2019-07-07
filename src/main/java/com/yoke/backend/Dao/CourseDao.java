@@ -14,4 +14,5 @@ public interface CourseDao {
     List<CourseInfo> findAll();
     void save(CourseInfo courseInfo);
     List<CourseInfo> findCourse(SearchCourseInfoParams serachCourseInfoParams);
+    CourseInfo findCourseInfoByCourseId(String course_id);
 }
