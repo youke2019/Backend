@@ -53,7 +53,7 @@ public class JaccountController {
         JSONObject responseJson = JSONObject.parseObject(responseEntity.getBody());
         String token = responseJson.getString("access_token");
         try {
-            String app_url = "yoke://app/home?access_token="+token;
+            String app_url = "yoke://login?access_token="+token;
             response.sendRedirect(app_url);
         } catch (Exception e) {
             e.printStackTrace();
@@ -74,12 +74,25 @@ public class JaccountController {
         String name = responseJson.getJSONArray("entities").getJSONObject(0).getString("name");
         String department = responseJson.getJSONArray("entities").getJSONObject(0).getJSONObject("organize").getString("name");
         String major = responseJson.getJSONArray("entities").getJSONObject(0).getJSONArray("identities").getJSONObject(0).getJSONObject("major").getString("name");
+        String account = responseJson.getJSONArray("entities").getJSONObject(0).getString("account");
+        String gender = responseJson.getJSONArray("entities").getJSONObject(0).getString("gender");
+        String admission_date = responseJson.getJSONArray("entities").getJSONObject(0).getJSONArray("identities").getJSONObject(0).getString("admissionDate");
 
         // build response json
         User user = new User();
+        user.setJaccount(account);
         user.setName(name);
         user.setDepartment(department);
         user.setMajor(major);
+        user.setGrade(Integer.parseInt(admission_date.substring(0,4)));
+//        switch (gender) {
+//            case "male":
+//                user.setSex('M');
+//                break;
+//            case "female":
+//                user.setSex('F');
+//                break;
+//        }
 
         // save user data into database.
         userService.generateUserIfNoUserLike(user);
