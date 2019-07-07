@@ -33,7 +33,6 @@ public class CourseController {
     @GetMapping("update")
     public void UpdateCourseInfoFromJWC(String url,String cookies) throws IOException {
         courseService.GetCourseFromJWC(url,cookies);
-
     }
 
     /**
