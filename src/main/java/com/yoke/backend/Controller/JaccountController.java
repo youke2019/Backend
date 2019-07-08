@@ -24,9 +24,10 @@ public class JaccountController {
 
     private String tokenUrl = "https://jaccount.sjtu.edu.cn/oauth2/token";
     private String profileApi = "https://api.sjtu.edu.cn/v1/me/profile";
-    private String client_id = "EHuqrWEKvazXzTErwPmCX2m1";
-    private String client_secret = "BA796DCE46F7832F7C4AE3D3DA912CB9703186BA9137D56B";
+    private String client_id = "k8vX4aeVqZc0VCP1rSaG";
+    private String client_secret = "E0C775E0A140B98F4A083EA876F2FDD5629B38E9F8C7088A";
     private String grant_type = "authorization_code";
+    private String base_url = "http://10.0.2.2:8080";
 
     @ResponseBody
     @RequestMapping(value = "/login", method = RequestMethod.GET)
@@ -43,7 +44,7 @@ public class JaccountController {
         param.add("client_id",client_id);
         param.add("client_secret",client_secret);
         param.add("grant_type",grant_type);
-        param.add("redirect_uri","http://10.0.2.2:8080/jaccount/login");
+        param.add("redirect_uri",base_url+"/jaccount/login");
 
         // request for access token with http request
         HttpEntity<MultiValueMap<String,String>> request = new HttpEntity<>(param,headers);
@@ -52,6 +53,7 @@ public class JaccountController {
         // use access token to get user profile with http request
         JSONObject responseJson = JSONObject.parseObject(responseEntity.getBody());
         String token = responseJson.getString("access_token");
+        System.out.println(token);
         try {
             String app_url = "yoke://login?access_token="+token;
             response.sendRedirect(app_url);
@@ -73,18 +75,18 @@ public class JaccountController {
         JSONObject responseJson = JSONObject.parseObject(responseEntity.getBody());
         String name = responseJson.getJSONArray("entities").getJSONObject(0).getString("name");
         String department = responseJson.getJSONArray("entities").getJSONObject(0).getJSONObject("organize").getString("name");
-        String major = responseJson.getJSONArray("entities").getJSONObject(0).getJSONArray("identities").getJSONObject(0).getJSONObject("major").getString("name");
+        //String major = responseJson.getJSONArray("entities").getJSONObject(0).getJSONArray("identities").getJSONObject(0).getJSONObject("major").getString("name");
         String account = responseJson.getJSONArray("entities").getJSONObject(0).getString("account");
-        String gender = responseJson.getJSONArray("entities").getJSONObject(0).getString("gender");
-        String admission_date = responseJson.getJSONArray("entities").getJSONObject(0).getJSONArray("identities").getJSONObject(0).getString("admissionDate");
+        //String gender = responseJson.getJSONArray("entities").getJSONObject(0).getString("gender");
+        //String admission_date = responseJson.getJSONArray("entities").getJSONObject(0).getJSONArray("identities").getJSONObject(0).getString("admissionDate");
 
         // build response json
         User user = new User();
         user.setJaccount(account);
         user.setName(name);
         user.setDepartment(department);
-        user.setMajor(major);
-        user.setGrade(Integer.parseInt(admission_date.substring(0,4)));
+        //user.setMajor(major);
+        //user.setGrade(Integer.parseInt(admission_date.substring(0,4)));
 //        switch (gender) {
 //            case "male":
 //                user.setSex('M');
