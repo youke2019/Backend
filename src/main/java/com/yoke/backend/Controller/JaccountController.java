@@ -28,6 +28,14 @@ public class JaccountController {
     private String client_secret = "BA796DCE46F7832F7C4AE3D3DA912CB9703186BA9137D56B";
     private String grant_type = "authorization_code";
 
+    /**
+     * @api {get} /login
+     * @apiDescription 用Oauth2的code进行user登陆
+     * @apiName login
+     * @apiGroup jaccount
+     * @apiVersion 1.0.0
+     * @apiParam {String} code
+     */
     @ResponseBody
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public String login(@RequestParam("code")String code, HttpServletResponse response) {
@@ -62,6 +70,15 @@ public class JaccountController {
         return "redirecting";
     }
 
+
+    /**@api {get} /profile
+     * @apiDescription 用Oauth2的access_token获取用户信息
+     * @apiName getProfile
+     * @apiGroup jaccount
+     * @apiVersion 1.0.0
+     *
+     * @apiParam {String} token
+     */
     @ResponseBody
     @RequestMapping(value = "/profile", method = RequestMethod.GET)
     public User getProfile(@RequestParam("access_token")String token) {

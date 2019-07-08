@@ -6,6 +6,8 @@ import com.yoke.backend.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class UserServiceImpl implements UserService {
     @Autowired
@@ -18,6 +20,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public List<User> findAll() {
+        return userDao.findAll();
+    }
+
+    @Override
     public void save(User user) {
         userDao.save(user);
     }
@@ -25,13 +32,21 @@ public class UserServiceImpl implements UserService {
     @Override
     public void generateUserIfNoUserLike(User user) {
         if (user == null) {
-            System.out.println("In generateUserIfNoUserLike(user): input user is null");
+            System.out.println("Error: user should not be null");
             return;
         }
-        if (user.getId() == null) {
-            System.out.println("error: user must have ID"); //todo : implement this with java exception.
-            return;
-        }
+
         userDao.save(user); //Is it necessary to Update Information ?
+
+    }
+
+    @Override
+    public void banUser(String id) {
+        userDao.banUser(id);
+    }
+
+    @Override
+    public void unBanUser(String id) {
+        userDao.unBanUser(id);
     }
 }
