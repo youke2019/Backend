@@ -29,7 +29,7 @@ public class CourseServiceImpl implements CourseService {
 
     final private int receive_course_number_limit = 20000;
     final private String search_course_year = "2018";
-    final private String search_course_semester = "3"; //   1:3 ,   2:12,   夏季学期:16
+    final private String search_course_semester = ""; //   1:3 ,   2:12,   夏季学期:16
 
     @Override
     public void GetCourseFromJWC(String url,String cookies) throws IOException {
@@ -169,7 +169,9 @@ public class CourseServiceImpl implements CourseService {
             // 选课人数
             classInfo.setCourse_participants(info.getChosen_number());
             //备注
-            classInfo.setClass_note(info.getNotes());
+            classInfo.setClass_note("");
+            if(classInfo.getClass_note()!=null)
+                classInfo.setClass_note(info.getNotes());
             //开课年份
             classInfo.setYear(info.getYear());
             //开课学期
