@@ -20,6 +20,18 @@ public class ClassInfo {
     private String teacher_name;
     private String teachers;
     private Integer course_participants;
+    private String class_note;
+
+    @Basic
+    @Column(name = "class_note")
+    public String getClass_note() {
+        return class_note;
+    }
+
+    public void setClass_note(String class_note) {
+        this.class_note = class_note;
+    }
+
     private List<ClassSegment> classSegments;
 
 

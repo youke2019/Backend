@@ -4,7 +4,6 @@ import com.alibaba.fastjson.JSON;
 import com.yoke.backend.Dao.CourseDao;
 import com.yoke.backend.Entity.Course.*;
 import com.yoke.backend.Service.CourseService;
-import com.yoke.backend.repository.CourseRepository;
 import org.apache.commons.text.StringEscapeUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -98,9 +97,9 @@ public class CourseServiceImpl implements CourseService {
         else segment.setEnd_week(Integer.valueOf(strs[4]));
         if(strs.length == 6){                                               /** 表明是单双周的课*/
             Character ch = strs[5].charAt(1);
-            if (ch == '单') segment.setOddOrEven('o');
-            else segment.setOddOrEven('e');
-        }else segment.setOddOrEven('b');
+            if (ch == '单') segment.setOdd_or_even('o');
+            else segment.setOdd_or_even('e');
+        } else segment.setOdd_or_even('b');
 
     }
 
@@ -163,6 +162,7 @@ public class CourseServiceImpl implements CourseService {
             classInfo.setTeachers(info.getTeacher_info());
             classInfo.setCourse_participants(info.getChosen_number());
             classInfo.setClassSegments(new ArrayList<>());
+            classInfo.setClass_note(info.getNotes());
             if(info.getCourse_time_unparsed() == null){System.out.println("No Course arrangement of this course: " + info.getCourse_id());}
             parseCourseArrangement(info.getCourse_time_unparsed(),classInfo.getClassSegments());
             for(ClassSegment segment: classInfo.getClassSegments())

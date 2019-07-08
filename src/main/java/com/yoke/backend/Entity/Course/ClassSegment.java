@@ -22,7 +22,7 @@ public class ClassSegment {
     private Integer begin_sec;
     private Integer end_sec;
     private Integer week;
-    private Character oddOrEven;
+    private Character odd_or_even;
 
     public ClassSegment() {
     }
@@ -55,12 +55,12 @@ public class ClassSegment {
 
     @Basic
     @Column(name = "odd_or_even")
-    public Character getOddOrEven() {
-        return oddOrEven;
+    public Character getOdd_or_even() {
+        return odd_or_even;
     }
 
-    public void setOddOrEven(Character oddOrEven) {
-        this.oddOrEven = oddOrEven;
+    public void setOdd_or_even(Character odd_or_even) {
+        this.odd_or_even = odd_or_even;
     }
 
     public void setBegin_week(Integer begin_week) {
