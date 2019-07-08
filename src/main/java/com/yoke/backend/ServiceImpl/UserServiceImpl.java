@@ -28,7 +28,7 @@ public class UserServiceImpl implements UserService {
             System.out.println("In generateUserIfNoUserLike(user): input user is null");
             return;
         }
-        if (user.getID() == null) {
+        if (user.getId() == null) {
             System.out.println("error: user must have ID"); //todo : implement this with java exception.
             return;
         }

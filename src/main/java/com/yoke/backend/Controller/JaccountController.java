@@ -80,7 +80,7 @@ public class JaccountController {
         String id = responseJson.getJSONArray("entities").getJSONObject(0).getString("id");
         // build response json
         User user = new User();
-        user.setID(id);
+        user.setId(id);
         user.setName(name);
         user.setDepartment(department);
         user.setMajor(major);

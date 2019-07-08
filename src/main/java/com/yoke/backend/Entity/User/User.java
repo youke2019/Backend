@@ -11,10 +11,10 @@ import javax.persistence.*;
 @JsonIgnoreProperties(value = {"handler", "hibernateLazyInitializer", "fieldHandler"})
 @JsonIdentityInfo(
         generator = ObjectIdGenerators.PropertyGenerator.class,
-        property = "ID"
+        property = "id"
 )
 public class User {
-    private String ID;
+    private String id;
     private String nickname;
     private String name;
     private String department;
@@ -26,15 +26,15 @@ public class User {
 
     @Id
     @Column(name = "ID", nullable = false)
-    public String getID() {
-        return ID;
+    public String getId() {
+        return id;
     }
 
-    public void setID(String ID) {
-        this.ID = ID;
+    public void setId(String id) {
+        this.id = id;
     }
 
-    @Id
+    @Basic
     @Column(name = "banned")
     public Boolean getBanned() {
         return banned;

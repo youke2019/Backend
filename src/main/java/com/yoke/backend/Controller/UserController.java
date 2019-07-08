@@ -30,7 +30,7 @@ public class UserController {
         User user = userService.GetUserByID(id);
         if (user == null) {  /** this login has unknown purpose except testing*/
             user = new User();
-            user.setID(id);
+            user.setId(id);
             user.setDepartment("dept1");
             user.setSex('m');
             user.setMajor("rjgc");
