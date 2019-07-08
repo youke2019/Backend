@@ -22,6 +22,29 @@ public class ClassInfo {
     private Integer course_participants;
     private String class_note;
 
+
+    private Integer year;
+    private Integer semester;
+
+    @Basic
+    @Column(name = "year")
+    public Integer getYear() {
+        return year;
+    }
+
+    public void setYear(Integer year) {
+        this.year = year;
+    }
+
+    @Basic
+    @Column(name = "semester")
+    public Integer getSemester() {
+        return semester;
+    }
+
+    public void setSemester(Integer semester) {
+        this.semester = semester;
+    }
     @Basic
     @Column(name = "class_note")
     public String getClass_note() {

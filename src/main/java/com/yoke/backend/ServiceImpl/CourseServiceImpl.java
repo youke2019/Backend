@@ -27,9 +27,9 @@ public class CourseServiceImpl implements CourseService {
     CourseDao courseDao;
 
 
-    final private int receive_course_number_limit = 10000;
-    final private int search_course_year = 2018;
-    final private int search_course_semester = 3; //   1:3 ,   2:12,   夏季学期:16
+    final private int receive_course_number_limit = 20000;
+    final private String search_course_year = "2018";
+    final private String search_course_semester = "3"; //   1:3 ,   2:12,   夏季学期:16
 
     @Override
     public void GetCourseFromJWC(String url,String cookies) throws IOException {
@@ -59,6 +59,8 @@ public class CourseServiceImpl implements CourseService {
      */
     private void parseTeacher(String unparsed, ClassInfo info){
         if(unparsed == null){
+            info.setTeacher_id("暂无教师信息");
+            info.setTeacher_name("暂无教师信息");
             System.out.println("no teacher of this" + info.getCourse_id());
             return;
         }
@@ -74,6 +76,7 @@ public class CourseServiceImpl implements CourseService {
      */
     private void parseCourseTime(String unparsed, ClassSegment segment) {
         if(unparsed.contains(",")) {
+
             System.out.println("false syntax:" + unparsed);
             return ;
         }
@@ -109,6 +112,7 @@ public class CourseServiceImpl implements CourseService {
      */
     private void parseCourseArrangement(String unparsed, List<ClassSegment> segments){
         if(unparsed == null) {
+
             return ;
         }
         String[] strs = unparsed.split("\\|");
@@ -147,6 +151,7 @@ public class CourseServiceImpl implements CourseService {
                 courseInfo.setCourse_credits(info.getCredits());
                 courseInfo.setCourse_hours(info.getHours());
                 courseInfo.setGeneral(info.getGeneral_course().equals("是"));
+                courseInfo.setCourse_deptname(info.getDepartment_name());
                 if(info.getGeneral_course().equals("是"))
                     courseInfo.setGeneral_type(info.getGeneral_type());
                 else
@@ -163,6 +168,8 @@ public class CourseServiceImpl implements CourseService {
             classInfo.setCourse_participants(info.getChosen_number());
             classInfo.setClassSegments(new ArrayList<>());
             classInfo.setClass_note(info.getNotes());
+            classInfo.setYear(info.getYear());
+            classInfo.setSemester(info.getSemester_id());
             if(info.getCourse_time_unparsed() == null){System.out.println("No Course arrangement of this course: " + info.getCourse_id());}
             parseCourseArrangement(info.getCourse_time_unparsed(),classInfo.getClassSegments());
             for(ClassSegment segment: classInfo.getClassSegments())
