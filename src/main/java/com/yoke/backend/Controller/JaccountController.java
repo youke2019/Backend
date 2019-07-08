@@ -74,25 +74,25 @@ public class JaccountController {
         String name = responseJson.getJSONArray("entities").getJSONObject(0).getString("name");
         String department = responseJson.getJSONArray("entities").getJSONObject(0).getJSONObject("organize").getString("name");
         String major = responseJson.getJSONArray("entities").getJSONObject(0).getJSONArray("identities").getJSONObject(0).getJSONObject("major").getString("name");
-        String account = responseJson.getJSONArray("entities").getJSONObject(0).getString("account");
+        //String account = responseJson.getJSONArray("entities").getJSONObject(0).getString("account");
         String gender = responseJson.getJSONArray("entities").getJSONObject(0).getString("gender");
         String admission_date = responseJson.getJSONArray("entities").getJSONObject(0).getJSONArray("identities").getJSONObject(0).getString("admissionDate");
-
+        String id = responseJson.getJSONArray("entities").getJSONObject(0).getString("id");
         // build response json
         User user = new User();
-        user.setID(account);
+        user.setID(id);
         user.setName(name);
         user.setDepartment(department);
         user.setMajor(major);
         user.setAdmissionYear(Integer.parseInt(admission_date.substring(0, 4)));
-//        switch (gender) {
-//            case "male":
-//                user.setSex('M');
-//                break;
-//            case "female":
-//                user.setSex('F');
-//                break;
-//        }
+        switch (gender) {
+            case "male":
+                user.setSex('M');
+                break;
+            case "female":
+                user.setSex('F');
+                break;
+        }
 
         // save user data into database.
         userService.generateUserIfNoUserLike(user);

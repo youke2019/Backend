@@ -164,12 +164,26 @@ public class CourseServiceImpl implements CourseService {
             classInfo.setCourse_id(courseID);
             classInfo.setClassname(info.getClass_name());
             parseTeacher(info.getTeacher(),classInfo);
+            //合上教师
             classInfo.setTeachers(info.getTeacher_info());
+            // 选课人数
             classInfo.setCourse_participants(info.getChosen_number());
-            classInfo.setClassSegments(new ArrayList<>());
+            //备注
             classInfo.setClass_note(info.getNotes());
+            //开课年份
             classInfo.setYear(info.getYear());
-            classInfo.setSemester(info.getSemester_id());
+            //开课学期
+            {
+                int semester_id = info.getSemester_id();
+                if (semester_id == 3) classInfo.setSemester(1);
+                else if (semester_id == 12) classInfo.setSemester(2);
+                else if (semester_id == 16) classInfo.setSemester(3);
+                else {
+                    System.out.println("error: unknown semester"); //todo: with exception.
+                    classInfo.setSemester(-1);
+                }
+            }
+            classInfo.setClassSegments(new ArrayList<>());
             if(info.getCourse_time_unparsed() == null){System.out.println("No Course arrangement of this course: " + info.getCourse_id());}
             parseCourseArrangement(info.getCourse_time_unparsed(),classInfo.getClassSegments());
             for(ClassSegment segment: classInfo.getClassSegments())
