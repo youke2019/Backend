@@ -29,7 +29,7 @@ public class CourseServiceImpl implements CourseService {
 
     final private int receive_course_number_limit = 20000;
     final private String search_course_year = "2018";
-    final private String search_course_semester = "3"; //   1:3 ,   2:12,   夏季学期:16
+    final private String search_course_semester = ""; //   1:3 ,   2:12,   夏季学期:16
 
     @Override
     public void GetCourseFromJWC(String url,String cookies) throws IOException {

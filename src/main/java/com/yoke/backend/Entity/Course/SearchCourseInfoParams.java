@@ -14,14 +14,14 @@ public class SearchCourseInfoParams {
     private String course_name="";
     private String teacher_name="";
     private List<Integer> course_types=Arrays.asList(0,1);
-    private List<String> general_types=Arrays.asList("社会学科","人文学科","自然学科","工程科学与技术","");  /*
+    private List<String> general_types=Arrays.asList("社会科学","人文学科","自然科学","工程科学与技术","");  /*
     需要将数据库中general_types为null的课程的general_types设为""*/
     private List<Integer> weekdays=Arrays.asList(1,2,3,4,5,6,7);
     private List<Integer> begin_secs=Arrays.asList(1,2,3,4,5,6,7,8,9,10,11,12,13,14);
     private List<Integer> end_secs=Arrays.asList(1,2,3,4,5,6,7,8,9,10,11,12,13,14);
     private String building="";
     private List<Double> course_credits=new ArrayList<Double>(Arrays.asList(0.5,1.0,1.5,2.0,2.5,3.0,3.5,
-            4.0,4.5,5.0,5.5,6.0,6.5,7.0,7.5,8.0,8.5,9.0,9.5,10.0,10.5,11.5,12.0,12.5,13.0,14.0,15.0,16.0,17.0,18.0,19.0,
+            4.0,4.5,5.0,5.5,6.0,6.5,7.0,7.5,8.0,8.5,9.0,9.5,10.0,10.5,11.0,11.5,12.0,12.5,13.0,14.0,15.0,16.0,17.0,18.0,19.0,
             20.0,21.0,22.0,23.0,24.0,25.0));
     /*需要将数据库中的classroom 为空的值设置为未知*/
     /*将数据库中teacher_id,teacher_name为空的值设置为未知*/
