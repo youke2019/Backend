@@ -169,7 +169,9 @@ public class CourseServiceImpl implements CourseService {
             // 选课人数
             classInfo.setCourse_participants(info.getChosen_number());
             //备注
-            classInfo.setClass_note(info.getNotes());
+            classInfo.setClass_note("");
+            if(classInfo.getClass_note()!=null)
+                classInfo.setClass_note(info.getNotes());
             //开课年份
             classInfo.setYear(info.getYear());
             //开课学期

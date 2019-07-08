@@ -40,7 +40,8 @@ public class CourseDaoImpl implements CourseDao {
                 searchCourseInfoParams.getCourse_types(),searchCourseInfoParams.getGeneral_types(),
                 searchCourseInfoParams.getWeekdays(),searchCourseInfoParams.getBegin_secs(),
                 searchCourseInfoParams.getEnd_secs(),searchCourseInfoParams.getBuilding(),
-                searchCourseInfoParams.getCourse_credits());
+                searchCourseInfoParams.getCourse_credits(),searchCourseInfoParams.getDept_name(),
+                searchCourseInfoParams.getYears(),searchCourseInfoParams.getSemester());
         for(int i=0;i<courseInfoList.size();++i)
         {
             courseInfoList.get(i).setClasses(null);

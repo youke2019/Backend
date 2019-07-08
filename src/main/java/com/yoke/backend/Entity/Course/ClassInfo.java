@@ -43,6 +43,7 @@ public class ClassInfo {
     public void setSemester(Integer semester) {
         this.semester = semester;
     }
+
     @Basic
     @Column(name = "class_note")
     public String getClass_note() {

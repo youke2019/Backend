@@ -17,12 +17,40 @@ public class SearchCourseInfoParams {
     private List<String> general_types=Arrays.asList("社会科学","人文学科","自然科学","工程科学与技术","");  /*
     需要将数据库中general_types为null的课程的general_types设为""*/
     private List<Integer> weekdays=Arrays.asList(1,2,3,4,5,6,7);
-    private List<Integer> begin_secs=Arrays.asList(1,2,3,4,5,6,7,8,9,10,11,12,13,14);
-    private List<Integer> end_secs=Arrays.asList(1,2,3,4,5,6,7,8,9,10,11,12,13,14);
+    private List<Integer> begin_secs=Arrays.asList(1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16);
+    private List<Integer> end_secs=Arrays.asList(1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16);
     private String building="";
     private List<Double> course_credits=new ArrayList<Double>(Arrays.asList(0.5,1.0,1.5,2.0,2.5,3.0,3.5,
             4.0,4.5,5.0,5.5,6.0,6.5,7.0,7.5,8.0,8.5,9.0,9.5,10.0,10.5,11.0,11.5,12.0,12.5,13.0,14.0,15.0,16.0,17.0,18.0,19.0,
             20.0,21.0,22.0,23.0,24.0,25.0));
+    private String dept_name="";
+    private List<Integer> years=Arrays.asList(2018,2019);
+    private List<Integer> semester=Arrays.asList(-1,1,2,3);
+
+    public String getDept_name() {
+        return dept_name;
+    }
+
+    public void setDept_name(String dept_name) {
+        this.dept_name = dept_name;
+    }
+
+    public List<Integer> getYears() {
+        return years;
+    }
+
+    public void setYears(List<Integer> years) {
+        this.years = years;
+    }
+
+    public List<Integer> getSemester() {
+        return semester;
+    }
+
+    public void setSemester(List<Integer> semester) {
+        this.semester = semester;
+    }
+
     /*需要将数据库中的classroom 为空的值设置为未知*/
     /*将数据库中teacher_id,teacher_name为空的值设置为未知*/
 
