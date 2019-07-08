@@ -4,7 +4,6 @@ import com.alibaba.fastjson.JSON;
 import com.yoke.backend.Dao.CourseDao;
 import com.yoke.backend.Entity.Course.*;
 import com.yoke.backend.Service.CourseService;
-import com.yoke.backend.repository.CourseRepository;
 import org.apache.commons.text.StringEscapeUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -28,9 +27,9 @@ public class CourseServiceImpl implements CourseService {
     CourseDao courseDao;
 
 
-    final private int receive_course_number_limit = 10000;
-    final private int search_course_year = 2018;
-    final private int search_course_semester = 3; //   1:3 ,   2:12,   夏季学期:16
+    final private int receive_course_number_limit = 20000;
+    final private String search_course_year = "2018";
+    final private String search_course_semester = ""; //   1:3 ,   2:12,   夏季学期:16
 
     @Override
     public void GetCourseFromJWC(String url,String cookies) throws IOException {
@@ -60,6 +59,8 @@ public class CourseServiceImpl implements CourseService {
      */
     private void parseTeacher(String unparsed, ClassInfo info){
         if(unparsed == null){
+            info.setTeacher_id("暂无教师信息");
+            info.setTeacher_name("暂无教师信息");
             System.out.println("no teacher of this" + info.getCourse_id());
             return;
         }
@@ -75,6 +76,7 @@ public class CourseServiceImpl implements CourseService {
      */
     private void parseCourseTime(String unparsed, ClassSegment segment) {
         if(unparsed.contains(",")) {
+
             System.out.println("false syntax:" + unparsed);
             return ;
         }
@@ -98,9 +100,9 @@ public class CourseServiceImpl implements CourseService {
         else segment.setEnd_week(Integer.valueOf(strs[4]));
         if(strs.length == 6){                                               /** 表明是单双周的课*/
             Character ch = strs[5].charAt(1);
-            if (ch == '单') segment.setOddOrEven('o');
-            else segment.setOddOrEven('e');
-        }else segment.setOddOrEven('b');
+            if (ch == '单') segment.setOdd_or_even('o');
+            else segment.setOdd_or_even('e');
+        } else segment.setOdd_or_even('b');
 
     }
 
@@ -110,6 +112,7 @@ public class CourseServiceImpl implements CourseService {
      */
     private void parseCourseArrangement(String unparsed, List<ClassSegment> segments){
         if(unparsed == null) {
+
             return ;
         }
         String[] strs = unparsed.split("\\|");
@@ -148,6 +151,7 @@ public class CourseServiceImpl implements CourseService {
                 courseInfo.setCourse_credits(info.getCredits());
                 courseInfo.setCourse_hours(info.getHours());
                 courseInfo.setGeneral(info.getGeneral_course().equals("是"));
+                courseInfo.setCourse_deptname(info.getDepartment_name());
                 if(info.getGeneral_course().equals("是"))
                     courseInfo.setGeneral_type(info.getGeneral_type());
                 else
@@ -160,8 +164,27 @@ public class CourseServiceImpl implements CourseService {
             classInfo.setCourse_id(courseID);
             classInfo.setClassname(info.getClass_name());
             parseTeacher(info.getTeacher(),classInfo);
+            //合上教师
             classInfo.setTeachers(info.getTeacher_info());
+            // 选课人数
             classInfo.setCourse_participants(info.getChosen_number());
+            //备注
+            classInfo.setClass_note("");
+            if(classInfo.getClass_note()!=null)
+                classInfo.setClass_note(info.getNotes());
+            //开课年份
+            classInfo.setYear(info.getYear());
+            //开课学期
+            {
+                int semester_id = info.getSemester_id();
+                if (semester_id == 3) classInfo.setSemester(1);
+                else if (semester_id == 12) classInfo.setSemester(2);
+                else if (semester_id == 16) classInfo.setSemester(3);
+                else {
+                    System.out.println("error: unknown semester"); //todo: with exception.
+                    classInfo.setSemester(-1);
+                }
+            }
             classInfo.setClassSegments(new ArrayList<>());
             if(info.getCourse_time_unparsed() == null){System.out.println("No Course arrangement of this course: " + info.getCourse_id());}
             parseCourseArrangement(info.getCourse_time_unparsed(),classInfo.getClassSegments());

@@ -1,8 +1,19 @@
 package com.yoke.backend.ServiceImpl; 
 
-import org.junit.Test; 
+import com.yoke.backend.Entity.Course.CourseInfo;
+import com.yoke.backend.Entity.Course.SearchCourseInfoParams;
+import com.yoke.backend.Service.CourseService;
+import org.junit.Assert;
+import org.junit.Test;
 import org.junit.Before; 
-import org.junit.After; 
+import org.junit.After;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit4.SpringRunner;
+
+import java.util.Arrays;
+import java.util.List;
 
 /** 
 * CourseServiceImpl Tester. 
@@ -10,9 +21,13 @@ import org.junit.After;
 * @author <Zhi Guo> 
 * @since <pre>07/05/2019</pre> 
 * @version 1.0 
-*/ 
+*/
+@RunWith(SpringRunner.class)
+@SpringBootTest
 public class CourseServiceImplTest { 
 
+    @Autowired
+    CourseService courseService;
 @Before
 public void before() throws Exception { 
 } 
@@ -38,7 +53,47 @@ public void testGetCourseFromJWC() throws Exception {
 */ 
 @Test
 public void testSearchCourseInfo() throws Exception { 
-//TODO: Test goes here... 
+//TODO: Test goes here...
+
+    SearchCourseInfoParams searchCourseInfoParams=new SearchCourseInfoParams();
+    List<CourseInfo> courseInfoList;
+
+    /*通过类型搜索课程数量测试*/
+    List<String> originGenearlTypes=searchCourseInfoParams.getGeneral_types();
+    List<String> genearltypes= Arrays.asList("人文学科");
+    searchCourseInfoParams.setGeneral_types(genearltypes);
+    courseInfoList=courseService.SearchCourseInfo(searchCourseInfoParams);
+    Assert.assertEquals(75,courseInfoList.size());
+    searchCourseInfoParams.setGeneral_types(originGenearlTypes);
+
+    /*通过教学楼搜索课程数量测试*/
+    searchCourseInfoParams.setBuilding("东上院");
+    courseInfoList=courseService.SearchCourseInfo(searchCourseInfoParams);
+    Assert.assertEquals(431,courseInfoList.size());
+    searchCourseInfoParams.setBuilding("");
+
+    /*通过课程段所在工作日查询*/
+    List<Integer> originWeekDays=searchCourseInfoParams.getWeekdays();
+    List<Integer> weekDays=Arrays.asList(3);
+    searchCourseInfoParams.setWeekdays(weekDays);
+    courseInfoList=courseService.SearchCourseInfo(searchCourseInfoParams);
+    Assert.assertEquals(717,courseInfoList.size());
+    searchCourseInfoParams.setWeekdays(originWeekDays);
+
+    /*通过学分搜索课程数量测试*/
+    List<Double> originCredits=searchCourseInfoParams.getCourse_credits();
+    List<Double> credits=Arrays.asList(2.0);
+    searchCourseInfoParams.setCourse_credits(credits);
+    courseInfoList=courseService.SearchCourseInfo(searchCourseInfoParams);
+    Assert.assertEquals(1437,courseInfoList.size());
+    searchCourseInfoParams.setCourse_credits(originCredits);
+
+    /*搜索全部课程数量测试*/
+    searchCourseInfoParams=new SearchCourseInfoParams();
+    courseInfoList=courseService.SearchCourseInfo(searchCourseInfoParams);
+    Assert.assertEquals(3021,courseInfoList.size());
+
+
 } 
 
 /** 

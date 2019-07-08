@@ -29,6 +29,14 @@ public class JaccountController {
     private String grant_type = "authorization_code";
     private String base_url = "http://10.0.2.2:8080";
 
+    /**
+     * @api {get} /login
+     * @apiDescription 用Oauth2的code进行user登陆
+     * @apiName login
+     * @apiGroup jaccount
+     * @apiVersion 1.0.0
+     * @apiParam {String} code
+     */
     @ResponseBody
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public String login(@RequestParam("code")String code, HttpServletResponse response) {
@@ -64,6 +72,15 @@ public class JaccountController {
         return "redirecting";
     }
 
+
+    /**@api {get} /profile
+     * @apiDescription 用Oauth2的access_token获取用户信息
+     * @apiName getProfile
+     * @apiGroup jaccount
+     * @apiVersion 1.0.0
+     *
+     * @apiParam {String} token
+     */
     @ResponseBody
     @RequestMapping(value = "/profile", method = RequestMethod.GET)
     public User getProfile(@RequestParam("access_token")String token) {
@@ -75,14 +92,15 @@ public class JaccountController {
         JSONObject responseJson = JSONObject.parseObject(responseEntity.getBody());
         String name = responseJson.getJSONArray("entities").getJSONObject(0).getString("name");
         String department = responseJson.getJSONArray("entities").getJSONObject(0).getJSONObject("organize").getString("name");
-        //String major = responseJson.getJSONArray("entities").getJSONObject(0).getJSONArray("identities").getJSONObject(0).getJSONObject("major").getString("name");
-        String account = responseJson.getJSONArray("entities").getJSONObject(0).getString("account");
-        //String gender = responseJson.getJSONArray("entities").getJSONObject(0).getString("gender");
-        //String admission_date = responseJson.getJSONArray("entities").getJSONObject(0).getJSONArray("identities").getJSONObject(0).getString("admissionDate");
+
+        String major = responseJson.getJSONArray("entities").getJSONObject(0).getJSONArray("identities").getJSONObject(0).getJSONObject("major").getString("name");
+        String gender = responseJson.getJSONArray("entities").getJSONObject(0).getString("gender");
+        String admission_date = responseJson.getJSONArray("entities").getJSONObject(0).getJSONArray("identities").getJSONObject(0).getString("admissionDate");
+        String id = responseJson.getJSONArray("entities").getJSONObject(0).getString("id");
 
         // build response json
         User user = new User();
-        user.setJaccount(account);
+        user.setId(id);
         user.setName(name);
         user.setDepartment(department);
         //user.setMajor(major);
@@ -95,6 +113,7 @@ public class JaccountController {
 //                user.setSex('F');
 //                break;
 //        }
+
 
         // save user data into database.
         userService.generateUserIfNoUserLike(user);

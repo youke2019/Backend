@@ -6,17 +6,23 @@ import com.yoke.backend.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class UserServiceImpl implements UserService {
     @Autowired
     UserDao userDao;
 
     @Override
-    public User GetUserByJaccount(String jaccount) {
-        return userDao.findUserByJaccount(jaccount);
+    public User GetUserByID(String id) {
+        return userDao.findUserByID(id);
 
     }
 
+    @Override
+    public List<User> findAll() {
+        return userDao.findAll();
+    }
 
     @Override
     public void save(User user) {
@@ -26,17 +32,21 @@ public class UserServiceImpl implements UserService {
     @Override
     public void generateUserIfNoUserLike(User user) {
         if (user == null) {
-            System.out.println("In generateUserIfNoUserLike(user): input user is null");
+            System.out.println("Error: user should not be null");
             return;
         }
-        User userByJaccountID = userDao.findUserByJaccount(user.getJaccount());
-        if (userByJaccountID == null) {
-            userDao.save(user);
-        } else {
-            userByJaccountID.setMajor(user.getMajor());
-            userByJaccountID.setDepartment(user.getDepartment());
-            userByJaccountID.setName(user.getName());
-            userDao.save(user); //Is it necessary to Update Information ?
-        }
+
+        userDao.save(user); //Is it necessary to Update Information ?
+
+    }
+
+    @Override
+    public void banUser(String id) {
+        userDao.banUser(id);
+    }
+
+    @Override
+    public void unBanUser(String id) {
+        userDao.unBanUser(id);
     }
 }

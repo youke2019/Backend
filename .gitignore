@@ -42,4 +42,4 @@ target/
 /src/main/resources/application.yml
 /src/main/java/resources/application.properties
 src/main/java/resources/
-src/test/java/com/yoke/backend/Controller/
+!/src/test/java/com/yoke/backend/Controller/CourseControllerTest.java

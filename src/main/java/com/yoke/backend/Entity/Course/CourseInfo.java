@@ -23,8 +23,20 @@ public class CourseInfo {
     private float course_credits;
     private boolean general;
     private String general_type;
+    private String course_deptname;
+
 
     private List<ClassInfo> classes;
+
+    @Basic
+    @Column(name = "course_deptname")
+    public String getCourse_deptname() {
+        return course_deptname;
+    }
+
+    public void setCourse_deptname(String course_deptname) {
+        this.course_deptname = course_deptname;
+    }
 
     public CourseInfo() {
     }
