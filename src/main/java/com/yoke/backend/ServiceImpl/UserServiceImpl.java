@@ -12,11 +12,10 @@ public class UserServiceImpl implements UserService {
     UserDao userDao;
 
     @Override
-    public User GetUserByJaccount(String jaccount) {
-        return userDao.findUserByJaccount(jaccount);
+    public User GetUserByID(String id) {
+        return userDao.findUserByID(id);
 
     }
-
 
     @Override
     public void save(User user) {
@@ -29,14 +28,10 @@ public class UserServiceImpl implements UserService {
             System.out.println("In generateUserIfNoUserLike(user): input user is null");
             return;
         }
-        User userByJaccountID = userDao.findUserByJaccount(user.getJaccount());
-        if (userByJaccountID == null) {
-            userDao.save(user);
-        } else {
-            userByJaccountID.setMajor(user.getMajor());
-            userByJaccountID.setDepartment(user.getDepartment());
-            userByJaccountID.setName(user.getName());
-            userDao.save(user); //Is it necessary to Update Information ?
+        if (user.getID() == null) {
+            System.out.println("error: user must have ID"); //todo : implement this with java exception.
+            return;
         }
+        userDao.save(user); //Is it necessary to Update Information ?
     }
 }

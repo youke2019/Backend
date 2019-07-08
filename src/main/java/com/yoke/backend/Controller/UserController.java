@@ -11,9 +11,12 @@ public class UserController {
     @Autowired
     UserService userService;
 
+    /**
+     *
+     */
     @RequestMapping(value = "/", method = RequestMethod.GET)
-    public User getUserInfoByJaccount(@RequestParam("j_id") String jaccount) {
-        return userService.GetUserByJaccount(jaccount);
+    public User getUserInfoByJaccount(@RequestParam("id") String jaccount) {
+        return userService.GetUserByID(jaccount);
     }
 
     /*
@@ -22,19 +25,19 @@ public class UserController {
         return userService.GetUserByID(id);
     }
     */
-    @RequestMapping(value = "/{jaccount}/login", method = RequestMethod.POST)
-    public User loginWithJaccount(@PathVariable String jaccount) {
-        User user = userService.GetUserByJaccount(jaccount);
+    @RequestMapping(value = "/{id}/login", method = RequestMethod.POST)
+    public User loginWithJaccount(@PathVariable String id) {
+        User user = userService.GetUserByID(id);
         if (user == null) {  /** this login has unknown purpose except testing*/
             user = new User();
-            user.setJaccount(jaccount);
+            user.setID(id);
             user.setDepartment("dept1");
             user.setSex('m');
             user.setMajor("rjgc");
             user.setName("lzw");
-            user.setGrade(2017);
+            user.setAdmissionYear(2017);
             userService.save(user);
-            return userService.GetUserByJaccount(jaccount);
+            return userService.GetUserByID(id);
         } else return user;
     }
 }

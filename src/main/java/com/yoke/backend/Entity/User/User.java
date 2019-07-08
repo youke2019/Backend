@@ -11,16 +11,48 @@ import javax.persistence.*;
 @JsonIgnoreProperties(value = {"handler", "hibernateLazyInitializer", "fieldHandler"})
 @JsonIdentityInfo(
         generator = ObjectIdGenerators.PropertyGenerator.class,
-        property = "jaccount"
+        property = "ID"
 )
 public class User {
-    private String jaccount;
+    private String ID;
     private String nickname;
     private String name;
     private String department;
     private String major;
     private Character sex;  /*m,f,u*/
-    private Integer grade;
+    private Integer admissionYear;
+    private Boolean banned;
+
+
+    @Id
+    @Column(name = "ID", nullable = false)
+    public String getID() {
+        return ID;
+    }
+
+    public void setID(String ID) {
+        this.ID = ID;
+    }
+
+    @Id
+    @Column(name = "banned")
+    public Boolean getBanned() {
+        return banned;
+    }
+
+    public void setBanned(Boolean banned) {
+        this.banned = banned;
+    }
+
+    @Basic
+    @Column(name = "grade")
+    public Integer getAdmissionYear() {
+        return admissionYear;
+    }
+
+    public void setAdmissionYear(Integer admissionYear) {
+        this.admissionYear = admissionYear;
+    }
 
     @Basic
     @Column(name = "nickname")
@@ -32,15 +64,7 @@ public class User {
         this.nickname = nickname;
     }
 
-    @Id
-    @Column(name = "jaccount", nullable = false)
-    public String getJaccount() {
-        return jaccount;
-    }
 
-    public void setJaccount(String jaccount) {
-        this.jaccount = jaccount;
-    }
 
     @Basic
     @Column(name = "sex")
@@ -52,15 +76,6 @@ public class User {
         this.sex = sex;
     }
 
-    @Basic
-    @Column(name = "grade")
-    public Integer getGrade() {
-        return grade;
-    }
-
-    public void setGrade(Integer grade) {
-        this.grade = grade;
-    }
 
     @Basic
     @Column(name = "name")

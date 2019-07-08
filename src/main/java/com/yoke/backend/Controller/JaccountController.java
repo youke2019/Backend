@@ -80,11 +80,11 @@ public class JaccountController {
 
         // build response json
         User user = new User();
-        user.setJaccount(account);
+        user.setID(account);
         user.setName(name);
         user.setDepartment(department);
         user.setMajor(major);
-        user.setGrade(Integer.parseInt(admission_date.substring(0,4)));
+        user.setAdmissionYear(Integer.parseInt(admission_date.substring(0, 4)));
 //        switch (gender) {
 //            case "male":
 //                user.setSex('M');

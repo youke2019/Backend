@@ -12,8 +12,8 @@ public class UserDaoImpl implements UserDao {
     UserRepository repository;
 
     @Override
-    public User findUserByJaccount(String jaccount) {
-        return repository.findUserByJaccount(jaccount);
+    public User findUserByID(String id) {
+        return repository.findUserByID(id);
     }
 
     @Override

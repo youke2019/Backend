@@ -21,8 +21,6 @@ public class ClassInfo {
     private String teachers;
     private Integer course_participants;
     private String class_note;
-
-
     private Integer year;
     private Integer semester;
 

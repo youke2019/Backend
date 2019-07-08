@@ -4,7 +4,7 @@ package com.yoke.backend.Service;
 import com.yoke.backend.Entity.User.User;
 
 public interface UserService {
-    User GetUserByJaccount(String jaccount);
+    User GetUserByID(String id);
 
     void save(User user);
 
