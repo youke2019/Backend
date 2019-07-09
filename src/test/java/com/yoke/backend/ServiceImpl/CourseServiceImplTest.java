@@ -55,6 +55,8 @@ public void testGetCourseFromJWC() throws Exception {
 public void testSearchCourseInfo() throws Exception { 
 //TODO: Test goes here...
 
+    /*常规测试*/
+
     SearchCourseInfoParams searchCourseInfoParams=new SearchCourseInfoParams();
     List<CourseInfo> courseInfoList;
 
@@ -77,7 +79,7 @@ public void testSearchCourseInfo() throws Exception {
     List<Integer> weekDays=Arrays.asList(3);
     searchCourseInfoParams.setWeekdays(weekDays);
     courseInfoList=courseService.SearchCourseInfo(searchCourseInfoParams);
-    Assert.assertEquals(717,courseInfoList.size());
+    Assert.assertEquals(715,courseInfoList.size());
     searchCourseInfoParams.setWeekdays(originWeekDays);
 
     /*通过学分搜索课程数量测试*/
@@ -88,10 +90,19 @@ public void testSearchCourseInfo() throws Exception {
     Assert.assertEquals(1437,courseInfoList.size());
     searchCourseInfoParams.setCourse_credits(originCredits);
 
-    /*搜索全部课程数量测试*/
-    searchCourseInfoParams=new SearchCourseInfoParams();
+    /*通过学院开设课程数量测试*/
+    searchCourseInfoParams.setDept_name("电子信息");
     courseInfoList=courseService.SearchCourseInfo(searchCourseInfoParams);
-    Assert.assertEquals(3021,courseInfoList.size());
+    Assert.assertEquals(424,courseInfoList.size());
+    searchCourseInfoParams.setDept_name("");
+
+    /*通过年份测试*/
+    List<Integer> originSemester=searchCourseInfoParams.getSemester();
+    List<Integer> semester=Arrays.asList(3);
+    searchCourseInfoParams.setSemester(semester);
+    courseInfoList=courseService.SearchCourseInfo(searchCourseInfoParams);
+    Assert.assertEquals(250,courseInfoList.size());
+    searchCourseInfoParams.setSemester(originSemester);
 
 
 } 
@@ -113,7 +124,9 @@ public void testParseRawCourseInfo() throws Exception {
 */ 
 @Test
 public void testUpdateCourseTable() throws Exception { 
-//TODO: Test goes here... 
+//TODO: Test goes here...
+    List<CourseInfo> courseInfoList=courseService.updateCourseTable("\"http://i.sjtu.edu.cn/design/funcData_cxFuncDataList.html?func_widget_guid=8B04B7BBB49C4455E0530200A8C06482&gnmkdm=N2199113&su=517021910503\"","_ga=GA1.3.1037536714.1553838728; UM_distinctid=16bae3ba0e48-09fd12d662a261-e343166-100200-16bae3ba0e52f; kc@i.sjtu.edu.cn=ffffffff0973176845525d5f4f58455e445a4a423660; JSESSIONID=E7BBE3F39AAB72869756D9874DA0767D");
+    Assert.assertEquals(3095,courseInfoList.size());
 } 
 
 
