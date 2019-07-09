@@ -52,7 +52,10 @@ public class CourseController {
      *                    "begin_sec":[1,2,3],
      *                    "end_sec":[3,4,5],
      *                    "building":"东上院",
-     *                    "course_credits":[2,3,4]
+     *                    "course_credits":[2,3,4],
+     *                    "dept_name":"电子信息与电气工程",
+     *                    "years":2018,
+     *                    "semester":1          //1:第一学期，2：第二学期，3:夏季学期
      *                     }
      *@apiHeaderExample {json} Response-Example:
      * [
@@ -62,7 +65,8 @@ public class CourseController {
      *         "course_hours": 80,
      *         "course_credits": 5,
      *         "general": false,
-     *         "general_type": ""
+     *         "general_type": "",
+     *         "course_deptname": "电子信息与电气工程学院"
      *     }
      * ]
      *
@@ -90,6 +94,7 @@ public class CourseController {
      *     "course_credits": 5,
      *     "general": false,
      *     "general_type": "",
+     *     "course_deptname": "电子信息与电气工程学院",
      *     "classes": [
      *         {
      *             "classname": "2018-2019-1-SE101-392689",
@@ -98,9 +103,12 @@ public class CourseController {
      *             "teacher_name": "臧斌宇",
      *             "teachers": "11145/臧斌宇/教授[电子信息与电气工程学院];10886/陈榕/副教授[电子信息与电气工程学院]",
      *             "course_participants": 48,
+     *             "class_note": null,
+     *             "year": 2018,
+     *             "semester": 1,
      *             "classSegments": [
      *                 {
-     *                     "class_sec_id": 9250,
+     *                     "class_sec_id": 7358,
      *                     "classname": "2018-2019-1-SE101-392689",
      *                     "classroom": "东上院102",
      *                     "begin_week": 1,
@@ -108,43 +116,10 @@ public class CourseController {
      *                     "begin_sec": 7,
      *                     "end_sec": 8,
      *                     "week": 2,
-     *                     "oddOrEven": "b"
-     *                 },
-     *                 {
-     *                     "class_sec_id": 9251,
-     *                     "classname": "2018-2019-1-SE101-392689",
-     *                     "classroom": "东上院102",
-     *                     "begin_week": 1,
-     *                     "end_week": 16,
-     *                     "begin_sec": 7,
-     *                     "end_sec": 8,
-     *                     "week": 2,
-     *                     "oddOrEven": "b"
-     *                 },
-     *                 {
-     *                     "class_sec_id": 9252,
-     *                     "classname": "2018-2019-1-SE101-392689",
-     *                     "classroom": "东上院102",
-     *                     "begin_week": 1,
-     *                     "end_week": 16,
-     *                     "begin_sec": 3,
-     *                     "end_sec": 4,
-     *                     "week": 5,
-     *                     "oddOrEven": "b"
-     *                 },
-     *                 {
-     *                     "class_sec_id": 9253,
-     *                     "classname": "2018-2019-1-SE101-392689",
-     *                     "classroom": "东上院102",
-     *                     "begin_week": 1,
-     *                     "end_week": 16,
-     *                     "begin_sec": 3,
-     *                     "end_sec": 4,
-     *                     "week": 5,
-     *                     "oddOrEven": "b"
+     *                     "odd_or_even": "b"
      *                 }
-     *             ]
-     *         }
+     *                 ]
+     *                 }
      *     ]
      * }
      * @param course_id

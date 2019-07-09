@@ -15,4 +15,5 @@ public interface CourseService {
     void GetCourseFromJWC(String url,String cookies) throws IOException;
     List<CourseInfo> SearchCourseInfo(SearchCourseInfoParams searchCourseInfoParams);
     CourseInfo findCourseInfoByCourseId(String course_id);
-}
+    List<CourseInfo> updateCourseTable(String requestUrl, String Cookie) throws IOException;
+    }

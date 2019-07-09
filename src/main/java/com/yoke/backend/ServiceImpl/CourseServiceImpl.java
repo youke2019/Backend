@@ -205,7 +205,10 @@ public class CourseServiceImpl implements CourseService {
         return courseInfos;
     }
 
-    private List<CourseInfo> updateCourseTable(String requestUrl, String Cookie) throws IOException {//TODO post-form like LZW
+    @Override
+    public List<CourseInfo> updateCourseTable(String requestUrl, String Cookie) throws IOException {//TODO post-form like LZW
+        System.out.println(requestUrl);
+        System.out.println(Cookie);
         String res = "";
         StringBuffer buffer = new StringBuffer();
 
