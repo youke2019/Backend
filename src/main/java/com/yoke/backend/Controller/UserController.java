@@ -23,6 +23,7 @@ public class UserController {
      */
     @RequestMapping(value = "/specific", method = RequestMethod.GET)
     public User getUserByID(@RequestParam("id") String id) {
+
         return userService.GetUserByID(id);
     }
 
@@ -49,6 +50,7 @@ public class UserController {
      */
     @RequestMapping(value = "/unban", method = RequestMethod.POST)
     public void unBanUser(@RequestParam String id) {
+
         userService.unBanUser(id);
     }
 
@@ -64,25 +66,15 @@ public class UserController {
         return userService.findAll();
     }
 
-    /*
-    @RequestMapping(value = "/", method = RequestMethod.GET)
-    public User getUserInfoById(@RequestParam("u_id") String id) {
-        return userService.GetUserByID(id);
-    }
-    */
-    @RequestMapping(value = "/{id}/login", method = RequestMethod.POST)
-    public User loginWithJaccount(@PathVariable String id) {
+
+    /**
+     *
+     * @param id
+     * @return
+     */
+    @RequestMapping(value = "/login")
+    public User loginWithJaccount(String id) {
         User user = userService.GetUserByID(id);
-        if (user == null) {  /** this login has unknown purpose except testing*/
-            user = new User();
-            user.setId(id);
-            user.setDepartment("testDept");
-            user.setSex('m');
-            user.setMajor("rjgc");
-            user.setName("lzw");
-            user.setAdmissionYear(2017);
-            userService.save(user);
-            return userService.GetUserByID(id);
-        } else return user;
+        return user;
     }
 }

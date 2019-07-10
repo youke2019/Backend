@@ -53,18 +53,19 @@ public void testUpdateCourseInfoFromJWC() throws Exception {
 public void testSearchCourseInfo() throws Exception { 
 //TODO: Test goes here...
 
-    RestTemplate restTemplate=new RestTemplate();
+    /*RestTemplate restTemplate=new RestTemplate();
     /*   合格post参数
     post参数为
     {
     "course_id":"SE101"
     }
      */
+    /*
     SearchCourseInfoParams searchCourseInfoParams=new SearchCourseInfoParams();
     searchCourseInfoParams.setCourse_id("SE101");
     CourseInfo courseInfo=restTemplate.postForObject("http://localhost:8000/courses/search",searchCourseInfoParams,CourseInfo.class);
     Assert.assertEquals("电子信息与电气工程学院",courseInfo.getCourse_deptname());
-
+    */
     /*不合格post参数
     post参数为
     {
