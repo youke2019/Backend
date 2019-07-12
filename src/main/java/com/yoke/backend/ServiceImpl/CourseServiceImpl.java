@@ -171,7 +171,14 @@ public class CourseServiceImpl implements CourseService {
             //备注
             classInfo.setClass_note("");
             if(info.getNotes()!=null)
+            {
+                while(info.getNotes().endsWith(" "))
+                {
+                    info.setNotes(info.getNotes().trim());
+                }
                 classInfo.setClass_note(info.getNotes());
+                System.out.println(info.getNotes().length());
+            }
             //开课年份
             classInfo.setYear(info.getYear());
             //开课学期
@@ -203,8 +210,6 @@ public class CourseServiceImpl implements CourseService {
 
     @Override
     public List<CourseInfo> updateCourseTable(String requestUrl, String Cookie) throws IOException {//TODO post-form like LZW
-        System.out.println(requestUrl);
-        System.out.println(Cookie);
         String res = "";
         StringBuffer buffer = new StringBuffer();
 
