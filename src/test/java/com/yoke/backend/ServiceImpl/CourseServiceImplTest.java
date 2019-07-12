@@ -126,7 +126,7 @@ public void testParseRawCourseInfo() throws Exception {
 @Test
 public void testUpdateCourseTable() throws Exception { 
 //TODO: Test goes here...
-    //List<CourseInfo> courseInfoList=courseService.updateCourseTable("\"http://i.sjtu.edu.cn/design/funcData_cxFuncDataList.html?func_widget_guid=8B04B7BBB49C4455E0530200A8C06482&gnmkdm=N2199113&su=517021910503\"","_ga=GA1.3.1037536714.1553838728; UM_distinctid=16bae3ba0e48-09fd12d662a261-e343166-100200-16bae3ba0e52f; JSESSIONID=916E74DCCDFC4374085F1EDA8E14B35B; kc@i.sjtu.edu.cn=ffffffff0973176845525d5f4f58455e445a4a423660");
+    List<CourseInfo> courseInfoList=courseService.updateCourseTable("\"http://i.sjtu.edu.cn/design/funcData_cxFuncDataList.html?func_widget_guid=8B04B7BBB49C4455E0530200A8C06482&gnmkdm=N2199113&su=517021910503\"","_ga=GA1.3.1037536714.1553838728; UM_distinctid=16bae3ba0e48-09fd12d662a261-e343166-100200-16bae3ba0e52f; JSESSIONID=916E74DCCDFC4374085F1EDA8E14B35B; kc@i.sjtu.edu.cn=ffffffff0973176845525d5f4f58455e445a4a423660");
 } 
 
 

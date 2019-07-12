@@ -102,9 +102,9 @@
                 <destFile>target/coverage-reports/jacoco-unit.exec</destFile>
                 <dataFile>target/coverage-reports/jacoco-unit.exec</dataFile>
                 <includes>
-                    <include>**/Controller/CourseController.class</include>
-                    <include>**/ServiceImpl/CourseServiceImpl.class</include>
-                    <include>**/ServiceImpl/UserServiceImpl.class</include>
+                    <include>**/Controller/*.class</include>
+                    <include>**/ServiceImpl/*.class</include>
+
 
                 </includes>
                 <!-- rules里面指定覆盖规则 -->
