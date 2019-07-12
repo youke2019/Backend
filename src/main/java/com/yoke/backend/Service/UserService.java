@@ -15,4 +15,10 @@ public interface UserService {
     void banUser(String id);
 
     void unBanUser(String id);
+
+    void removeById(String id);
+
+    int countAll();
+
+    User findByNickname(String nickname);
 }

@@ -19,4 +19,13 @@ public interface UserRepository extends JpaRepository<User, Integer> {
     @Query(value = "update user u set u.banned = false where u.ID = ?1 ", nativeQuery = true)
     @Modifying
     void unBanUserById(String id);
+
+    @Transactional
+    @Modifying
+    void removeById(String id);
+
+    @Query(value = "select count(*) from user", nativeQuery = true)
+    int countAll();
+
+    User findByNickname(String nickname);
 }
