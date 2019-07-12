@@ -28,7 +28,7 @@ public class JaccountController {
     private String client_secret = "E0C775E0A140B98F4A083EA876F2FDD5629B38E9F8C7088A";
     private String grant_type = "authorization_code";
     private String base_url = "http://10.0.2.2:8080";
-    private String redirect_url = base_url + "/jaccount/login";
+
     /**
      * @api {get} /login
      * @apiDescription 用Oauth2的code进行user登陆
@@ -52,7 +52,7 @@ public class JaccountController {
         param.add("client_id",client_id);
         param.add("client_secret",client_secret);
         param.add("grant_type",grant_type);
-        param.add("redirect_uri", redirect_url);
+        param.add("redirect_uri",base_url+"/jaccount/login");
 
         // request for access token with http request
         HttpEntity<MultiValueMap<String,String>> request = new HttpEntity<>(param,headers);
@@ -65,7 +65,6 @@ public class JaccountController {
         try {
             String app_url = "yoke://login?access_token="+token;
             response.sendRedirect(app_url);
-            System.out.println(app_url);
         } catch (Exception e) {
             e.printStackTrace();
         }

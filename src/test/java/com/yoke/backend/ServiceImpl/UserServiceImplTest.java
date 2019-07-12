@@ -14,10 +14,14 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 
 import javax.jws.soap.SOAPBinding;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit4.SpringRunner;
 
 import static org.junit.Assert.*;
 
 @RunWith(SpringJUnit4ClassRunner.class)
+@SpringBootTest
+@RunWith(SpringRunner.class)
 @SpringBootTest
 public class UserServiceImplTest {
 
@@ -38,6 +42,12 @@ public class UserServiceImplTest {
     public void getUserByID() {
         User u = userService.GetUserByID("00890");
         assertEquals("Benton1950", u.getNickname());
+    }
+    @Test
+    public void save(){
+        User user1=new User();
+        user1.setId("00126");
+        userService.save(user1);
     }
 
     @Test

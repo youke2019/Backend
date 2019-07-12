@@ -170,8 +170,15 @@ public class CourseServiceImpl implements CourseService {
             classInfo.setCourse_participants(info.getChosen_number());
             //备注
             classInfo.setClass_note("");
-            if(classInfo.getClass_note()!=null)
+            if(info.getNotes()!=null)
+            {
+                while(info.getNotes().endsWith(" "))
+                {
+                    info.setNotes(info.getNotes().trim());
+                }
                 classInfo.setClass_note(info.getNotes());
+                System.out.println(info.getNotes().length());
+            }
             //开课年份
             classInfo.setYear(info.getYear());
             //开课学期
@@ -180,10 +187,6 @@ public class CourseServiceImpl implements CourseService {
                 if (semester_id == 3) classInfo.setSemester(1);
                 else if (semester_id == 12) classInfo.setSemester(2);
                 else if (semester_id == 16) classInfo.setSemester(3);
-                else {
-                    System.out.println("error: unknown semester"); //todo: with exception.
-                    classInfo.setSemester(-1);
-                }
             }
             classInfo.setClassSegments(new ArrayList<>());
             if(info.getCourse_time_unparsed() == null){System.out.println("No Course arrangement of this course: " + info.getCourse_id());}
@@ -207,8 +210,6 @@ public class CourseServiceImpl implements CourseService {
 
     @Override
     public List<CourseInfo> updateCourseTable(String requestUrl, String Cookie) throws IOException {//TODO post-form like LZW
-        System.out.println(requestUrl);
-        System.out.println(Cookie);
         String res = "";
         StringBuffer buffer = new StringBuffer();
 
