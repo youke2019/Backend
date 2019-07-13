@@ -37,4 +37,20 @@ public class UserDaoImpl implements UserDao {
     public void unBanUser(String id) {
         repository.unBanUserById(id);
     }
+
+    @Override
+    public void removeById(String id) {
+        repository.removeById(id);
+    }
+
+    @Override
+    public int countAll() {
+
+        return repository.countAll();
+    }
+
+    @Override
+    public User findByNickname(String nickname) {
+        return repository.findByNickname(nickname);
+    }
 }

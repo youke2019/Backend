@@ -27,7 +27,7 @@ public class JaccountController {
     private String client_id = "k8vX4aeVqZc0VCP1rSaG";
     private String client_secret = "E0C775E0A140B98F4A083EA876F2FDD5629B38E9F8C7088A";
     private String grant_type = "authorization_code";
-    private String base_url = "http://192.168.1.102:8080";
+    private String base_url = "http://10.0.2.2:8080";
 
     /**
      * @api {get} /login
@@ -104,7 +104,7 @@ public class JaccountController {
         user.setName(name);
         user.setDepartment(department);
         user.setMajor(major);
-        user.setAdmissionYear(Integer.parseInt(admission_date.substring(0,4)));
+        user.setAdmissionYear(Integer.parseInt(admission_date.substring(0, 4)));
         switch (gender) {
             case "male":
                 user.setSex('M');
@@ -113,7 +113,6 @@ public class JaccountController {
                 user.setSex('F');
                 break;
         }
-
 
         // save user data into database.
         userService.generateUserIfNoUserLike(user);
