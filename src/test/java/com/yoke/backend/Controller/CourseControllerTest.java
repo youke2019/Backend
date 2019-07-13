@@ -78,13 +78,14 @@ public void testSearchCourseInfo() throws Exception {
     Assert.assertEquals(null,courseInfo1);*/
 
 
-} 
+}
 
 /** 
 * 
 * Method: SpecificCourseInfo(String course_id) 
 * 
-*/ 
+*/
+
 @Test
 public void testSpecificCourseInfo() throws Exception { 
 //TODO: Test goes here...

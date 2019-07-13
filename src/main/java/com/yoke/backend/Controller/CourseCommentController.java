@@ -78,6 +78,4 @@ public class CourseCommentController {
         courseCommentService.unbanCommentOfCourse(comment_id);
         return "success";
     }
-
-
 }
