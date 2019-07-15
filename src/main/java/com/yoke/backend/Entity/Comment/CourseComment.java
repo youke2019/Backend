@@ -2,6 +2,7 @@ package com.yoke.backend.Entity.Comment;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.yoke.backend.Entity.Praise.CourseCommentPraise;
 
@@ -23,6 +24,7 @@ import java.util.List;
         generator = ObjectIdGenerators.PropertyGenerator.class,
         property = "course_comment_id"
 )
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class CourseComment {
 
     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");// 格式化时间

@@ -18,6 +18,17 @@ public class CourseCommentPraise {
     Integer course_comment_id;
     Integer course_comment_praise_id;
 
+    public CourseCommentPraise()
+    {
+
+    }
+    public CourseCommentPraise(String user_id,Integer course_comment_id)
+    {
+        this.user_id=user_id;
+        this.course_comment_id=course_comment_id;
+        this.course_comment_praise_id=0;
+    }
+
     @Id
     @Column(name = "course_comment_praise_id")
     public Integer getCourse_comment_praise_id() {

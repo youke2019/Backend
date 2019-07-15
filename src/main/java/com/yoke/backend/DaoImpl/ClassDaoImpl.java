@@ -4,6 +4,7 @@ import com.yoke.backend.Dao.ClassDao;
 import com.yoke.backend.Entity.Course.ClassInfo;
 import com.yoke.backend.repository.ClassRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -13,7 +14,7 @@ import java.util.List;
  * @DATE : 2019/7/4
  * @description:
  **/
-@Service
+@Repository
 public class ClassDaoImpl implements ClassDao {
     @Autowired
     ClassRepository classRepository;

@@ -3,6 +3,7 @@ package com.yoke.backend.Controller;
 import com.yoke.backend.Entity.Comment.CourseComment;
 import com.yoke.backend.Service.CourseCommentService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -113,4 +114,39 @@ public class CourseCommentController {
         courseCommentService.unbanCommentOfCourse(comment_id);
         return "success";
     }
+
+    /**
+     * @api {get} /course/comments/praise:
+     * @apiName praiseComment
+     * @apiGroup Comment
+     * @apiPram  点赞
+     * @apiPram  example: /course/comments/praise?user_id=1&course_comment_id=2
+     * @param user_id
+     * @param course_comment_id
+     * @return
+     */
+    @RequestMapping(value = "/praise")
+    public String praiseCourseComment(String user_id,Integer course_comment_id)
+    {
+        courseCommentService.praiseCourseComment(user_id,course_comment_id);
+        return "success";
+    }
+
+    /**
+     * @api {get} /course/comments/unpraise:
+     * @apiName unpraiseComment
+     * @apiGroup Comment
+     * @apiPram  取消点赞
+     * @apiPram  example: /course/comments/unpraise?user_id=1&course_comment_id=2
+     * @param user_id
+     * @param course_comment_id
+     * @return
+     */
+    @RequestMapping(value = "/unpraise")
+    public String unpraiseCourseComment(String user_id,Integer course_comment_id)
+    {
+        courseCommentService.unpraiseCourseComment(user_id,course_comment_id);
+        return "successs";
+    }
+
 }
