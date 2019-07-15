@@ -3,10 +3,13 @@ package com.yoke.backend.Entity.Comment;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import com.yoke.backend.Entity.Praise.CourseCommentPraise;
 
 import javax.persistence.*;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  * @AUTHOR: Guozhi
@@ -32,6 +35,8 @@ public class CourseComment {
     private String course_comment_content;
     private Integer user_id;
     private Boolean isbanned=false;
+    private Integer course_comment_praise_point=0;
+    List<CourseCommentPraise> courseCommentPraises=new ArrayList<>();
 
     public CourseComment(){
 
@@ -45,6 +50,7 @@ public class CourseComment {
         this.course_id=course_id;
         this.user_id=user_id;
         this.isbanned=false;
+        this.course_comment_praise_point=0;
     }
 
     @Id
@@ -78,10 +84,30 @@ public class CourseComment {
     }
 
     @Basic
-    @Column(name = "isbanned")
+    @Column(name = "course_comment_isbanned")
     public Boolean getIsbanned() {
         return isbanned;
     }
+
+    @Basic
+    @Column(name = "course_comment_praise_point")
+    public Integer getCourse_comment_praise_point() {
+        return course_comment_praise_point;
+    }
+
+    public void setCourse_comment_praise_point(Integer course_comment_praise_point) {
+        this.course_comment_praise_point = course_comment_praise_point;
+    }
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "course_comment_id", cascade = CascadeType.ALL)
+    public List<CourseCommentPraise> getCourseCommentPraises() {
+        return courseCommentPraises;
+    }
+
+    public void setCourseCommentPraises(List<CourseCommentPraise> courseCommentPraises) {
+        this.courseCommentPraises = courseCommentPraises;
+    }
+
 
     public void setIsbanned(Boolean isbanned) {
         this.isbanned = isbanned;
