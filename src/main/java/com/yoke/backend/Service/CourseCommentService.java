@@ -1,6 +1,6 @@
 package com.yoke.backend.Service;
 
-import com.yoke.backend.Entity.Comment.CourseComment;
+import com.yoke.backend.Entity.CourseMessage.CourseComment;
 
 import java.util.List;
 
@@ -16,4 +16,6 @@ public interface CourseCommentService {
     void withdrawCommentOfCourse(Integer comment_id);
     void banCommentOfCourse(Integer comment_id);
     void unbanCommentOfCourse(Integer comment_id);
+    boolean praiseCourseComment(String user_id,Integer course_comment_id);
+    boolean unpraiseCourseComment(String user_id,Integer course_comment_id);
 }
