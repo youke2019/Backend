@@ -31,7 +31,7 @@ public class CourseComment {
     private String course_comment_time=sdf.format(date);/*此处的初始化是为了post参数传入时设置默认参数*/
     private String course_comment_content;
     private Integer user_id;
-    private Boolean isbanned=false;
+    private Boolean isbanned = false;
 
     public CourseComment(){
 
