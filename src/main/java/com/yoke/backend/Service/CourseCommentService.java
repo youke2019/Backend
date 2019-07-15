@@ -1,6 +1,6 @@
 package com.yoke.backend.Service;
 
-import com.yoke.backend.Entity.Comment.CourseComment;
+import com.yoke.backend.Entity.CourseMessage.CourseComment;
 
 import java.util.List;
 

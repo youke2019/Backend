@@ -1,6 +1,6 @@
-package com.yoke.backend.repository;
+package com.yoke.backend.repository.CourseMessage;
 
-import com.yoke.backend.Entity.Comment.CourseComment;
+import com.yoke.backend.Entity.CourseMessage.CourseComment;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 

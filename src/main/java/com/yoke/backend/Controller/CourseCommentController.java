@@ -1,9 +1,8 @@
 package com.yoke.backend.Controller;
 
-import com.yoke.backend.Entity.Comment.CourseComment;
+import com.yoke.backend.Entity.CourseMessage.CourseComment;
 import com.yoke.backend.Service.CourseCommentService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -28,7 +27,7 @@ public class CourseCommentController {
     /**
      * @api {get} /course/comments/sortbycourseid:
      * @apiName getcomment
-     * @apiGroup Comment
+     * @apiGroup CourseMessage
      * @apiPram  获取评论
      * @apiSuccessExample Response-Example:
      *[
@@ -56,7 +55,7 @@ public class CourseCommentController {
      *
      * @api {post} /course/comments/add:
      * @apiName addComment
-     * @apiGroup Comment
+     * @apiGroup CourseMessage
      * @apiPram  添加评论
      * @apiSuccessExample Request-Example:
      *     {
@@ -79,7 +78,7 @@ public class CourseCommentController {
     /**
      * @api {get} /course/comments/withdraw:
      * @apiName withdrawComment
-     * @apiGroup Comment
+     * @apiGroup CourseMessage
      * @apiPram  撤回评论
      * @param comment_id
      * @return
@@ -118,7 +117,7 @@ public class CourseCommentController {
     /**
      * @api {get} /course/comments/praise:
      * @apiName praiseComment
-     * @apiGroup Comment
+     * @apiGroup CourseMessage
      * @apiPram  点赞
      * @apiPram  example: /course/comments/praise?user_id=1&course_comment_id=2
      * @param user_id
@@ -135,7 +134,7 @@ public class CourseCommentController {
     /**
      * @api {get} /course/comments/unpraise:
      * @apiName unpraiseComment
-     * @apiGroup Comment
+     * @apiGroup CourseMessage
      * @apiPram  取消点赞
      * @apiPram  example: /course/comments/unpraise?user_id=1&course_comment_id=2
      * @param user_id

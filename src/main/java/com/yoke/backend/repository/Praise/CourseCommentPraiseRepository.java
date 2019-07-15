@@ -1,11 +1,8 @@
 package com.yoke.backend.repository.Praise;
 
-import com.yoke.backend.Entity.Comment.CourseComment;
 import com.yoke.backend.Entity.Praise.CourseCommentPraise;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
-
-import java.util.List;
 
 /**
  * @AUTHOR: Guozhi

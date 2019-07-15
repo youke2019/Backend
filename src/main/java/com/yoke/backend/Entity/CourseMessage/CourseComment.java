@@ -1,4 +1,4 @@
-package com.yoke.backend.Entity.Comment;
+package com.yoke.backend.Entity.CourseMessage;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;

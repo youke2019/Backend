@@ -1,8 +1,7 @@
 package com.yoke.backend.Dao;
 
-import com.yoke.backend.Entity.Comment.CourseComment;
+import com.yoke.backend.Entity.CourseMessage.CourseComment;
 
-import javax.xml.stream.events.Comment;
 import java.util.List;
 
 /**

@@ -1,7 +1,6 @@
 package com.yoke.backend.DaoImpl.Praise;
 
 import com.yoke.backend.Dao.Praise.CourseCommentPraiseDao;
-import com.yoke.backend.Entity.Comment.CourseComment;
 import com.yoke.backend.Entity.Praise.CourseCommentPraise;
 import com.yoke.backend.repository.Praise.CourseCommentPraiseRepository;
 import org.springframework.beans.factory.annotation.Autowired;

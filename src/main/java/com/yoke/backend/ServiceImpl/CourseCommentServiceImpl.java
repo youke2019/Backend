@@ -2,7 +2,7 @@ package com.yoke.backend.ServiceImpl;
 
 import com.yoke.backend.Dao.CourseCommentDao;
 import com.yoke.backend.Dao.Praise.CourseCommentPraiseDao;
-import com.yoke.backend.Entity.Comment.CourseComment;
+import com.yoke.backend.Entity.CourseMessage.CourseComment;
 import com.yoke.backend.Entity.Praise.CourseCommentPraise;
 import com.yoke.backend.Service.CourseCommentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -77,6 +77,7 @@ public class CourseCommentServiceImpl implements CourseCommentService {
         List<CourseCommentPraise> courseCommentPraises=courseComment.getCourseCommentPraises();
         courseCommentPraises.add(courseCommentPraise);
         courseComment.setCourseCommentPraises(courseCommentPraises);
+        courseComment.setCourse_comment_praise_point(courseComment.getCourse_comment_praise_point()+1);
         courseCommentDao.save(courseComment);
         return true;
     }
@@ -86,6 +87,8 @@ public class CourseCommentServiceImpl implements CourseCommentService {
     {
         CourseCommentPraise courseCommentPraise=courseCommentPraiseDao.findCourseCommentPraiseByUser_idAndCourse_comment_id(user_id, course_comment_id);
         courseCommentPraiseDao.deleteCourseCommentPraise(courseCommentPraise.getCourse_comment_praise_id());
+        CourseComment courseComment=courseCommentDao.findCourseCommentById(course_comment_id);
+        courseComment.setCourse_comment_praise_point(courseComment.getCourse_comment_praise_point()-1);
         return true;
     }
 
