@@ -18,6 +18,7 @@ import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import javax.transaction.Transactional;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -62,15 +63,6 @@ public void testAllComment() throws Exception {
     Assert.assertThat(result.getBody().get(0).getCourse_comment_id(), equalTo(1));
 }
 
-    @Test
-    public void testAllComment() throws Exception {
-//TODO: Test goes here...
-        String response = testRestTemplate.getForObject("/courses/comments/all", String.class);
-        List<CourseComment> cc = JSON.parseArray(response, CourseComment.class);
-
-        Integer size = cc.size();
-        Assert.assertThat(size,equalTo(12));
-    }
     /**
 * 
 * Method: findCommentByCourse(String course_id) 
@@ -99,7 +91,7 @@ public void testUserCommentCourse() throws Exception {
     CourseComment cc = new CourseComment();
     cc.setCourse_id("1");
     cc.setCourse_comment_content("此条为添加进入的测试条目");
-    cc.setUser_id(0);
+    cc.setUser_id("0");
     String response = testRestTemplate.postForObject("/courses/comments/add",cc ,String.class);
     Assert.assertThat(response,not("success"));
 }
@@ -111,7 +103,7 @@ public void testUserCommentCourse() throws Exception {
         CourseComment cc = new CourseComment();
         cc.setCourse_id("41899");
         cc.setCourse_comment_content("此条为添加进入的测试条目");
-        cc.setUser_id(0);
+        cc.setUser_id("0");
         String response = testRestTemplate.postForObject("/courses/comments/add",cc ,String.class);
         Assert.assertThat(response,not("success"));
     }
@@ -124,7 +116,7 @@ public void testUserCommentCourse() throws Exception {
         CourseComment cc = new CourseComment();
         cc.setCourse_id("41899");
         cc.setCourse_comment_content("此条为添加进入的测试条目");
-        cc.setUser_id(01231);
+        cc.setUser_id("01231");
         String response = testRestTemplate.postForObject("/courses/comments/add",cc ,String.class);
         Assert.assertThat(response,not("success"));
     }
@@ -136,7 +128,7 @@ public void testUserCommentCourse() throws Exception {
         CourseComment cc = new CourseComment();
         cc.setCourse_id("41899");
         cc.setCourse_comment_content("此条为添加进入的测试条目");
-        cc.setUser_id(79832);
+        cc.setUser_id("79832");
         String response = testRestTemplate.postForObject("/courses/comments/add",cc ,String.class);
         Assert.assertThat(response,equalTo("success"));
     }
