@@ -1,8 +1,8 @@
-package com.yoke.backend.ServiceImpl;
+package com.yoke.backend.ServiceImpl.User;
 
-import com.yoke.backend.Dao.UserDao;
+import com.yoke.backend.Dao.User.UserDao;
 import com.yoke.backend.Entity.User.User;
-import com.yoke.backend.Service.UserService;
+import com.yoke.backend.Service.User.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;

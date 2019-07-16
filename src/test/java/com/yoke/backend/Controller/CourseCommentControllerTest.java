@@ -95,7 +95,7 @@ public void testUserCommentCourse() throws Exception {
     cc.setCourse_comment_content("此条为添加进入的测试条目");
     cc.setCourse_comment_id(0);
     cc.setCourse_comment_time("0");
-    cc.setUser_id(0);
+    cc.setUser_id("0");
        String response = testRestTemplate.postForObject("/courses/comments/add",cc ,String.class);
 
     Assert.assertThat(response,equalTo("success"));

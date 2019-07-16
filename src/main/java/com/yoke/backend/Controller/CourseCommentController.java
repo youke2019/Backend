@@ -1,7 +1,7 @@
 package com.yoke.backend.Controller;
 
 import com.yoke.backend.Entity.CourseMessage.CourseComment;
-import com.yoke.backend.Service.CourseCommentService;
+import com.yoke.backend.Service.Course.CourseCommentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -25,7 +25,7 @@ public class CourseCommentController {
     }
 
     /**
-     * @api {get} /course/comments/sortbycourseid:
+     * @api {get} /course/comments/find:
      * @apiName getcomment
      * @apiGroup CourseMessage
      * @apiPram  获取评论
@@ -45,7 +45,7 @@ public class CourseCommentController {
      * @param course_id
      * @return
      */
-    @GetMapping(value = "/sortbycourseid")
+    @GetMapping(value = "/find")
     public List<CourseComment> findCommentByCourse(String course_id)
     {
         return courseCommentService.findCommentByCourse(course_id);
@@ -76,14 +76,14 @@ public class CourseCommentController {
     }
 
     /**
-     * @api {get} /course/comments/withdraw:
+     * @api {get} /course/comments/delete:
      * @apiName withdrawComment
      * @apiGroup CourseMessage
      * @apiPram  撤回评论
      * @param comment_id
      * @return
      */
-    @GetMapping(value = "withdraw")
+    @GetMapping(value = "delete")
     public String withdrawCommentOfCourse(Integer comment_id)
     {
         courseCommentService.withdrawCommentOfCourse(comment_id);

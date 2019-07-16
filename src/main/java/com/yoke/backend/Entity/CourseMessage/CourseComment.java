@@ -35,7 +35,7 @@ public class CourseComment {
     private String course_id;
     private String course_comment_time=sdf.format(date);/*此处的初始化是为了post参数传入时设置默认参数*/
     private String course_comment_content;
-    private Integer user_id;
+    private String user_id;
     private Boolean isbanned=false;
     private Integer course_comment_praise_point=0;
     List<CourseCommentPraise> courseCommentPraises=new ArrayList<>();
@@ -43,7 +43,7 @@ public class CourseComment {
     public CourseComment(){
 
     }
-    public CourseComment(Integer user_id,String course_id,String content){
+    public CourseComment(String user_id,String course_id,String content){
         this.course_comment_id=0;
         this.course_comment_content=content;
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");// 格式化时间
@@ -81,7 +81,7 @@ public class CourseComment {
 
     @Basic
     @Column(name = "ID")
-    public Integer getUser_id() {
+    public String getUser_id() {
         return user_id;
     }
 
@@ -127,7 +127,7 @@ public class CourseComment {
         this.course_comment_time = course_comment_time;
     }
 
-    public void setUser_id(Integer user_id) {
+    public void setUser_id(String user_id) {
         this.user_id = user_id;
     }
 
