@@ -61,13 +61,8 @@ public void testAllComment1() throws Exception {
     ParameterizedTypeReference<List<CourseComment>> type = new ParameterizedTypeReference<List<CourseComment>>() {};
     ResponseEntity<List<CourseComment>> result = testRestTemplate.exchange("/courses/comments/all", HttpMethod.GET, null, type);
     Assert.assertThat(result.getBody().get(0).getCourse_comment_id(), equalTo(1));
-
-    String response = testRestTemplate.getForObject("/courses/comments/all", String.class);
-    List<CourseComment> cc = JSON.parseArray(response, CourseComment.class);
-
-    Integer size = cc.size();
-    Assert.assertThat(size,equalTo(12));
 }
+
     @Test
     public void testAllComment() throws Exception {
 //TODO: Test goes here...
@@ -117,19 +112,6 @@ public void testUserCommentCourse() throws Exception {
     cc.setUser_id(0);
     String response = testRestTemplate.postForObject("/courses/comments/add",cc ,String.class);
     Assert.assertThat(response,not("success"));
-
-    cc.setCourse_id("41899");
-    response = testRestTemplate.postForObject("/courses/comments/add",cc ,String.class);
-    Assert.assertThat(response,not("success"));
-
-    cc.setUser_id(01231);
-    response = testRestTemplate.postForObject("/courses/comments/add",cc ,String.class);
-    Assert.assertThat(response,not("success"));
-    //不能以0 开头
-
-    cc.setUser_id(79832);
-    response = testRestTemplate.postForObject("/courses/comments/add",cc ,String.class);
-    Assert.assertThat(response,equalTo("success"));
 }
     @Test
     @Transactional
