@@ -18,7 +18,6 @@ import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import javax.transaction.Transactional;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -40,15 +39,16 @@ import static org.hamcrest.CoreMatchers.not;
 public class CourseCommentControllerTest { 
 
 @Before
-public void before() throws Exception { 
+public void before() throws Exception {
 } 
 
 @After
-public void after() throws Exception { 
+public void after() throws Exception {
 }
 
     @Autowired
     private TestRestTemplate testRestTemplate;
+
 
 /** 
 * 
@@ -56,8 +56,7 @@ public void after() throws Exception {
 * 
 */ 
 @Test
-public void testAllComment1() throws Exception {
-//TODO: Test goes here...
+public void testAllComment() throws Exception {
     ParameterizedTypeReference<List<CourseComment>> type = new ParameterizedTypeReference<List<CourseComment>>() {};
     ResponseEntity<List<CourseComment>> result = testRestTemplate.exchange("/courses/comments/all", HttpMethod.GET, null, type);
     Assert.assertThat(result.getBody().get(0).getCourse_comment_id(), equalTo(1));
@@ -82,28 +81,19 @@ public void testFindCommentByCourse() throws Exception {
 //TODO: Test goes here...
     Map<String, String> params = new HashMap<>();
     params.put("course_id", "2");
+    ParameterizedTypeReference<List<CourseComment>> type = new ParameterizedTypeReference<List<CourseComment>>() {};
     String  result = testRestTemplate.getForObject("/courses/comments/sortbycourseid?course_id={course_id}",  String.class, params);
     List<CourseComment> cc = JSON.parseArray(result , CourseComment.class);
-    Assert.assertThat(cc.size(),equalTo(0));
-}
-    @Test
-    public void testFindCommentByCourse1() throws Exception {
-//TODO: Test goes here...
-        Map<String, String> params = new HashMap<>();
-        params.put("course_id", "41899");
-        String  result = testRestTemplate.getForObject("/courses/comments/sortbycourseid?course_id={course_id}",  String.class, params);
-        List<CourseComment> cc = JSON.parseArray(result , CourseComment.class);
-        Assert.assertThat(cc.size(),equalTo(0));
-    }
+    Assert.assertThat(cc.size(),equalTo(5));
+} 
 
-    /**
+/** 
 * 
 * Method: userCommentCourse(@RequestBody CourseComment courseComment) 
 * 
-*/ 
+*/
+
 @Test
-@Transactional
-@Rollback(true)
 public void testUserCommentCourse() throws Exception { 
 //TODO: Test goes here...
     CourseComment cc = new CourseComment();
@@ -156,152 +146,42 @@ public void testUserCommentCourse() throws Exception {
 * 
 */ 
 @Test
-@Transactional
-@Rollback
 public void testWithdrawCommentOfCourse() throws Exception { 
 //TODO: Test goes here...
     Map<String,Integer> params = new HashMap<>();
     params.put("comment_id",2);
     String  result = testRestTemplate.getForObject("/courses/comments/withdraw?comment_id={comment_id}",  String.class, params);
-    Assert.assertThat(result,equalTo("success"));//Report 没做关联没有处理
-}
+    Assert.assertThat(result,equalTo("success"));
+} 
 
-    @Test
-    @Transactional
-    @Rollback
-    public void testWithdrawCommentOfCourse1() throws Exception {
-//TODO: Test goes here...
-        Map<String,Integer> params = new HashMap<>();
-        params.put("comment_id",12);
-        String  result = testRestTemplate.getForObject("/courses/comments/withdraw?comment_id={comment_id}",  String.class, params);
-        Assert.assertThat(result,equalTo("success"));//没有rollback
-    }
-
-    /**
+/** 
 * 
 * Method: banCommentOfCourse(Integer comment_id) 
 * 
 */ 
 @Test
-@Transactional
 public void testBanCommentOfCourse() throws Exception { 
 //TODO: Test goes here...
     Map<String,Integer> params = new HashMap<>();
-    params.put("comment_id",10);
+    params.put("comment_id",1);
     String  result = testRestTemplate.getForObject("/courses/comments/ban?comment_id={comment_id}",  String.class, params);
     Assert.assertThat(result,equalTo("success"));
+} 
 
-}
-    @Test
-    @Transactional
-    public void testBanCommentOfCourse1() throws Exception {
-//TODO: Test goes here...
-        Map<String,Integer> params = new HashMap<>();
-        params.put("comment_id",11);
-        String  result = testRestTemplate.getForObject("/courses/comments/ban?comment_id={comment_id}",  String.class, params);
-        Assert.assertThat(result,not("success"));
-    }
-    /**
+/** 
 * 
 * Method: unbanCommentOfCourse(Integer comment_id) 
 * 
-*/ 
+*/
+
 @Test
-@Transactional
 public void testUnbanCommentOfCourse() throws Exception { 
 //TODO: Test goes here...
     Map<String,Integer> params = new HashMap<>();
-    params.put("comment_id",10);
+    params.put("comment_id",1);
     String  result = testRestTemplate.getForObject("/courses/comments/unban?comment_id={comment_id}",  String.class, params);
     Assert.assertThat(result,equalTo("success"));
-
 }
-
-    @Test
-    @Transactional
-    public void testUnbanCommentOfCourse1() throws Exception {
-//TODO: Test goes here...
-        Map<String,Integer> params = new HashMap<>();
-        params.put("comment_id",11);
-        String  result = testRestTemplate.getForObject("/courses/comments/unban?comment_id={comment_id}",  String.class, params);
-        Assert.assertThat(result,not("success"));
-    }
-    /**
-* 
-* Method: praiseCourseComment(String user_id, Integer course_comment_id) 
-* 
-*/ 
-@Test
-@Transactional
-public void testPraiseCourseComment() throws Exception { 
-//TODO: Test goes here...
-    Map<String,Integer> params = new HashMap<>();
-    params.put("course_comment_id",0);
-    params.put("user_id",1);
-    String  result = testRestTemplate.getForObject("/courses/comments/praise?ccourse_comment_id={course_comment_id}&&user_id={user_id}",  String.class, params);
-    Assert.assertThat(result,not("success"));
-}
-
-    @Test
-    @Transactional
-    public void testPraiseCourseComment1() throws Exception {
-//TODO: Test goes here...
-        Map<String,Integer> params = new HashMap<>();
-        params.put("course_comment_id",0);
-        params.put("user_id",79832);
-        String  result = testRestTemplate.getForObject("/courses/comments/praise?course_comment_id={course_comment_id}&&user_id={user_id}",  String.class, params);
-        Assert.assertThat(result,not("success"));
-    }
-
-    @Test
-    @Transactional
-    public void testPraiseCourseComment2() throws Exception {
-//TODO: Test goes here...
-        Map<String,Integer> params = new HashMap<>();
-        params.put("course_comment_id",2);
-        params.put("user_id",79832);
-        String  result = testRestTemplate.getForObject("/courses/comments/praise?course_comment_id={course_comment_id}&&user_id={user_id}",  String.class, params);
-        Assert.assertThat(result,equalTo("success"));
-    }
-    /**
-* 
-* Method: unpraiseCourseComment(String user_id, Integer course_comment_id) 
-* 
-*/
-    @Test
-    @Transactional
-    public void testUnpraiseCourseComment() throws Exception {
-//TODO: Test goes here...
-
-        Map<String,Integer> params = new HashMap<>();
-        params.put("course_comment_id",0);
-        params.put("user_id",1);
-        String  result = testRestTemplate.getForObject("/courses/comments/unpraise?course_comment_id={course_comment_id}&&user_id={user_id}",  String.class, params);
-        Assert.assertThat(result,not("success"));
-    }
-    @Test
-    @Transactional
-    public void testUnpraiseCourseComment1() throws Exception {
-//TODO: Test goes here...
-
-        Map<String,Integer> params = new HashMap<>();
-        params.put("course_comment_id",0);
-        params.put("user_id",79832);
-        String  result = testRestTemplate.getForObject("/courses/comments/unpraise?course_comment_id={course_comment_id}&&user_id={user_id}",  String.class, params);
-        Assert.assertThat(result,not("success"));
-    }
-    @Test
-    @Transactional
-    public void testUnpraiseCourseComment2() throws Exception {
-//TODO: Test goes here...
-
-        Map<String,Integer> params = new HashMap<>();
-        params.put("course_comment_id",10);
-        params.put("user_id",79832);
-        String  result = testRestTemplate.getForObject("/courses/comments/unpraise?course_comment_id={course_comment_id}&&user_id={user_id}",  String.class, params);
-        Assert.assertThat(result,equalTo("success"));
-
-    }
 
 
 } 

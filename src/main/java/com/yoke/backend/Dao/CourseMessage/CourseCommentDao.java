@@ -1,4 +1,4 @@
-package com.yoke.backend.Dao;
+package com.yoke.backend.Dao.CourseMessage;
 
 import com.yoke.backend.Entity.CourseMessage.CourseComment;
 

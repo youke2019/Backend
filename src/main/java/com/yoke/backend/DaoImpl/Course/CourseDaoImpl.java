@@ -1,6 +1,6 @@
-package com.yoke.backend.DaoImpl;
+package com.yoke.backend.DaoImpl.Course;
 
-import com.yoke.backend.Dao.CourseDao;
+import com.yoke.backend.Dao.Course.CourseDao;
 import com.yoke.backend.Entity.Course.CourseInfo;
 import com.yoke.backend.Entity.Course.SearchCourseInfoParams;
 import com.yoke.backend.repository.CourseRepository;

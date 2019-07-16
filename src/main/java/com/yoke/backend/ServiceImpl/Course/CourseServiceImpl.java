@@ -1,9 +1,9 @@
-package com.yoke.backend.ServiceImpl;
+package com.yoke.backend.ServiceImpl.Course;
 
 import com.alibaba.fastjson.JSON;
-import com.yoke.backend.Dao.CourseDao;
+import com.yoke.backend.Dao.Course.CourseDao;
 import com.yoke.backend.Entity.Course.*;
-import com.yoke.backend.Service.CourseService;
+import com.yoke.backend.Service.Course.CourseService;
 import org.apache.commons.text.StringEscapeUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

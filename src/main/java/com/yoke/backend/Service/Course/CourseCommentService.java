@@ -1,4 +1,4 @@
-package com.yoke.backend.Service;
+package com.yoke.backend.Service.Course;
 
 import com.yoke.backend.Entity.CourseMessage.CourseComment;
 

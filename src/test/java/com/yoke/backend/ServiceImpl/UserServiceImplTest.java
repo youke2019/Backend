@@ -1,7 +1,7 @@
 package com.yoke.backend.ServiceImpl;
 
 import com.yoke.backend.Entity.User.User;
-import com.yoke.backend.Service.UserService;
+import com.yoke.backend.Service.User.UserService;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;

@@ -1,14 +1,16 @@
-package com.yoke.backend.Dao;
+package com.yoke.backend.Service.User;
+
 
 import com.yoke.backend.Entity.User.User;
 
 import java.util.List;
 
-public interface UserDao {
-    User findUserByID(String id);
+public interface UserService {
+    User GetUserByID(String id);
 
     List<User> findAll();
     void save(User user);
+    void generateUserIfNoUserLike(User user);
 
     void banUser(String id);
 
