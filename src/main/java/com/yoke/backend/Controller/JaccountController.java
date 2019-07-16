@@ -2,7 +2,7 @@ package com.yoke.backend.Controller;
 
 import com.alibaba.fastjson.JSONObject;
 import com.yoke.backend.Entity.User.User;
-import com.yoke.backend.Service.UserService;
+import com.yoke.backend.Service.User.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;

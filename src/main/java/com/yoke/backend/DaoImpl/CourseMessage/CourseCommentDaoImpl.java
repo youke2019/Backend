@@ -1,6 +1,6 @@
-package com.yoke.backend.DaoImpl;
+package com.yoke.backend.DaoImpl.CourseMessage;
 
-import com.yoke.backend.Dao.CourseCommentDao;
+import com.yoke.backend.Dao.CourseMessage.CourseCommentDao;
 import com.yoke.backend.Entity.CourseMessage.CourseComment;
 import com.yoke.backend.repository.CourseMessage.CourseCommentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
