@@ -50,9 +50,10 @@ public class CourseEvaluateController {
      */
     @RequestMapping(value = "/add", method= RequestMethod.POST)
     @ResponseBody
-    public void addEvaluation(@RequestBody String json)
+    public String addEvaluation(@RequestBody String json)
     {
         courseEvaluationService.addCourseEvaluation(json);
+        return "success";
     }
 
     @GetMapping(value = "all")

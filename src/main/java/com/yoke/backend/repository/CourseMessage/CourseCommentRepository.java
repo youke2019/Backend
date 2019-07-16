@@ -16,3 +16,7 @@ public interface CourseCommentRepository extends JpaRepository<CourseComment,Int
     List<CourseComment> findCommentByCourse(String course_id);
 
 }
+
+
+
+
