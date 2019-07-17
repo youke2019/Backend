@@ -17,4 +17,6 @@ public interface CourseQuestionService {
     void addAnswer(CourseAnswer courseAnswer);
     void praiseQuestion(Integer question_id,String user_id);
     void praiseAnswer(Integer answer_id,String user_id);
+    void unpraiseQuestion(Integer question_id,String user_id);
+    void unpraiseAnswer(Integer answer_id,String user_id);
 }

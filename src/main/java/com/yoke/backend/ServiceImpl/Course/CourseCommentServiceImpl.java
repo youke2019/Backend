@@ -89,6 +89,7 @@ public class CourseCommentServiceImpl implements CourseCommentService {
         courseCommentPraiseDao.deleteCourseCommentPraise(courseCommentPraise.getCourse_comment_praise_id());
         CourseComment courseComment=courseCommentDao.findCourseCommentById(course_comment_id);
         courseComment.setCourse_comment_praise_point(courseComment.getCourse_comment_praise_point()-1);
+        courseCommentDao.save(courseComment);
         return true;
     }
 

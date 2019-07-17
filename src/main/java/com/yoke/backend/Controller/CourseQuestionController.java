@@ -19,6 +19,7 @@ public class CourseQuestionController {
     CourseQuestionService courseQuestionService;
 
 
+
     /**
      *@api {get} /course/questions/find
      * @apiName findQuestion
@@ -122,6 +123,31 @@ public class CourseQuestionController {
         return "success";
     }
 
+    /**
+     *
+     * @param question_id
+     * @param user_id
+     * @return
+     */
+    @RequestMapping(value = "courses/questions/unpraise")
+    String unpraiseQuestion(Integer question_id,String user_id)
+    {
+        courseQuestionService.unpraiseQuestion(question_id, user_id);
+        return "success";
+    }
+
+    /**
+     *
+     * @param answer_id
+     * @param user_id
+     * @return
+     */
+    @RequestMapping(value = "courses/answers/unpraise")
+    String unpraiseAnswer(Integer answer_id,String user_id)
+    {
+        courseQuestionService.unpraiseAnswer(answer_id, user_id);
+        return "success";
+    }
 
 
 

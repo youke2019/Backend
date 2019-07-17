@@ -41,7 +41,7 @@ public class CourseQuestionServiceImpl implements CourseQuestionService {
         {
             for(CourseQuestionPraise courseQuestionPraise :courseQuestion.getCourseQuestionPraiseList())
             {
-                if(courseQuestionPraise.getUser_id().equals(course_id))
+                if(courseQuestionPraise.getUser_id().equals(user_id))
                     courseQuestion.setCurrent_user_praise(true);
             }
             List<CourseAnswer> courseAnswerList=courseQuestion.getCourseAnswerList();
@@ -49,7 +49,7 @@ public class CourseQuestionServiceImpl implements CourseQuestionService {
             {
                 for(CourseAnswerPraise courseAnswerPraise:courseAnswer.getCourseAnswerPraiseList())
                 {
-                    if(courseAnswerPraise.getUser_id().equals(course_id))
+                    if(courseAnswerPraise.getUser_id().equals(user_id))
                         courseAnswer.setCurrent_user_praise(true);
                 }
             }
@@ -74,6 +74,7 @@ public class CourseQuestionServiceImpl implements CourseQuestionService {
     {
         CourseQuestion courseQuestion=courseQuestionDao.findQuestionById(question_id);
         courseQuestion.setQuestion_praise_point(courseQuestion.getQuestion_praise_point()+1);
+        courseQuestionDao.save(courseQuestion);
         CourseQuestionPraise courseQuestionPraise=new CourseQuestionPraise(question_id,user_id);
         courseQuestionPraiseDao.save(courseQuestionPraise);
     }
@@ -83,7 +84,46 @@ public class CourseQuestionServiceImpl implements CourseQuestionService {
     {
         CourseAnswer courseAnswer=courseAnswerDao.findAnswerById(answer_id);
         courseAnswer.setAnswer_praise_point(courseAnswer.getAnswer_praise_point()+1);
+        courseAnswerDao.save(courseAnswer);
         CourseAnswerPraise courseAnswerPraise=new CourseAnswerPraise(answer_id,user_id);
         courseAnswerPraiseDao.save(courseAnswerPraise);
+    }
+
+    @Override
+    public void unpraiseQuestion(Integer question_id,String user_id)
+    {
+        CourseQuestion courseQuestion=courseQuestionDao.findQuestionById(question_id);
+        List<CourseQuestionPraise> courseQuestionPraiseList=courseQuestion.getCourseQuestionPraiseList();
+        for(CourseQuestionPraise courseQuestionPraise:courseQuestionPraiseList)
+        {
+            if(courseQuestionPraise.getUser_id().equals(user_id))
+            {
+                courseQuestionPraiseList.remove(courseQuestionPraise);
+                courseQuestion.setQuestion_praise_point(courseQuestion.getQuestion_praise_point()-1);
+                break;
+            }
+        }
+        courseQuestion.setCourseQuestionPraiseList(courseQuestionPraiseList);
+        courseQuestionDao.save(courseQuestion);
+    }
+
+    /**
+     * userid只能为已经点赞的用户
+     */
+    @Override
+    public void unpraiseAnswer(Integer answer_id,String user_id)
+    {
+        CourseAnswer courseAnswer=courseAnswerDao.findAnswerById(answer_id);
+        for(CourseAnswerPraise courseAnswerPraise:courseAnswer.getCourseAnswerPraiseList())
+        {
+            if(courseAnswerPraise.getUser_id().equals(user_id))
+            {
+                List<CourseAnswerPraise> courseAnswerPraiseList=courseAnswer.getCourseAnswerPraiseList();
+                courseAnswerPraiseList.remove(courseAnswerPraise);
+                courseAnswer.setCourseAnswerPraiseList(courseAnswerPraiseList);
+                courseAnswer.setAnswer_praise_point(courseAnswer.getAnswer_praise_point()-1);
+            }
+        }
+        courseAnswerDao.save(courseAnswer);
     }
 }
