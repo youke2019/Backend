@@ -24,6 +24,15 @@ public class CourseAnswerPraise {
     private String user_id;
     private Integer answer_id;
 
+    public CourseAnswerPraise(Integer answer_id,String user_id)
+    {
+        this.answer_praise_id=0;
+        this.answer_id=answer_id;
+        this.user_id=user_id;
+    }
+    public  CourseAnswerPraise()
+    {}
+
     @Id
     @Column(name = "answer_praise_id")
     public Integer getAnswer_praise_id() {

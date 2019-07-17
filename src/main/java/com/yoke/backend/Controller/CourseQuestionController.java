@@ -1,11 +1,10 @@
 package com.yoke.backend.Controller;
 
+import com.yoke.backend.Entity.CourseMessage.CourseAnswer;
 import com.yoke.backend.Entity.CourseMessage.CourseQuestion;
 import com.yoke.backend.Service.Course.CourseQuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -15,10 +14,10 @@ import java.util.List;
  * @description:
  **/
 @RestController
-@RequestMapping(value = "/courses/questions")
 public class CourseQuestionController {
     @Autowired
     CourseQuestionService courseQuestionService;
+
 
     /**
      *@api {get} /course/questions/find
@@ -75,9 +74,56 @@ public class CourseQuestionController {
      * @param user_id
      * @return
      */
-    @GetMapping(value = "find")
+    @GetMapping(value = "courses/questions/find")
     List<CourseQuestion> findQuestionByCourse(String course_id,String user_id)
     {
         return courseQuestionService.findQuestionByCourse(course_id, user_id);
     }
+
+    @RequestMapping(value = "courses/questions/add", method= RequestMethod.POST)
+    @ResponseBody
+    String addQuestion(@RequestBody CourseQuestion courseQuestion)
+    {
+        courseQuestionService.addQuestion(courseQuestion);
+        return "success";
+    }
+
+    @RequestMapping(value = "courses/answers/add",method = RequestMethod.POST)
+    @ResponseBody
+    String addAnswer(@RequestBody CourseAnswer courseAnswer)
+    {
+        courseQuestionService.addAnswer(courseAnswer);
+        return "success";
+    }
+
+    /**
+     *
+     * @param question_id
+     * @param user_id
+     * @return
+     */
+    @RequestMapping(value = "courses/questions/praise")
+    String praiseQuestion(Integer question_id,String user_id)
+    {
+        courseQuestionService.praiseQuestion(question_id, user_id);
+        return "success";
+    }
+
+    /**
+     *
+     * @param answer_id
+     * @param user_id
+     * @return
+     */
+    @RequestMapping(value = "courses/answers/praise")
+    String praiseAnswer(Integer answer_id,String user_id)
+    {
+        courseQuestionService.praiseAnswer(answer_id, user_id);
+        return "success";
+    }
+
+
+
+
+
 }

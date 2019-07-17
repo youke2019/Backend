@@ -27,7 +27,7 @@ public class CourseAnswer {
     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");// 格式化时间
     Date date = new Date();
 
-    private Integer answer_id;
+    private Integer answer_id=0;
     private Integer question_id;
     private String user_id;
     private String answer_content;

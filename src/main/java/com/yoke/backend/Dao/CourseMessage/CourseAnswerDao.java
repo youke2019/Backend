@@ -9,4 +9,5 @@ import com.yoke.backend.Entity.CourseMessage.CourseAnswer;
  **/
 public interface CourseAnswerDao  {
     void save(CourseAnswer courseAnswer);
+    CourseAnswer findAnswerById(Integer answer_id);
 }

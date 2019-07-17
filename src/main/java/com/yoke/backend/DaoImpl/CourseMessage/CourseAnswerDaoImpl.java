@@ -16,8 +16,15 @@ public class CourseAnswerDaoImpl implements CourseAnswerDao {
     @Autowired
     CourseAnswerRepository courseAnswerRepository;
 
+    @Override
     public void save(CourseAnswer courseAnswer)
     {
         courseAnswerRepository.save(courseAnswer);
+    }
+
+    @Override
+    public CourseAnswer findAnswerById(Integer answer_id)
+    {
+        return courseAnswerRepository.findById(answer_id).get();
     }
 }

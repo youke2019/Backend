@@ -30,12 +30,12 @@ public class CourseQuestion {
     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");// 格式化时间
     Date date = new Date();
 
-    private Integer question_id;
+    private Integer question_id=0;
     private String user_id;
     private String course_id;
     private String question_content;
     private String question_time=sdf.format(date);
-    private Boolean question_isbanned;
+    private Boolean question_isbanned=false;
     private Integer question_praise_point=0;
     private List<CourseAnswer>  courseAnswerList=new ArrayList<>();
     private List<CourseQuestionPraise> courseQuestionPraiseList=new ArrayList<>();

@@ -2,6 +2,8 @@ package com.yoke.backend.ServiceImpl.Course;
 
 import com.yoke.backend.Dao.CourseMessage.CourseAnswerDao;
 import com.yoke.backend.Dao.CourseMessage.CourseQuestionDao;
+import com.yoke.backend.Dao.CourseMessage.Praise.CourseAnswerPraiseDao;
+import com.yoke.backend.Dao.CourseMessage.Praise.CourseQuestionPraiseDao;
 import com.yoke.backend.Entity.CourseMessage.CourseAnswer;
 import com.yoke.backend.Entity.CourseMessage.CourseQuestion;
 import com.yoke.backend.Entity.CourseMessage.Praise.CourseAnswerPraise;
@@ -24,6 +26,12 @@ public class CourseQuestionServiceImpl implements CourseQuestionService {
 
     @Autowired
     CourseAnswerDao courseAnswerDao;
+
+    @Autowired
+    CourseQuestionPraiseDao courseQuestionPraiseDao;
+
+    @Autowired
+    CourseAnswerPraiseDao courseAnswerPraiseDao;
 
     @Override
     public List<CourseQuestion> findQuestionByCourse(String course_id,String user_id)
@@ -50,28 +58,32 @@ public class CourseQuestionServiceImpl implements CourseQuestionService {
     }
 
     @Override
-    public void addQuestion(String course_id,String user_id,String question_content)
+    public void addQuestion(CourseQuestion courseQuestion)
     {
-        CourseQuestion courseQuestion=new CourseQuestion(course_id, user_id, question_content);
         courseQuestionDao.save(courseQuestion);
     }
+
     @Override
-    public void addAnswer(Integer question_id,String user_id,String answer_content)
+    public void addAnswer(CourseAnswer courseAnswer)
     {
-        CourseAnswer courseAnswer=new CourseAnswer(question_id,user_id,answer_content);
         courseAnswerDao.save(courseAnswer);
     }
 
     @Override
     public void praiseQuestion(Integer question_id,String user_id)
     {
+        CourseQuestion courseQuestion=courseQuestionDao.findQuestionById(question_id);
+        courseQuestion.setQuestion_praise_point(courseQuestion.getQuestion_praise_point()+1);
         CourseQuestionPraise courseQuestionPraise=new CourseQuestionPraise(question_id,user_id);
-
+        courseQuestionPraiseDao.save(courseQuestionPraise);
     }
 
     @Override
     public void praiseAnswer(Integer answer_id,String user_id)
     {
-
+        CourseAnswer courseAnswer=courseAnswerDao.findAnswerById(answer_id);
+        courseAnswer.setAnswer_praise_point(courseAnswer.getAnswer_praise_point()+1);
+        CourseAnswerPraise courseAnswerPraise=new CourseAnswerPraise(answer_id,user_id);
+        courseAnswerPraiseDao.save(courseAnswerPraise);
     }
 }
