@@ -6,7 +6,9 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.yoke.backend.Entity.CourseMessage.Praise.CourseAnswerPraise;
 
 import javax.persistence.*;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -22,16 +24,34 @@ import java.util.List;
         property = "answer_id"
 )
 public class CourseAnswer {
+    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");// 格式化时间
+    Date date = new Date();
+
     private Integer answer_id;
     private Integer question_id;
     private String user_id;
     private String answer_content;
-    private String answer_time;
+    private String answer_time=sdf.format(date);
     private Boolean answer_isbanned=false;
     private Integer answer_praise_point=0;
     private Boolean current_user_praise=false;
     private List<CourseAnswerPraise> courseAnswerPraiseList=new ArrayList<>();
 
+    public CourseAnswer()
+    {
+
+    }
+    public CourseAnswer(Integer question_id,String user_id,String answer_content)
+    {
+        this.answer_id=0;
+        this.question_id=question_id;
+        this.user_id=user_id;
+        this.answer_content=answer_content;
+        this.answer_isbanned=false;
+        this.answer_praise_point=0;
+        this.current_user_praise=false;
+        this.answer_time=sdf.format(date);
+    }
     @Id
     @Column(name = "answer_id")
     public Integer getAnswer_id() {

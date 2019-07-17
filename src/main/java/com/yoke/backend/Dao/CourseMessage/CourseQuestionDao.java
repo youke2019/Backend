@@ -12,4 +12,5 @@ import java.util.List;
 public interface CourseQuestionDao {
     List<CourseQuestion> findQuestionByCourse(String course_id);
     void save(CourseQuestion courseQuestion);
+    CourseQuestion findQuestionById(Integer question_id);
 }

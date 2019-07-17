@@ -1,5 +1,6 @@
 package com.yoke.backend.ServiceImpl.Course;
 
+import com.yoke.backend.Dao.CourseMessage.CourseAnswerDao;
 import com.yoke.backend.Dao.CourseMessage.CourseQuestionDao;
 import com.yoke.backend.Entity.CourseMessage.CourseAnswer;
 import com.yoke.backend.Entity.CourseMessage.CourseQuestion;
@@ -20,6 +21,9 @@ import java.util.List;
 public class CourseQuestionServiceImpl implements CourseQuestionService {
     @Autowired
     CourseQuestionDao courseQuestionDao;
+
+    @Autowired
+    CourseAnswerDao courseAnswerDao;
 
     @Override
     public List<CourseQuestion> findQuestionByCourse(String course_id,String user_id)
@@ -48,18 +52,23 @@ public class CourseQuestionServiceImpl implements CourseQuestionService {
     @Override
     public void addQuestion(String course_id,String user_id,String question_content)
     {
-
+        CourseQuestion courseQuestion=new CourseQuestion(course_id, user_id, question_content);
+        courseQuestionDao.save(courseQuestion);
     }
     @Override
     public void addAnswer(Integer question_id,String user_id,String answer_content)
     {
-
+        CourseAnswer courseAnswer=new CourseAnswer(question_id,user_id,answer_content);
+        courseAnswerDao.save(courseAnswer);
     }
+
     @Override
     public void praiseQuestion(Integer question_id,String user_id)
     {
+        CourseQuestionPraise courseQuestionPraise=new CourseQuestionPraise(question_id,user_id);
 
     }
+
     @Override
     public void praiseAnswer(Integer answer_id,String user_id)
     {

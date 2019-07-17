@@ -23,6 +23,16 @@ public class CourseQuestionPraise {
     private Integer question_id;
     private String user_id;
 
+    public CourseQuestionPraise()
+    {
+
+    }
+    public CourseQuestionPraise(Integer question_id,String user_id)
+    {
+        this.question_id=question_id;
+        this.user_id=user_id;
+        this.question_praise_id=0;
+    }
     @Id
     @Column(name = "question_praise_id")
     public Integer getQuestion_praise_id() {

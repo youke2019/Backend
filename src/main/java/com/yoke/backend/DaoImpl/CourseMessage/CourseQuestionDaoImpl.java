@@ -5,7 +5,6 @@ import com.yoke.backend.Entity.CourseMessage.CourseQuestion;
 import com.yoke.backend.repository.CourseMessage.CourseQuestionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
 
@@ -30,4 +29,11 @@ public class CourseQuestionDaoImpl implements CourseQuestionDao {
     {
         courseQuestionRepository.save(courseQuestion);
     }
+
+    @Override
+    public CourseQuestion findQuestionById(Integer question_id)
+    {
+         return courseQuestionRepository.findById(question_id).get();
+    }
+
 }

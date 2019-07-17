@@ -7,7 +7,9 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.yoke.backend.Entity.CourseMessage.Praise.CourseQuestionPraise;
 
 import javax.persistence.*;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -24,16 +26,36 @@ import java.util.List;
 )
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class CourseQuestion {
+
+    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");// 格式化时间
+    Date date = new Date();
+
     private Integer question_id;
     private String user_id;
     private String course_id;
     private String question_content;
-    private String question_time;
+    private String question_time=sdf.format(date);
     private Boolean question_isbanned;
     private Integer question_praise_point=0;
     private List<CourseAnswer>  courseAnswerList=new ArrayList<>();
     private List<CourseQuestionPraise> courseQuestionPraiseList=new ArrayList<>();
     private Boolean current_user_praise=false;
+
+    public CourseQuestion()
+    {
+
+    }
+    public CourseQuestion(String course_id,String user_id,String question_content)
+    {
+        this.course_id=course_id;
+        this.user_id=user_id;
+        this.question_content=question_content;
+        this.question_isbanned=false;
+        this.question_id=0;
+        this.question_praise_point=0;
+        this.question_time=sdf.format(date);
+        this.current_user_praise=false;
+    }
 
     @Transient
     public Boolean getCurrent_user_praise() {
