@@ -36,10 +36,11 @@ buildNumber.properties
 .mvn/timing.properties
 .mvn/wrapper/maven-wrapper.jar
 
+testreport/
 target/
 .idea/
 /src/main/resources/application.properties
 /src/main/resources/application.yml
 /src/main/java/resources/application.properties
 src/main/java/resources/
-!/src/test/java/com/yoke/backend/Controller/CourseControllerTest.java
+backend.iml

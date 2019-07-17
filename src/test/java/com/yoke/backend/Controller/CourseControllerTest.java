@@ -10,6 +10,7 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.web.client.RestTemplate;
 
@@ -20,7 +21,7 @@ import org.springframework.web.client.RestTemplate;
 * @since <pre>07/07/2019</pre> 
 * @version 1.0 
 */
-@RunWith(SpringRunner.class)
+@RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class CourseControllerTest { 
     @Autowired
@@ -53,18 +54,19 @@ public void testUpdateCourseInfoFromJWC() throws Exception {
 public void testSearchCourseInfo() throws Exception { 
 //TODO: Test goes here...
 
-    RestTemplate restTemplate=new RestTemplate();
+    /*RestTemplate restTemplate=new RestTemplate();
     /*   合格post参数
     post参数为
     {
     "course_id":"SE101"
     }
      */
+    /*
     SearchCourseInfoParams searchCourseInfoParams=new SearchCourseInfoParams();
     searchCourseInfoParams.setCourse_id("SE101");
     CourseInfo courseInfo=restTemplate.postForObject("http://localhost:8000/courses/search",searchCourseInfoParams,CourseInfo.class);
     Assert.assertEquals("电子信息与电气工程学院",courseInfo.getCourse_deptname());
-
+    */
     /*不合格post参数
     post参数为
     {
@@ -77,13 +79,14 @@ public void testSearchCourseInfo() throws Exception {
     Assert.assertEquals(null,courseInfo1);*/
 
 
-} 
+}
 
 /** 
 * 
 * Method: SpecificCourseInfo(String course_id) 
 * 
-*/ 
+*/
+
 @Test
 public void testSpecificCourseInfo() throws Exception { 
 //TODO: Test goes here...
