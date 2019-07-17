@@ -4,8 +4,12 @@ import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import com.yoke.backend.Entity.CourseMessage.Praise.CourseAnswerPraise;
+import com.yoke.backend.Entity.CourseMessage.Praise.CourseQuestioinPraise;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @AUTHOR: Guozhi
@@ -28,6 +32,18 @@ public class CourseQuestion {
     private String question_time;
     private String question_isbanned;
     private Integer question_praise_point=0;
+    private List<CourseAnswer>  courseAnswerList=new ArrayList<>();
+    private List<CourseQuestioinPraise> courseQuestioinPraiseList=new ArrayList<>();
+    private Boolean currentUserPraise=false;
+
+    @Transient
+    public Boolean getCurrentUserPraise() {
+        return currentUserPraise;
+    }
+
+    public void setCurrentUserPraise(Boolean currentUserPraise) {
+        this.currentUserPraise = currentUserPraise;
+    }
 
     @Id
     @Column(name = "question_id")
@@ -41,22 +57,32 @@ public class CourseQuestion {
         return user_id;
     }
 
+    @Basic
+    @Column(name = "course_id")
     public String getCourse_id() {
         return course_id;
     }
 
+    @Basic
+    @Column(name = "question_content")
     public String getQuestion_content() {
         return question_content;
     }
 
+    @Basic
+    @Column(name = "question_time")
     public String getQuestion_time() {
         return question_time;
     }
 
+    @Basic
+    @Column(name = "question_isbanned")
     public String getQuestion_isbanned() {
         return question_isbanned;
     }
 
+    @Basic
+    @Column(name = "question_praise_point")
     public Integer getQuestion_praise_point() {
         return question_praise_point;
     }
@@ -87,5 +113,22 @@ public class CourseQuestion {
 
     public void setQuestion_praise_point(Integer question_praise_point) {
         this.question_praise_point = question_praise_point;
+    }
+    @OneToMany(mappedBy = "question_id",fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+    public List<CourseAnswer> getCourseAnswerList() {
+        return courseAnswerList;
+    }
+
+    public void setCourseAnswerList(List<CourseAnswer> courseAnswerList) {
+        this.courseAnswerList = courseAnswerList;
+    }
+
+    @OneToMany(mappedBy = "question_id",fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+    public List<CourseQuestioinPraise> getCourseQuestioinPraiseList() {
+        return courseQuestioinPraiseList;
+    }
+
+    public void setCourseQuestioinPraiseList(List<CourseQuestioinPraise> courseQuestioinPraiseList) {
+        this.courseQuestioinPraiseList = courseQuestioinPraiseList;
     }
 }
