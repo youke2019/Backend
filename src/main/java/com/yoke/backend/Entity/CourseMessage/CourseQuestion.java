@@ -4,8 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
-import com.yoke.backend.Entity.CourseMessage.Praise.CourseAnswerPraise;
-import com.yoke.backend.Entity.CourseMessage.Praise.CourseQuestioinPraise;
+import com.yoke.backend.Entity.CourseMessage.Praise.CourseQuestionPraise;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -30,19 +29,19 @@ public class CourseQuestion {
     private String course_id;
     private String question_content;
     private String question_time;
-    private String question_isbanned;
+    private Boolean question_isbanned;
     private Integer question_praise_point=0;
     private List<CourseAnswer>  courseAnswerList=new ArrayList<>();
-    private List<CourseQuestioinPraise> courseQuestioinPraiseList=new ArrayList<>();
-    private Boolean currentUserPraise=false;
+    private List<CourseQuestionPraise> courseQuestionPraiseList=new ArrayList<>();
+    private Boolean current_user_praise=false;
 
     @Transient
-    public Boolean getCurrentUserPraise() {
-        return currentUserPraise;
+    public Boolean getCurrent_user_praise() {
+        return current_user_praise;
     }
 
-    public void setCurrentUserPraise(Boolean currentUserPraise) {
-        this.currentUserPraise = currentUserPraise;
+    public void setCurrent_user_praise(Boolean current_user_praise) {
+        this.current_user_praise = current_user_praise;
     }
 
     @Id
@@ -77,7 +76,7 @@ public class CourseQuestion {
 
     @Basic
     @Column(name = "question_isbanned")
-    public String getQuestion_isbanned() {
+    public Boolean getQuestion_isbanned() {
         return question_isbanned;
     }
 
@@ -107,7 +106,7 @@ public class CourseQuestion {
         this.question_time = question_time;
     }
 
-    public void setQuestion_isbanned(String question_isbanned) {
+    public void setQuestion_isbanned(Boolean question_isbanned) {
         this.question_isbanned = question_isbanned;
     }
 
@@ -124,11 +123,11 @@ public class CourseQuestion {
     }
 
     @OneToMany(mappedBy = "question_id",fetch = FetchType.LAZY,cascade = CascadeType.ALL)
-    public List<CourseQuestioinPraise> getCourseQuestioinPraiseList() {
-        return courseQuestioinPraiseList;
+    public List<CourseQuestionPraise> getCourseQuestionPraiseList() {
+        return courseQuestionPraiseList;
     }
 
-    public void setCourseQuestioinPraiseList(List<CourseQuestioinPraise> courseQuestioinPraiseList) {
-        this.courseQuestioinPraiseList = courseQuestioinPraiseList;
+    public void setCourseQuestionPraiseList(List<CourseQuestionPraise> courseQuestionPraiseList) {
+        this.courseQuestionPraiseList = courseQuestionPraiseList;
     }
 }

@@ -4,7 +4,7 @@ import com.yoke.backend.Dao.CourseMessage.CourseQuestionDao;
 import com.yoke.backend.Entity.CourseMessage.CourseAnswer;
 import com.yoke.backend.Entity.CourseMessage.CourseQuestion;
 import com.yoke.backend.Entity.CourseMessage.Praise.CourseAnswerPraise;
-import com.yoke.backend.Entity.CourseMessage.Praise.CourseQuestioinPraise;
+import com.yoke.backend.Entity.CourseMessage.Praise.CourseQuestionPraise;
 import com.yoke.backend.Service.Course.CourseQuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -27,17 +27,18 @@ public class CourseQuestionServiceImpl implements CourseQuestionService {
         List<CourseQuestion> courseQuestionList=courseQuestionDao.findQuestionByCourse(course_id);
         for(CourseQuestion courseQuestion:courseQuestionList)
         {
-            for(CourseQuestioinPraise courseQuestioinPraise:courseQuestion.getCourseQuestioinPraiseList())
+            for(CourseQuestionPraise courseQuestionPraise :courseQuestion.getCourseQuestionPraiseList())
             {
-                if(courseQuestioinPraise.getUser_id().equals(course_id))
-                    courseQuestion.setCurrentUserPraise(true);
+                if(courseQuestionPraise.getUser_id().equals(course_id))
+                    courseQuestion.setCurrent_user_praise(true);
             }
             List<CourseAnswer> courseAnswerList=courseQuestion.getCourseAnswerList();
             for(CourseAnswer courseAnswer:courseAnswerList)
             {
                 for(CourseAnswerPraise courseAnswerPraise:courseAnswer.getCourseAnswerPraiseList())
                 {
-                    if(courseAnswerPraise)
+                    if(courseAnswerPraise.getUser_id().equals(course_id))
+                        courseAnswer.setCurrent_user_praise(true);
                 }
             }
         }

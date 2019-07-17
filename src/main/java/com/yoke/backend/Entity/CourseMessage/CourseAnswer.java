@@ -27,9 +27,9 @@ public class CourseAnswer {
     private String user_id;
     private String answer_content;
     private String answer_time;
-    private Boolean answer_isbanned;
-    private Integer answer_praise_point;
-    private Boolean current_user_praise;
+    private Boolean answer_isbanned=false;
+    private Integer answer_praise_point=0;
+    private Boolean current_user_praise=false;
     private List<CourseAnswerPraise> courseAnswerPraiseList=new ArrayList<>();
 
     @Id

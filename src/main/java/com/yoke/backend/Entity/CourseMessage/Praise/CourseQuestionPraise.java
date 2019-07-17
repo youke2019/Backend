@@ -16,9 +16,9 @@ import javax.persistence.*;
 @JsonIgnoreProperties(value = {"handler","hibernateLazyInitializer","fieldHandler"})
 @JsonIdentityInfo(
         generator = ObjectIdGenerators.PropertyGenerator.class,
-        property = "questioin_praise_id"
+        property = "question_praise_id"
 )
-public class CourseQuestioinPraise {
+public class CourseQuestionPraise {
     private Integer question_praise_id;
     private Integer question_id;
     private String user_id;
