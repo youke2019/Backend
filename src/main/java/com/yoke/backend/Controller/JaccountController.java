@@ -61,7 +61,6 @@ public class JaccountController {
         // use access token to get user profile with http request
         JSONObject responseJson = JSONObject.parseObject(responseEntity.getBody());
         String token = responseJson.getString("access_token");
-        System.out.println(token);
         try {
             String app_url = "yoke://login?access_token="+token;
             response.sendRedirect(app_url);
