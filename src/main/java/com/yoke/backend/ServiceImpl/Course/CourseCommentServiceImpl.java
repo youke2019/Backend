@@ -1,9 +1,9 @@
 package com.yoke.backend.ServiceImpl.Course;
 
+import com.yoke.backend.Dao.CourseMessage.CourseAnswerDao;
 import com.yoke.backend.Dao.CourseMessage.CourseCommentDao;
-import com.yoke.backend.Dao.Praise.CourseCommentPraiseDao;
 import com.yoke.backend.Entity.CourseMessage.CourseComment;
-import com.yoke.backend.Entity.Praise.CourseCommentPraise;
+import com.yoke.backend.Entity.CourseMessage.Praise.CourseCommentPraise;
 import com.yoke.backend.Service.Course.CourseCommentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,7 +22,7 @@ public class CourseCommentServiceImpl implements CourseCommentService {
     CourseCommentDao courseCommentDao;
 
     @Autowired
-    CourseCommentPraiseDao courseCommentPraiseDao;
+    CourseAnswerDao.CourseCommentPraiseDao courseCommentPraiseDao;
 
     @Override
     public List<CourseComment> allComment()
@@ -89,6 +89,7 @@ public class CourseCommentServiceImpl implements CourseCommentService {
         courseCommentPraiseDao.deleteCourseCommentPraise(courseCommentPraise.getCourse_comment_praise_id());
         CourseComment courseComment=courseCommentDao.findCourseCommentById(course_comment_id);
         courseComment.setCourse_comment_praise_point(courseComment.getCourse_comment_praise_point()-1);
+        courseCommentDao.save(courseComment);
         return true;
     }
 

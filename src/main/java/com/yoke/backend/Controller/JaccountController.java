@@ -27,7 +27,7 @@ public class JaccountController {
     private String client_id = "k8vX4aeVqZc0VCP1rSaG";
     private String client_secret = "E0C775E0A140B98F4A083EA876F2FDD5629B38E9F8C7088A";
     private String grant_type = "authorization_code";
-    private String base_url = "http://192.168.42.13:8080";
+    private String base_url = "http://10.0.2.2:8080";
 
     /**
      * @api {get} /login
@@ -61,7 +61,6 @@ public class JaccountController {
         // use access token to get user profile with http request
         JSONObject responseJson = JSONObject.parseObject(responseEntity.getBody());
         String token = responseJson.getString("access_token");
-        System.out.println(token);
         try {
             String app_url = "yoke://login?access_token="+token;
             response.sendRedirect(app_url);

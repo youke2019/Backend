@@ -1,4 +1,4 @@
-package com.yoke.backend.Entity.Praise;
+package com.yoke.backend.Entity.CourseMessage.Praise;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 

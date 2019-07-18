@@ -49,7 +49,6 @@ public class CourseServiceImpl implements CourseService {
     @Override
     public CourseInfo findCourseInfoByCourseId(String course_id)
     {
-
         return courseDao.findCourseInfoByCourseId(course_id);
     }
 
@@ -76,7 +75,6 @@ public class CourseServiceImpl implements CourseService {
      */
     private void parseCourseTime(String unparsed, ClassSegment segment) {
         if(unparsed.contains(",")) {
-
             System.out.println("false syntax:" + unparsed);
             return ;
         }
@@ -102,7 +100,7 @@ public class CourseServiceImpl implements CourseService {
             Character ch = strs[5].charAt(1);
             if (ch == '单') segment.setOdd_or_even('o');
             else segment.setOdd_or_even('e');
-        } else segment.setOdd_or_even('b');
+        }else segment.setOdd_or_even('b');
 
     }
 
@@ -112,7 +110,6 @@ public class CourseServiceImpl implements CourseService {
      */
     private void parseCourseArrangement(String unparsed, List<ClassSegment> segments){
         if(unparsed == null) {
-
             return ;
         }
         String[] strs = unparsed.split("\\|");

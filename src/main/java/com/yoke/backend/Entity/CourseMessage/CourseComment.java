@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
-import com.yoke.backend.Entity.Praise.CourseCommentPraise;
+import com.yoke.backend.Entity.CourseMessage.Praise.CourseCommentPraise;
 
 import javax.persistence.*;
 import java.text.SimpleDateFormat;

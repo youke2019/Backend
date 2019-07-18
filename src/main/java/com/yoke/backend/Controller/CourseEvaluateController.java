@@ -26,6 +26,24 @@ public class CourseEvaluateController {
      * @apiPram  通过课程ID查找评测
      * @apiPram  example: /course/evaluates/find?course_id=SE101
      * @param course_id
+     * @@apiSuccessExample Request-Example:
+     * [
+     *     {
+     *         "course_id": "11004",
+     *         "user_id": "01231",
+     *         "credit_point": 90.0,
+     *         "考核方式": "论文",
+     *         "点名": "每节课都点名"
+     *     },
+     *     {
+     *         "course_id": "11004",
+     *         "user_id": "42257",
+     *         "credit_point": 90.0,
+     *         "考核方式": "论文",
+     *         "点名": "每节课都点名",
+     *         "给分": "给分很低"
+     *     }
+     * ]
      * @return
      */
     @GetMapping(value = "/find")
@@ -50,9 +68,10 @@ public class CourseEvaluateController {
      */
     @RequestMapping(value = "/add", method= RequestMethod.POST)
     @ResponseBody
-    public void addEvaluation(@RequestBody String json)
+    public String addEvaluation(@RequestBody String json)
     {
         courseEvaluationService.addCourseEvaluation(json);
+        return "success";
     }
 
     @GetMapping(value = "all")
