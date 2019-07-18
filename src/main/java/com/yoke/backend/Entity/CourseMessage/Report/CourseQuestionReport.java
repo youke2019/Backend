@@ -12,12 +12,6 @@ import javax.persistence.Table;
  * @DATE : 2019/7/18
  * @description:
  **/
-@Entity
-@Table(name="question_report",schema = "yoke",catalog = "")
-@JsonIgnoreProperties(value = {"handler","hibernateLazyInitializer","fieldHandler"})
-@JsonIdentityInfo(
-        generator = ObjectIdGenerators.PropertyGenerator.class,
-        property = "question_praise_id"
-)
+
 public class CourseQuestionReport {
 }
