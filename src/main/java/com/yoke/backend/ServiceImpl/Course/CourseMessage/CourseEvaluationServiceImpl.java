@@ -1,4 +1,4 @@
-package com.yoke.backend.ServiceImpl.Course;
+package com.yoke.backend.ServiceImpl.Course.CourseMessage;
 
 import com.mongodb.BasicDBObject;
 import com.mongodb.MongoClient;
@@ -7,7 +7,7 @@ import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoCursor;
 import com.mongodb.client.MongoDatabase;
-import com.yoke.backend.Service.Course.CourseEvaluationService;
+import com.yoke.backend.Service.Course.CourseMessage.CourseEvaluationService;
 import org.bson.Document;
 import org.springframework.stereotype.Service;
 

@@ -9,4 +9,5 @@ import com.yoke.backend.Entity.CourseMessage.Praise.CourseQuestionPraise;
  **/
 public interface CourseQuestionPraiseDao {
     void save(CourseQuestionPraise courseQuestionPraise);
+    void delete(Integer question_id,String answer_id);
 }

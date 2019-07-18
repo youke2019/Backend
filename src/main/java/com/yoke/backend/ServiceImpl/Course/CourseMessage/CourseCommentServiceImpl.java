@@ -1,10 +1,10 @@
-package com.yoke.backend.ServiceImpl.Course;
+package com.yoke.backend.ServiceImpl.Course.CourseMessage;
 
 import com.yoke.backend.Dao.CourseMessage.CourseAnswerDao;
 import com.yoke.backend.Dao.CourseMessage.CourseCommentDao;
 import com.yoke.backend.Entity.CourseMessage.CourseComment;
 import com.yoke.backend.Entity.CourseMessage.Praise.CourseCommentPraise;
-import com.yoke.backend.Service.Course.CourseCommentService;
+import com.yoke.backend.Service.Course.CourseMessage.CourseCommentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

@@ -1,4 +1,4 @@
-package com.yoke.backend.ServiceImpl.Course;
+package com.yoke.backend.ServiceImpl.Course.CourseMessage;
 
 import com.yoke.backend.Dao.CourseMessage.CourseAnswerDao;
 import com.yoke.backend.Dao.CourseMessage.CourseQuestionDao;
@@ -8,7 +8,7 @@ import com.yoke.backend.Entity.CourseMessage.CourseAnswer;
 import com.yoke.backend.Entity.CourseMessage.CourseQuestion;
 import com.yoke.backend.Entity.CourseMessage.Praise.CourseAnswerPraise;
 import com.yoke.backend.Entity.CourseMessage.Praise.CourseQuestionPraise;
-import com.yoke.backend.Service.Course.CourseQuestionService;
+import com.yoke.backend.Service.Course.CourseMessage.CourseQuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -93,18 +93,9 @@ public class CourseQuestionServiceImpl implements CourseQuestionService {
     public void unpraiseQuestion(Integer question_id,String user_id)
     {
         CourseQuestion courseQuestion=courseQuestionDao.findQuestionById(question_id);
-        List<CourseQuestionPraise> courseQuestionPraiseList=courseQuestion.getCourseQuestionPraiseList();
-        for(CourseQuestionPraise courseQuestionPraise:courseQuestionPraiseList)
-        {
-            if(courseQuestionPraise.getUser_id().equals(user_id))
-            {
-                courseQuestionPraiseList.remove(courseQuestionPraise);
-                courseQuestion.setQuestion_praise_point(courseQuestion.getQuestion_praise_point()-1);
-                break;
-            }
-        }
-        courseQuestion.setCourseQuestionPraiseList(courseQuestionPraiseList);
+        courseQuestion.setQuestion_praise_point(courseQuestion.getQuestion_praise_point()-1);
         courseQuestionDao.save(courseQuestion);
+        courseQuestionPraiseDao.delete(question_id,user_id);
     }
 
     /**
@@ -114,16 +105,8 @@ public class CourseQuestionServiceImpl implements CourseQuestionService {
     public void unpraiseAnswer(Integer answer_id,String user_id)
     {
         CourseAnswer courseAnswer=courseAnswerDao.findAnswerById(answer_id);
-        for(CourseAnswerPraise courseAnswerPraise:courseAnswer.getCourseAnswerPraiseList())
-        {
-            if(courseAnswerPraise.getUser_id().equals(user_id))
-            {
-                List<CourseAnswerPraise> courseAnswerPraiseList=courseAnswer.getCourseAnswerPraiseList();
-                courseAnswerPraiseList.remove(courseAnswerPraise);
-                courseAnswer.setCourseAnswerPraiseList(courseAnswerPraiseList);
-                courseAnswer.setAnswer_praise_point(courseAnswer.getAnswer_praise_point()-1);
-            }
-        }
+        courseAnswer.setAnswer_praise_point(courseAnswer.getAnswer_praise_point()-1);
         courseAnswerDao.save(courseAnswer);
+        courseAnswerPraiseDao.delete(answer_id,user_id);
     }
 }
