@@ -25,10 +25,12 @@ public class CourseCommentController {
     }
 
     /**
-     * @api {get} /course/comments/find:
+     * @api {get} /courses/comments/find:
      * @apiName getcomment
+     * @apiDescription 获得课程评论
+     * @apiParam {String} course_id
      * @apiGroup CourseMessage
-     * @apiPram  获取评论
+     * @apiSampleRequest 47.103.30.166:8000/courses/comments/find?course_id=41899
      * @apiSuccessExample Response-Example:
      *[
      *     {
@@ -55,9 +57,10 @@ public class CourseCommentController {
      *
      * @api {post} /course/comments/add:
      * @apiName addComment
+     * @apiDescription 添加评论
      * @apiGroup CourseMessage
-     * @apiPram  添加评论
-     * @apiSuccessExample Request-Example:
+     * @apiSampleRequest 47.103.30.166:8000/courses/comments/add
+     * @apiSuccessExample Post-Example:
      *     {
      * 	"course_id":"SE101",
      * 	"user_id":84514,
@@ -76,10 +79,12 @@ public class CourseCommentController {
     }
 
     /**
-     * @api {get} /course/comments/delete:
-     * @apiName withdrawComment
+     * @api {get} /courses/comments/delete:
+     * @apiDescription 删除评论
+     * @apiParam {Interger} user_id
+     * @apiName deleteComment
      * @apiGroup CourseMessage
-     * @apiPram  撤回评论
+     * @apiSampleRequest 47.103.30.166:8000/courses/comments/delete?comment_id=3
      * @param comment_id
      * @return
      */
@@ -91,7 +96,12 @@ public class CourseCommentController {
     }
 
     /**
-     *
+     * @api {get} /courses/comments/ban:
+     * @apiDescription 封禁评论
+     * @apiParam {Interger} comment_id
+     * @apiName banComment
+     * @apiGroup CourseMessage
+     * @apiSampleRequest 47.103.30.166:8000/courses/comments/ban?comment_id=2
      * @param comment_id
      * @return
      */
@@ -103,7 +113,12 @@ public class CourseCommentController {
     }
 
     /**
-     *
+     * @api {get} /courses/comments/unban:
+     * @apiDescription 解禁评论
+     * @apiParam {Interger} comment_id
+     * @apiName unbanComment
+     * @apiGroup CourseMessage
+     * @apiSampleRequest 47.103.30.166:8000/courses/comments/unban?comment_id=2
      * @param comment_id
      * @return
      */
@@ -116,10 +131,12 @@ public class CourseCommentController {
 
     /**
      * @api {get} /course/comments/praise:
+     * @apiDescription 点赞评论
+     * @apiParam {String} user_id
+     * @apiParam {Interger} course_comment_id
      * @apiName praiseComment
      * @apiGroup CourseMessage
-     * @apiPram  点赞
-     * @apiPram  example: /course/comments/praise?user_id=1&course_comment_id=2
+     * @apiSampleRequest example: /course/comments/praise?user_id=1&course_comment_id=2
      * @param user_id
      * @param course_comment_id
      * @return
@@ -132,11 +149,13 @@ public class CourseCommentController {
     }
 
     /**
-     * @api {get} /course/comments/unpraise:
+     * @api {get} /courses/comments/unpraise:
+     * @apiDescription 取消点赞评论
+     * @apiParam {String} user_id
+     * @apiParam {Interger} course_comment_id
      * @apiName unpraiseComment
      * @apiGroup CourseMessage
-     * @apiPram  取消点赞
-     * @apiPram  example: /course/comments/unpraise?user_id=1&course_comment_id=2
+     * @apiSampleRequest  example: /course/comments/unpraise?user_id=1&course_comment_id=2
      * @param user_id
      * @param course_comment_id
      * @return
