@@ -2,7 +2,7 @@ package com.yoke.backend.Controller;
 
 import com.yoke.backend.Entity.CourseMessage.CourseAnswer;
 import com.yoke.backend.Entity.CourseMessage.CourseQuestion;
-import com.yoke.backend.Service.Course.CourseQuestionService;
+import com.yoke.backend.Service.Course.CourseMessage.CourseQuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -21,11 +21,11 @@ public class CourseQuestionController {
 
 
     /**
-     *@api {get} /course/questions/find
+     * @api {get} /course/questions/find
      * @apiName findQuestion
      * @apiGroup CourseMessage
      * @apiPram  通过课程ID查找提问
-     * @apiPram  example: http://localhost:8080/courses/questions/find?course_id=83374&user_id=02690
+     * @apiPram  example: 47.103.30.166:8000/courses/questions/find?course_id=66974&user_id=01231
      * @apiSuccessExample Request-Example:
      * [
      *     {

@@ -2,7 +2,7 @@ package com.yoke.backend.DaoImpl.CourseMessage.Praise;
 
 import com.yoke.backend.Dao.CourseMessage.CourseAnswerDao;
 import com.yoke.backend.Entity.CourseMessage.Praise.CourseCommentPraise;
-import com.yoke.backend.repository.Praise.CourseCommentPraiseRepository;
+import com.yoke.backend.repository.CourseMessage.Praise.CourseCommentPraiseRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 

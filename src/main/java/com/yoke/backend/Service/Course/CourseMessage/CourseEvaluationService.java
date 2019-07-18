@@ -1,4 +1,4 @@
-package com.yoke.backend.Service.Course;
+package com.yoke.backend.Service.Course.CourseMessage;
 
 import java.util.List;
 import java.util.Map;

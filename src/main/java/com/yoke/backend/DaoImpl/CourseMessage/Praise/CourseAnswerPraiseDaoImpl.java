@@ -22,4 +22,10 @@ public class CourseAnswerPraiseDaoImpl implements CourseAnswerPraiseDao {
     {
         courseAnswerPraiseRepositroy.save(courseAnswerPraise);
     }
+
+    @Override
+    public void delete(Integer answer_id,String user_id)
+    {
+        courseAnswerPraiseRepositroy.delete(answer_id,user_id);
+    }
 }

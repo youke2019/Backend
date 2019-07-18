@@ -1,7 +1,7 @@
 package com.yoke.backend.Controller;
 
 import com.yoke.backend.Entity.CourseMessage.CourseComment;
-import com.yoke.backend.Service.Course.CourseCommentService;
+import com.yoke.backend.Service.Course.CourseMessage.CourseCommentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

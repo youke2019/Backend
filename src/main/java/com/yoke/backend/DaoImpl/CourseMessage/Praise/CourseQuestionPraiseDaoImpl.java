@@ -16,8 +16,15 @@ public class CourseQuestionPraiseDaoImpl implements CourseQuestionPraiseDao {
     @Autowired
     CourseQuestionPraiseRepository courseQuestionPraiseRepository;
 
+    @Override
     public void save(CourseQuestionPraise courseQuestionPraise)
     {
         courseQuestionPraiseRepository.save(courseQuestionPraise);
+    }
+
+    @Override
+    public void delete(Integer question_id,String user_id)
+    {
+        courseQuestionPraiseRepository.delete(question_id,user_id);
     }
 }

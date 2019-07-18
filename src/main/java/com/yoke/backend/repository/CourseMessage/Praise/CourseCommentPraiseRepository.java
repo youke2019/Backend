@@ -1,4 +1,4 @@
-package com.yoke.backend.repository.Praise;
+package com.yoke.backend.repository.CourseMessage.Praise;
 
 import com.yoke.backend.Entity.CourseMessage.Praise.CourseCommentPraise;
 import org.springframework.data.jpa.repository.JpaRepository;
