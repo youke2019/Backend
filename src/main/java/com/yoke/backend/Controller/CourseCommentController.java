@@ -29,6 +29,7 @@ public class CourseCommentController {
      * @apiName getcomment
      * @apiDescription 获得课程评论
      * @apiParam {String} course_id
+     * @apiParam {String} user_id
      * @apiGroup CourseMessage
      * @apiSampleRequest 47.103.30.166:8000/courses/comments/find?course_id=41899
      * @apiSuccessExample Response-Example:
@@ -45,12 +46,13 @@ public class CourseCommentController {
      *     ]
      *
      * @param course_id
+     * @param user_id
      * @return
      */
     @GetMapping(value = "/find")
-    public List<CourseComment> findCommentByCourse(String course_id)
+    public List<CourseComment> findCommentByCourse(String course_id,String user_id)
     {
-        return courseCommentService.findCommentByCourse(course_id);
+        return courseCommentService.findCommentByCourse(course_id,user_id);
     }
 
     /**
