@@ -81,6 +81,22 @@ public class CourseQuestionController {
         return courseQuestionService.findQuestionByCourse(course_id, user_id);
     }
 
+    /**
+     *@api {get} /course/questions/add
+     * @apiName addQuestion
+     * @apiGroup CourseMessage
+     * @apiPram  用户对课程提问
+     * @apiPram  example: http://localhost:8080/courses/questions/find?course_id=83374&user_id=02690
+     * @apiSuccessExample Request-Example:
+     * {
+     * 	"course_id":"01190",
+     * 	"user_id":"02690",
+     * 	"question_content":"上课有趣吗"
+     * }
+     *
+     * @param courseQuestion
+     * @return
+     */
     @RequestMapping(value = "courses/questions/add", method= RequestMethod.POST)
     @ResponseBody
     String addQuestion(@RequestBody CourseQuestion courseQuestion)

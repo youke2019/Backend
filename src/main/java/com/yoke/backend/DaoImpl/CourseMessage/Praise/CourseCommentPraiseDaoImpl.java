@@ -1,7 +1,7 @@
-package com.yoke.backend.DaoImpl.Praise;
+package com.yoke.backend.DaoImpl.CourseMessage.Praise;
 
-import com.yoke.backend.Dao.Praise.CourseCommentPraiseDao;
-import com.yoke.backend.Entity.Praise.CourseCommentPraise;
+import com.yoke.backend.Dao.CourseMessage.CourseAnswerDao;
+import com.yoke.backend.Entity.CourseMessage.Praise.CourseCommentPraise;
 import com.yoke.backend.repository.Praise.CourseCommentPraiseRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -12,7 +12,7 @@ import org.springframework.stereotype.Repository;
  * @description:
  **/
 @Repository
-public class CourseCommentPraiseDaoImpl implements CourseCommentPraiseDao {
+public class CourseCommentPraiseDaoImpl implements CourseAnswerDao.CourseCommentPraiseDao {
 
     @Autowired
     CourseCommentPraiseRepository courseCommentPraiseRepository;

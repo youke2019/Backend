@@ -49,7 +49,6 @@ public class CourseServiceImpl implements CourseService {
     @Override
     public CourseInfo findCourseInfoByCourseId(String course_id)
     {
-
         return courseDao.findCourseInfoByCourseId(course_id);
     }
 
@@ -76,11 +75,32 @@ public class CourseServiceImpl implements CourseService {
      */
     private void parseCourseTime(String unparsed, ClassSegment segment) {
         if(unparsed.contains(",")) {
-
             System.out.println("false syntax:" + unparsed);
             return ;
         }
-        int week = 0;segment.setOdd_or_even('b');
+        int week = 0;
+        switch (unparsed.charAt(2)){
+            case '一': week = 1; break;
+            case '二': week = 2; break;
+            case '三': week = 3; break;
+            case '四': week = 4; break;
+            case '五': week = 5; break;
+            case '六': week = 6; break;
+            case '日': week = 7; break;
+        }
+        segment.setWeek(week);
+        // System.out.println(unparsed);
+        String[] strs = unparsed.split("第|-|节\\{|周|}");
+        segment.setBegin_sec(Integer.valueOf(strs[1]));
+        segment.setEnd_sec( Integer.valueOf(strs[2]));
+        segment.setBegin_week(Integer.valueOf(strs[3]));
+        if(strs.length == 4) segment.setEnd_week(Integer.valueOf(strs[3])); /** 表明只有一周上课*/
+        else segment.setEnd_week(Integer.valueOf(strs[4]));
+        if(strs.length == 6){                                               /** 表明是单双周的课*/
+            Character ch = strs[5].charAt(1);
+            if (ch == '单') segment.setOdd_or_even('o');
+            else segment.setOdd_or_even('e');
+        }else segment.setOdd_or_even('b');
 
     }
 
@@ -90,7 +110,6 @@ public class CourseServiceImpl implements CourseService {
      */
     private void parseCourseArrangement(String unparsed, List<ClassSegment> segments){
         if(unparsed == null) {
-
             return ;
         }
         String[] strs = unparsed.split("\\|");
