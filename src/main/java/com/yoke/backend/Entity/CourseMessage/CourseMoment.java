@@ -18,11 +18,11 @@ import java.util.List;
  * @description:
  **/
 @Entity
-@Table(name="course_comment",schema = "yoke",catalog = "")
+@Table(name="video",schema = "yoke",catalog = "")
 @JsonIgnoreProperties(value = {"handler","hibernateLazyInitializer","fieldHandler"})
 @JsonIdentityInfo(
         generator = ObjectIdGenerators.PropertyGenerator.class,
-        property = "course_comment_id"
+        property = "video_id"
 )
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class CourseMoment {
