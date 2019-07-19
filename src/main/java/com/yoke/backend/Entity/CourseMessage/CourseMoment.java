@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import com.yoke.backend.Entity.CourseMessage.Praise.CourseMomentPraise;
 
 import javax.persistence.*;
 import javax.print.attribute.standard.MediaSize;
@@ -40,6 +41,10 @@ public class CourseMoment {
     private Integer video_praise_point=0;
     private Boolean current_user_praise=false;
     private List<CourseMomentComment> courseMomentCommentList=new ArrayList<>();
+    private List<CourseMomentPraise> courseMomentPraiseList=new ArrayList<>();
+
+    public CourseMoment()
+    {}
 
     @Id
     @Column(name = "video_id")
@@ -148,4 +153,14 @@ public class CourseMoment {
     public void setCourseMomentCommentList(List<CourseMomentComment> courseMomentCommentList) {
         this.courseMomentCommentList = courseMomentCommentList;
     }
+
+    @OneToMany(fetch = FetchType.LAZY,mappedBy = "video_id",cascade = CascadeType.ALL)
+    public List<CourseMomentPraise> getCourseMomentPraiseList() {
+        return courseMomentPraiseList;
+    }
+
+    public void setCourseMomentPraiseList(List<CourseMomentPraise> courseMomentPraiseList) {
+        this.courseMomentPraiseList = courseMomentPraiseList;
+    }
+
 }

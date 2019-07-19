@@ -1,6 +1,7 @@
 package com.yoke.backend.Service.Course.CourseMessage;
 
 import com.yoke.backend.Entity.CourseMessage.CourseMoment;
+import com.yoke.backend.Entity.CourseMessage.CourseMomentComment;
 
 import java.util.List;
 
@@ -11,5 +12,9 @@ import java.util.List;
  **/
 public interface CourseMomentService {
     List<CourseMoment> findByTimeOrder(Integer serialNumber1,Integer serialNumber2);
-    List<CourseMoment> findAll();
+    List<CourseMoment> findAll(String user_id);
+    void commentCourseMoment(CourseMomentComment courseMomentComment);
+    void praiseCourseMoment(Integer video_id,String user_id);
+    void unpraiseCourseMoment(Integer video_id,String user_id);
+    void postCourseMoment(CourseMoment courseMoment);
 }
