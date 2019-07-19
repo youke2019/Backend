@@ -1,4 +1,4 @@
-package com.yoke.backend.Controller;
+package com.yoke.backend.Controller.Course.CourseMessage;
 
 import com.yoke.backend.Entity.CourseMessage.CourseAnswer;
 import com.yoke.backend.Entity.CourseMessage.CourseQuestion;

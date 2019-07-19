@@ -1,4 +1,4 @@
-package com.yoke.backend.Controller;
+package com.yoke.backend.Controller.Course;
 
 
 import com.alibaba.fastjson.JSON;

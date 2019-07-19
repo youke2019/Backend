@@ -1,8 +1,7 @@
-package com.yoke.backend.Dao.CourseMessage;
+package com.yoke.backend.Service.Course.CourseMessage;
 
 import com.yoke.backend.Entity.CourseMessage.CourseMoment;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -10,7 +9,7 @@ import java.util.List;
  * @DATE : 2019/7/19
  * @description:
  **/
-public interface CourseMomentDao{
+public interface CourseMomentService {
     List<CourseMoment> findByTimeOrder(Integer serialNumber1,Integer serialNumber2);
     List<CourseMoment> findAll();
 }

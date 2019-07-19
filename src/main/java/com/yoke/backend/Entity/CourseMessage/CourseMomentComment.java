@@ -6,6 +6,8 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import javax.persistence.*;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  * @AUTHOR: Guozhi
@@ -21,12 +23,15 @@ import javax.persistence.*;
 )
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class CourseMomentComment {
+    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");// 格式化时间
+    Date date = new Date();
+
     private Integer video_comment_id;
     private Integer video_id;
     private String user_id;
     private String video_comment_content;
-    private String video_comment_time;
-    private Boolean isbanned;
+    private String video_comment_time=sdf.format(date);
+    private Boolean isbanned=false;
 
     @Id
     @Column(name = "video_comment_id")
