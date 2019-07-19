@@ -1,6 +1,7 @@
 package com.yoke.backend.Controller;
 
 
+import com.alibaba.fastjson.JSON;
 import com.yoke.backend.Entity.Course.CourseInfo;
 import com.yoke.backend.Entity.Course.SearchCourseInfoParams;
 import com.yoke.backend.Service.Course.CourseService;
@@ -9,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.io.*;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -78,6 +80,15 @@ public class CourseController {
     @ResponseBody
     public List<CourseInfo> SearchCourseInfo(@RequestBody SearchCourseInfoParams searchCourseInfoParams)
     {
+        SearchCourseInfoParams searchCourseInfoParams1=new SearchCourseInfoParams();
+        String string1,string2;
+        string1=JSON.toJSONString(searchCourseInfoParams);
+        string2=JSON.toJSONString(searchCourseInfoParams1);
+        if(string1.equals(string2))
+        {
+            List<CourseInfo> noCourse=new ArrayList<>();
+            return noCourse;
+        }
         return courseService.SearchCourseInfo(searchCourseInfoParams);
     }
 
