@@ -71,7 +71,7 @@ public class CourseCommentServiceImplTest {
     @Test
     public void testFindCommentByCourse() throws Exception {
     //TODO: Test goes here...
-        List<CourseComment> result = courseCommentService.findCommentByCourse("41899");
+        List<CourseComment> result = courseCommentService.findCommentByCourse("41899","79832");
         Assert.assertThat(result.size() , equalTo(4));
     }
 
