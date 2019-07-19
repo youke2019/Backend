@@ -26,13 +26,27 @@ public class CourseMomentComment {
     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");// 格式化时间
     Date date = new Date();
 
-    private Integer video_comment_id;
+    private Integer video_comment_id=0;
     private Integer video_id;
     private String user_id;
     private String video_comment_content;
     private String video_comment_time=sdf.format(date);
     private Boolean isbanned=false;
 
+    public CourseMomentComment()
+    {
+
+    }
+
+    public CourseMomentComment(Integer video_id,String user_id,String video_comment_content)
+    {
+        this.user_id=user_id;
+        this.video_comment_content=video_comment_content;
+        this.video_id=video_id;
+        this.video_comment_time=sdf.format(date);
+        this.isbanned=false;
+        this.video_comment_id=0;
+    }
     @Id
     @Column(name = "video_comment_id")
     public Integer getVideo_comment_id() {

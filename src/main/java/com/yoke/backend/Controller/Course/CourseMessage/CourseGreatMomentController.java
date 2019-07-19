@@ -1,7 +1,6 @@
 package com.yoke.backend.Controller.Course.CourseMessage;
-
-import com.yoke.backend.Entity.CourseMessage.CourseComment;
 import com.yoke.backend.Entity.CourseMessage.CourseMoment;
+import com.yoke.backend.Entity.CourseMessage.CourseMomentComment;
 import com.yoke.backend.Service.Course.CourseMessage.CourseMomentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -90,6 +89,43 @@ public class CourseGreatMomentController {
     public String unpraiseCourseMoment(Integer video_id,String user_id)
     {
         courseMomentService.unpraiseCourseMoment(video_id, user_id);
+        return "success";
+    }
+
+    /**
+     * @api {post} /courses/moments/comment
+     * @apiName  commentCourseMoment
+     * @apiDescription  评论课程精彩瞬间
+     * @apiSuccessExample Post-Example:
+     * {
+     * 	"video_id":5,
+     * 	"user_id":"01231",
+     * 	"video_comment_content":"有趣"
+     * }
+     * @param courseMomentComment
+     * @return
+     */
+    @RequestMapping(value = "comment",method = RequestMethod.POST)
+    @ResponseBody
+    public String commentCourseMoment(@RequestBody CourseMomentComment courseMomentComment)
+    {
+        courseMomentService.commentCourseMoment(courseMomentComment);
+        return "success";
+    }
+
+    /**
+     * @api {post} courses/moments/post
+     * @apiName postCourseMoment
+     * @apiDescription 发布课程精彩瞬间
+     * @apiGroup CoursesMessage
+     * @param courseMoment
+     * @return
+     */
+    @RequestMapping(value = "post",method = RequestMethod.POST)
+    @ResponseBody
+    public String postCourseMoment(@RequestBody CourseMoment courseMoment)
+    {
+        courseMomentService.postCourseMoment(courseMoment);
         return "success";
     }
 }

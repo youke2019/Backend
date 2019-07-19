@@ -30,13 +30,13 @@ public class CourseMoment {
     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");// 格式化时间
     Date date = new Date();
 
-    private Integer video_id;
+    private Integer video_id=0;
     private String user_id;
     private String post_time=sdf.format(date);
     private String post_text;
-    private String video_url;
-    private String video_type;
-    private String image_url;
+    private String video_url="";
+    private Character video_type='n';
+    private String image_url="";
     private Boolean isbanned=false;
     private Integer video_praise_point=0;
     private Boolean current_user_praise=false;
@@ -45,6 +45,7 @@ public class CourseMoment {
 
     public CourseMoment()
     {}
+
 
     @Id
     @Column(name = "video_id")
@@ -98,11 +99,11 @@ public class CourseMoment {
 
     @Basic
     @Column(name = "type")
-    public String getVideo_type() {
+    public Character getVideo_type() {
         return video_type;
     }
 
-    public void setVideo_type(String video_type) {
+    public void setVideo_type(Character video_type) {
         this.video_type = video_type;
     }
 

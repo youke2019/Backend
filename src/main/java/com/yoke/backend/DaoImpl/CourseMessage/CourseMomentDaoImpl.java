@@ -30,4 +30,10 @@ public class CourseMomentDaoImpl implements CourseMomentDao {
     {
         return courseMomentRepository.findAll();
     }
+
+    @Override
+    public void save(CourseMoment courseMoment)
+    {
+        courseMomentRepository.save(courseMoment);
+    }
 }

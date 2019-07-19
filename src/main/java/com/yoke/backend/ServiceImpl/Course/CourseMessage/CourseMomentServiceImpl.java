@@ -1,5 +1,6 @@
 package com.yoke.backend.ServiceImpl.Course.CourseMessage;
 
+import com.yoke.backend.Dao.CourseMessage.CourseMomentCommentDao;
 import com.yoke.backend.Dao.CourseMessage.CourseMomentDao;
 import com.yoke.backend.Dao.CourseMessage.Praise.CourseMomentPraiseDao;
 import com.yoke.backend.Entity.CourseMessage.CourseMoment;
@@ -24,6 +25,9 @@ public class CourseMomentServiceImpl implements CourseMomentService {
 
     @Autowired
     CourseMomentPraiseDao courseMomentPraiseDao;
+
+    @Autowired
+    CourseMomentCommentDao courseMomentCommentDao;
 
     @Override
     public List<CourseMoment> findByTimeOrder(Integer serialNumber1,Integer serialNubmer2)
@@ -51,7 +55,7 @@ public class CourseMomentServiceImpl implements CourseMomentService {
     @Override
     public void commentCourseMoment(CourseMomentComment courseMomentComment)
     {
-
+        courseMomentCommentDao.save(courseMomentComment);
     }
 
     @Override
@@ -70,7 +74,7 @@ public class CourseMomentServiceImpl implements CourseMomentService {
     @Override
     public void postCourseMoment(CourseMoment courseMoment)
     {
-
+        courseMomentDao.save(courseMoment);
     }
 
 }
