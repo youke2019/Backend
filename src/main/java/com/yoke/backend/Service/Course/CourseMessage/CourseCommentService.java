@@ -11,7 +11,7 @@ import java.util.List;
  **/
 public interface CourseCommentService {
     List<CourseComment> allComment();
-    List<CourseComment> findCommentByCourse(String course_id);
+    List<CourseComment> findCommentByCourse(String course_id,String user_id);
     void userCommentCourse(CourseComment courseComment);
     void withdrawCommentOfCourse(Integer comment_id);
     void banCommentOfCourse(Integer comment_id);

@@ -5,8 +5,10 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.yoke.backend.Entity.CourseMessage.Praise.CourseCommentPraise;
+import com.yoke.backend.Entity.CourseMessage.Report.CourseCommentReport;
 
 import javax.persistence.*;
+import javax.transaction.Transactional;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -38,7 +40,9 @@ public class CourseComment {
     private String user_id;
     private Boolean isbanned=false;
     private Integer course_comment_praise_point=0;
+    private Boolean current_user_praise=false;
     List<CourseCommentPraise> courseCommentPraises=new ArrayList<>();
+    List<CourseCommentReport> courseCommentReportList=new ArrayList<>();
 
     public CourseComment(){
 
@@ -52,6 +56,7 @@ public class CourseComment {
         this.course_id=course_id;
         this.user_id=user_id;
         this.isbanned=false;
+        this.current_user_praise=false;
         this.course_comment_praise_point=0;
     }
 
@@ -89,6 +94,15 @@ public class CourseComment {
     @Column(name = "course_comment_isbanned")
     public Boolean getIsbanned() {
         return isbanned;
+    }
+
+    @Transient
+    public Boolean getCurrent_user_praise() {
+        return current_user_praise;
+    }
+
+    public void setCurrent_user_praise(Boolean current_user_praise) {
+        this.current_user_praise = current_user_praise;
     }
 
     @Basic
@@ -133,5 +147,14 @@ public class CourseComment {
 
     public void setCourse_comment_content(String course_comment_content) {
         this.course_comment_content = course_comment_content;
+    }
+
+    @OneToMany(fetch = FetchType.LAZY,mappedBy = "course_comment_id",cascade = CascadeType.ALL)
+    public List<CourseCommentReport> getCourseCommentReportList() {
+        return courseCommentReportList;
+    }
+
+    public void setCourseCommentReportList(List<CourseCommentReport> courseCommentReportList) {
+        this.courseCommentReportList = courseCommentReportList;
     }
 }

@@ -21,11 +21,13 @@ public class CourseQuestionController {
 
 
     /**
-     * @api {get} /course/questions/find
+     * @api {get} /courses/questions/find
+     * @apiDescription 查找课程提问
      * @apiName findQuestion
      * @apiGroup CourseMessage
-     * @apiPram  通过课程ID查找提问
-     * @apiPram  example: 47.103.30.166:8000/courses/questions/find?course_id=66974&user_id=01231
+     * @apiParam {String} course_id
+     * @apiParam {String} user_id
+     * @apiSampleRequest 47.103.30.166:8000/courses/questions/find?course_id=66974&user_id=01231
      * @apiSuccessExample Request-Example:
      * [
      *     {
@@ -82,11 +84,11 @@ public class CourseQuestionController {
     }
 
     /**
-     *@api {get} /course/questions/add
+     * @api {post} /courses/questions/add
+     * @apiDescription 添加提问
      * @apiName addQuestion
      * @apiGroup CourseMessage
-     * @apiPram  用户对课程提问
-     * @apiPram  example: http://localhost:8080/courses/questions/find?course_id=83374&user_id=02690
+     * @apiSampleRequest 47.103.30.166:8000/courses/questions/add
      * @apiSuccessExample Request-Example:
      * {
      * 	"course_id":"01190",
@@ -105,6 +107,21 @@ public class CourseQuestionController {
         return "success";
     }
 
+    /**
+     * @api {post} /courses/answers/add
+     * @apiDescription 添加回答
+     * @apiName addAnswer
+     * @apiGroup CourseMessage
+     * @apiSampleRequest 47.103.30.166:8000/courses/answers/add
+     * @apiSuccessExample Post-Example:
+     * {
+     * 	"question_id":3,
+     * 	"user_id":"01231",
+     * 	"answer_content":"这是一个好问题"
+     * }
+     * @param courseAnswer
+     * @return
+     */
     @RequestMapping(value = "courses/answers/add",method = RequestMethod.POST)
     @ResponseBody
     String addAnswer(@RequestBody CourseAnswer courseAnswer)
@@ -114,7 +131,13 @@ public class CourseQuestionController {
     }
 
     /**
-     *
+     * @api {get} /courses/questions/praise
+     * @apiDescription 对问题点赞
+     * @apiName praiseQuestion
+     * @apiGroup CourseMessage
+     * @apiParam {Integer} question_id
+     * @apiParam {String} user_id
+     * @apiSampleRequest 47.103.30.166:8000/courses/questions/praise?question_id=3&user_id=01231
      * @param question_id
      * @param user_id
      * @return
@@ -127,7 +150,13 @@ public class CourseQuestionController {
     }
 
     /**
-     *
+     * @api {get} /courses/answers/praise
+     * @apiDescription 点赞回答
+     * @apiName praiseAnswers
+     * @apiGroup CourseMessage
+     * @apiParam {Integer} answer_id
+     * @apiParam {String}  user_id
+     * @apiSampleRequest 47.103.30.166:8000/courses/answers/praise?answer_id=3&user_id=01231
      * @param answer_id
      * @param user_id
      * @return
@@ -140,7 +169,13 @@ public class CourseQuestionController {
     }
 
     /**
-     *
+     * @api {get} /courses/questions/unpraise
+     * @apiDescription 取消问题点赞
+     * @apiName unpraiseQuestion
+     * @apiGroup CourseMessage
+     * @apiParam {Integer} question_id
+     * @apiParam {String} user_id
+     * @apiSampleRequest 47.103.30.166:8000/courses/questions/unpraise?question_id=3&user_id=01231
      * @param question_id
      * @param user_id
      * @return
@@ -153,7 +188,13 @@ public class CourseQuestionController {
     }
 
     /**
-     *
+     * @api {get} /courses/answers/unpraise
+     * @apiDescription 取消回答点赞
+     * @apiName unpraiseAnswers
+     * @apiGroup CourseMessage
+     * @apiParam {Integer} answer_id
+     * @apiParam {String } user_id
+     * @apiSampleRequest 47.103.30.166:8000/courses/answers/unpraise?answer_id=3&user_id=01231
      * @param answer_id
      * @param user_id
      * @return
@@ -164,6 +205,7 @@ public class CourseQuestionController {
         courseQuestionService.unpraiseAnswer(answer_id, user_id);
         return "success";
     }
+
 
 
 

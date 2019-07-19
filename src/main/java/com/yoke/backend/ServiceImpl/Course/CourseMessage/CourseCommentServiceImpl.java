@@ -31,11 +31,18 @@ public class CourseCommentServiceImpl implements CourseCommentService {
     }
 
     @Override
-    public List<CourseComment> findCommentByCourse(String course_id)
+    public List<CourseComment> findCommentByCourse(String course_id,String user_id)
     {
         List<CourseComment> courseComments=courseCommentDao.findCommentByCourse(course_id);
         for (int i=0;i<courseComments.size();++i)
         {
+            for(CourseCommentPraise courseCommentPraise:courseComments.get(i).getCourseCommentPraises())
+            {
+                if(courseCommentPraise.getUser_id().equals(user_id))
+                {
+                    courseComments.get(i).setCurrent_user_praise(true);
+                }
+            }
             courseComments.get(i).setCourseCommentPraises(null);
         }
         return courseComments;

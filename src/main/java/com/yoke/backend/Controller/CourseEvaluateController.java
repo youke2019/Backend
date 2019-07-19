@@ -22,11 +22,12 @@ public class CourseEvaluateController {
     /**
      * @api {get} /course/evaluates/find
      * @apiName findEvaluation
+     * @apiDescription 获取课程评测
+     * @apiParam {String} course_id
      * @apiGroup CourseMessage
-     * @apiPram  通过课程ID查找评测
-     * @apiPram  example: /course/evaluates/find?course_id=SE101
+     * @apiSampleRequest /course/evaluates/find?course_id=SE101
      * @param course_id
-     * @@apiSuccessExample Request-Example:
+     * @apiSuccessExample Request-Example:
      * [
      *     {
      *         "course_id": "11004",
@@ -55,9 +56,9 @@ public class CourseEvaluateController {
     /**
      * @api {post} /course/evaluates/add:
      * @apiName addEvaluation
+     * @apiDescription 添加评测
      * @apiGroup CourseMessage
-     * @apiPram  添加课程评测
-     * @apiPram  example: /course/evaluates/add
+     * @apiSampleRequest /course/evaluates/add
      * @apiSuccessExample Request-Example:
      *     {
      * 	"course_id":"SE101",
