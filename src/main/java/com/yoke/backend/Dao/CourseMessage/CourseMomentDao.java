@@ -13,4 +13,5 @@ import java.util.List;
 public interface CourseMomentDao{
     List<CourseMoment> findByTimeOrder(Integer serialNumber1,Integer serialNumber2);
     List<CourseMoment> findAll();
+    void save(CourseMoment courseMoment);
 }

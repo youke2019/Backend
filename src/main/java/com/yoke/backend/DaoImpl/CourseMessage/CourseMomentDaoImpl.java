@@ -22,13 +22,18 @@ public class CourseMomentDaoImpl implements CourseMomentDao {
     @Override
     public List<CourseMoment> findByTimeOrder(Integer serialNumber1,Integer serialNumber2)
     {
-
-        return courseMomentRepository.findByTimeOrder(serialNumber2-serialNumber1,serialNumber2);
+        return courseMomentRepository.findByTimeOrder(serialNumber1, serialNumber2);
     }
 
     @Override
     public List<CourseMoment> findAll()
     {
         return courseMomentRepository.findAll();
+    }
+
+    @Override
+    public void save(CourseMoment courseMoment)
+    {
+        courseMomentRepository.save(courseMoment);
     }
 }

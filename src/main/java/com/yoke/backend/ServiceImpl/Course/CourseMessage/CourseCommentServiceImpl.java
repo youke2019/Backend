@@ -2,6 +2,7 @@ package com.yoke.backend.ServiceImpl.Course.CourseMessage;
 
 import com.yoke.backend.Dao.CourseMessage.CourseAnswerDao;
 import com.yoke.backend.Dao.CourseMessage.CourseCommentDao;
+import com.yoke.backend.Dao.CourseMessage.Praise.CourseCommentPraiseDao;
 import com.yoke.backend.Entity.CourseMessage.CourseComment;
 import com.yoke.backend.Entity.CourseMessage.Praise.CourseCommentPraise;
 import com.yoke.backend.Service.Course.CourseMessage.CourseCommentService;
@@ -22,7 +23,7 @@ public class CourseCommentServiceImpl implements CourseCommentService {
     CourseCommentDao courseCommentDao;
 
     @Autowired
-    CourseAnswerDao.CourseCommentPraiseDao courseCommentPraiseDao;
+    CourseCommentPraiseDao courseCommentPraiseDao;
 
     @Override
     public List<CourseComment> allComment()
