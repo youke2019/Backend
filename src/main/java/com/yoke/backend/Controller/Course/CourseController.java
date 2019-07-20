@@ -92,7 +92,6 @@ public class CourseController {
         return courseService.SearchCourseInfo(searchCourseInfoParams);
     }
 
-
     /**
      *@api {get} /courses/specific
      *@apiDescription 获取课程的具体信息

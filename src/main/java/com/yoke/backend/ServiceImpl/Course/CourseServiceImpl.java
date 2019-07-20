@@ -43,6 +43,7 @@ public class CourseServiceImpl implements CourseService {
     @Override
     public List<CourseInfo> SearchCourseInfo(SearchCourseInfoParams searchCourseInfoParams)
     {
+
         return courseDao.findCourse(searchCourseInfoParams);
     }
 

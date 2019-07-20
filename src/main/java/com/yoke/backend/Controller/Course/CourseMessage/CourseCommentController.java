@@ -57,7 +57,7 @@ public class CourseCommentController {
 
     /**
      *
-     * @api {post} /course/comments/add:
+     * @api {post} /courses/comments/add:
      * @apiName addComment
      * @apiDescription 添加评论
      * @apiGroup CourseMessage
