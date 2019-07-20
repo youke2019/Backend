@@ -5,6 +5,8 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import javax.persistence.*;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  * @AUTHOR: Guozhi
@@ -19,11 +21,13 @@ import javax.persistence.*;
         property = "course_comment_report_id"
 )
 public class CourseCommentReport {
-    private Integer course_comment_report_id;
+    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");// 格式化时间
+    Date date = new Date();
+    private Integer course_comment_report_id=0;
     private Integer course_comment_id;
     private String user_id;
     private String course_comment_report_reason;
-    private String course_comment_report_time;
+    private String course_comment_report_time=sdf.format(date);
     private Integer course_comment_report_ishandled;
 
     @Id

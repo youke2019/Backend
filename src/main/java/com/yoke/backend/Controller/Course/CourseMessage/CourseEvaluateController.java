@@ -1,4 +1,4 @@
-package com.yoke.backend.Controller;
+package com.yoke.backend.Controller.Course.CourseMessage;
 
 import com.yoke.backend.Service.Course.CourseMessage.CourseEvaluationService;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -101,7 +101,6 @@ public class CourseServiceImpl implements CourseService {
             if (ch == '单') segment.setOdd_or_even('o');
             else segment.setOdd_or_even('e');
         }else segment.setOdd_or_even('b');
-
     }
 
     /**

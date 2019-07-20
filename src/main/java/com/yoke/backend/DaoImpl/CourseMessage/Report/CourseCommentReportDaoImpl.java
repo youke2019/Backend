@@ -1,10 +1,13 @@
 package com.yoke.backend.DaoImpl.CourseMessage.Report;
 
 import com.yoke.backend.Dao.CourseMessage.Report.CourseCommentReportDao;
+import com.yoke.backend.Entity.CourseMessage.Report.CourseAnswerReport;
 import com.yoke.backend.Entity.CourseMessage.Report.CourseCommentReport;
 import com.yoke.backend.repository.CourseMessage.Report.CourseCommentReportRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 /**
  * @AUTHOR: Guozhi
@@ -27,4 +30,10 @@ public class CourseCommentReportDaoImpl implements CourseCommentReportDao {
     {
         return courseCommentReportRepository.findById(course_comment_report_id).get();
     }
+
+    @Override
+    public List<CourseCommentReport> findAllReported(){return courseCommentReportRepository.findCourseCommentReportsReported();}
+
+    @Override
+    public List<CourseCommentReport> findAllHandled(){return courseCommentReportRepository.findCourseCommentReportsHandled();}
 }

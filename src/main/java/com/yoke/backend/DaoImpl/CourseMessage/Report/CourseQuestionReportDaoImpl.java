@@ -1,10 +1,13 @@
 package com.yoke.backend.DaoImpl.CourseMessage.Report;
 
 import com.yoke.backend.Dao.CourseMessage.Report.CourseQuestionReportDao;
+import com.yoke.backend.Entity.CourseMessage.Report.CourseCommentReport;
 import com.yoke.backend.Entity.CourseMessage.Report.CourseQuestionReport;
 import com.yoke.backend.repository.CourseMessage.Report.CourseQuestionReportRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 /**
  * @AUTHOR: Guozhi
@@ -29,7 +32,9 @@ public class CourseQuestionReportDaoImpl implements CourseQuestionReportDao {
         return courseQuestionReportRepository.findById(course_question_report_id).get();
     }
 
+    @Override
+    public List<CourseQuestionReport> findAllReported(){return courseQuestionReportRepository.findCourseQuestionReportsReported();}
 
-
-
+    @Override
+    public List<CourseQuestionReport> findAllHandled(){return courseQuestionReportRepository.findCourseQuestionReportsHandled();}
 }
