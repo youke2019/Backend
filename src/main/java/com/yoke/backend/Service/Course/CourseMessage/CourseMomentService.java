@@ -17,4 +17,5 @@ public interface CourseMomentService {
     void praiseCourseMoment(Integer video_id,String user_id);
     void unpraiseCourseMoment(Integer video_id,String user_id);
     void postCourseMoment(CourseMoment courseMoment);
+
 }

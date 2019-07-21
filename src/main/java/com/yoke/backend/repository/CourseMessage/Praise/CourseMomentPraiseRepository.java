@@ -15,7 +15,7 @@ import javax.transaction.Transactional;
 public interface CourseMomentPraiseRepository extends JpaRepository<CourseMomentPraise,Integer> {
 
     @Transactional
-    @Query(value = "delete from video_praise where video_id=?1 and user_id=?2",nativeQuery = true)
+    @Query(value = "delete from video_praise where video_id=?1 and ID=?2",nativeQuery = true)
     @Modifying
     void delete(Integer video_id,String user_id);
 }
