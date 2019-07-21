@@ -6,6 +6,8 @@ import com.yoke.backend.repository.CourseMessage.Report.CourseAnswerReportReposi
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 /**
  * @AUTHOR: Guozhi
  * @DATE : 2019/7/18
@@ -28,4 +30,9 @@ public class CourseAnswerReportDaoImpl implements CourseAnswerReportDao {
         return courseAnswerReportRepository.findById(course_answer_report_id).get();
     }
 
+    @Override
+    public List<CourseAnswerReport> findAllReported(){return courseAnswerReportRepository.findCourseAnswerReportsReported();}
+
+    @Override
+    public List<CourseAnswerReport> findAllHandled(){return courseAnswerReportRepository.findCourseAnswerReportsHandled();}
 }
