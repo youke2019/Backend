@@ -21,9 +21,17 @@ import javax.persistence.*;
 )
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class CourseEvaluationPraise {
-    private Integer course_evaluate_praise_id;
+    private Integer course_evaluate_praise_id=0;
     private String user_id;
     private Integer course_evaluate_id;
+    public CourseEvaluationPraise(){}
+
+    public CourseEvaluationPraise(Integer course_evaluate_id,String user_id)
+    {
+        this.course_evaluate_id=course_evaluate_id;
+        this.user_id=user_id;
+        this.course_evaluate_praise_id=0;
+    }
 
     @Basic
     @Column(name = "ID")

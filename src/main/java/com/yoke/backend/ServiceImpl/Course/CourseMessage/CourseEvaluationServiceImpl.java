@@ -10,6 +10,7 @@ import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoCursor;
 import com.mongodb.client.MongoDatabase;
 import com.yoke.backend.Dao.CourseMessage.CourseEvaluateDao;
+import com.yoke.backend.Dao.CourseMessage.Praise.CourseEvaluatePraiseDao;
 import com.yoke.backend.Entity.CourseMessage.CourseEvaluation;
 import com.yoke.backend.Entity.CourseMessage.Praise.CourseEvaluationPraise;
 import com.yoke.backend.Service.Course.CourseMessage.CourseEvaluationService;
@@ -33,6 +34,8 @@ public class CourseEvaluationServiceImpl implements CourseEvaluationService {
     @Autowired
     CourseEvaluateDao courseEvaluateDao;
 
+    @Autowired
+    CourseEvaluatePraiseDao courseEvaluatePraiseDao;
     @Override
     public List<CourseEvaluation> allEvaluation()
     {
@@ -58,7 +61,7 @@ public class CourseEvaluationServiceImpl implements CourseEvaluationService {
         /**
          * 服务器 mongodb://root:XunKeTeam2019@127.0.0.1:27017/
          */
-        MongoClient mongoClient=new MongoClient(new MongoClientURI("mongodb://127.0.0.1:27017/"));
+        MongoClient mongoClient=new MongoClient(new MongoClientURI("mongodb://root:XunKeTeam2019@127.0.0.1:27017/"));
         MongoDatabase mongoDatabase=mongoClient.getDatabase("yoke");
         MongoCollection<Document> collection=mongoDatabase.getCollection("evaluation");
         List<CourseEvaluation> courseEvaluationList=courseEvaluateDao.findByCourse(course_id);
@@ -88,12 +91,26 @@ public class CourseEvaluationServiceImpl implements CourseEvaluationService {
         CourseEvaluation courseEvaluation=new CourseEvaluation(jsonObject.getString("course_id"),jsonObject.getString("user_id"));
         courseEvaluation=courseEvaluateDao.save(courseEvaluation);
         jsonObject.put("evaluate_id",courseEvaluation.getEvaluate_id());
-        MongoClient mongoClient=new MongoClient(new MongoClientURI("mongodb://127.0.0.1:27017/"));
+        MongoClient mongoClient=new MongoClient(new MongoClientURI("mongodb://root:XunKeTeam2019@127.0.0.1:27017/"));
         MongoDatabase mongoDatabase=mongoClient.getDatabase("yoke");
         MongoCollection<Document> collection=mongoDatabase.getCollection("evaluation");
         json=JSON.toJSONString(jsonObject);
         Document document=Document.parse(json);
         collection.insertOne(document);
+    }
+
+    public void praiseCourseEvaluation(Integer course_evaluate_id,String user_id)
+    {
+        CourseEvaluationPraise courseEvaluationPraise=new CourseEvaluationPraise(course_evaluate_id,user_id);
+        courseEvaluatePraiseDao.save(courseEvaluationPraise);
+        CourseEvaluation courseEvaluation=courseEvaluateDao.findById(course_evaluate_id);
+        courseEvaluation.setEvaluate_praise_point(courseEvaluation.getEvaluate_praise_point()+1);
+    }
+    public void unpraiseCourseEvaluation(Integer coures_evaluate_id,String user_id)
+    {
+        courseEvaluatePraiseDao.delete(coures_evaluate_id, user_id);
+        CourseEvaluation courseEvaluation=courseEvaluateDao.findById(coures_evaluate_id);
+        courseEvaluation.setEvaluate_praise_point(courseEvaluation.getEvaluate_praise_point()-1);
     }
 
 }
