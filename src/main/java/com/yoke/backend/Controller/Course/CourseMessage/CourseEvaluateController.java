@@ -98,7 +98,7 @@ public class CourseEvaluateController {
     public String praiseEvaluation(Integer course_evaluate_id,String user_id)
     {
         if(course_evaluate_id==null||user_id==null)
-            return "参数错误";
+            return "参数错误了";
         courseEvaluationService.praiseCourseEvaluation(course_evaluate_id, user_id);
         return "success";
     }
