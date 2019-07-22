@@ -147,6 +147,8 @@ public class CourseGreatMomentController {
     @ResponseBody
     public String uploadImg(@RequestParam("file")MultipartFile file, HttpServletRequest request)
     {
+        System.out.println("here");
+        System.out.println(file.getOriginalFilename());
         String localPath="/media/images";
         String fileName=file.getOriginalFilename();
         fileName= FileNameUtil.getFileName(fileName);
@@ -160,8 +162,12 @@ public class CourseGreatMomentController {
             // 得到去掉了uri的路径
             String url = requestURL.substring(0, requestURL.length()-requestURI.length() + 1);
             url+="images/"+ fileName;
+            System.out.println(url);
             return  url;
 
+        }
+        else{
+            System.out.println("未进入upload函数");
         }
         // 返回
         return "fault";
