@@ -71,8 +71,14 @@ public class CourseEvaluateController {
     @ResponseBody
     public String addEvaluation(@RequestBody String json)
     {
+        List<Map> responce = courseEvaluationService.allEvaluation();
+        Integer result = responce.size();
         courseEvaluationService.addCourseEvaluation(json);
-        return "success";
+        responce = courseEvaluationService.allEvaluation();
+        if(( responce.size() - result) == 1)
+            return "success";
+        else return "failure";
+
     }
 
     @GetMapping(value = "all")

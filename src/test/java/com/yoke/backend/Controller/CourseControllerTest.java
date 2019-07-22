@@ -73,11 +73,12 @@ public void testSearchCourseInfo() throws Exception {
         "courseid":"SE101"
      }
      */
-    /*SearchCourseInfoParams searchCourseInfoParams1=new SearchCourseInfoParams();
+    /*
+    SearchCourseInfoParams searchCourseInfoParams1=new SearchCourseInfoParams();
     searchCourseInfoParams1.setCourse_id("SE101");
     CourseInfo courseInfo1=testRestTemplate.postForObject("/courses/search",searchCourseInfoParams1,CourseInfo.class);
-    Assert.assertEquals(null,courseInfo1);*/
-
+    Assert.assertEquals(null,courseInfo1);
+*/
 
 }
 
@@ -90,11 +91,11 @@ public void testSearchCourseInfo() throws Exception {
 @Test
 public void testSpecificCourseInfo() throws Exception { 
 //TODO: Test goes here...
-    CourseInfo courseInfo = testRestTemplate.getForObject("/courses/specific?course_id=SE101",CourseInfo.class);
-    Assert.assertEquals(5.0,courseInfo.getCourse_credits(),0.1);
+    CourseInfo courseInfo = testRestTemplate.getForObject("/courses/specific?course_id=57878",CourseInfo.class);
+    Assert.assertEquals(-2528,courseInfo.getCourse_credits(),0.1);
 
-    CourseInfo courseInfo1=testRestTemplate.getForObject("/courses/specific?course_id=XP401",CourseInfo.class);
-    Assert.assertEquals("生产实习（软件工程）",courseInfo1.getCourse_name());
+    CourseInfo courseInfo1=testRestTemplate.getForObject("/courses/specific?course_id=57878",CourseInfo.class);
+    Assert.assertEquals("Socorro4",courseInfo1.getCourse_name());
 
 
 } 
