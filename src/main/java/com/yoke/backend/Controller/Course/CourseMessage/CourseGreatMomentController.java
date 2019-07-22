@@ -64,7 +64,7 @@ public class CourseGreatMomentController {
      * @api {get} /courses/moments/praise
      * @apiName praiseCourseMoment
      * @apiDescription 对课程精彩瞬间进行点赞
-     * @apiGroup courses/message
+     * @apiGroup Course/Message
      * @apiParam {Integer} video_id
      * @apiParam {Integer} user_id
      */
@@ -81,7 +81,7 @@ public class CourseGreatMomentController {
      * @api {get} /courses/moments/unpraise
      * @apiName unpraiseCourseMoment
      * @apiDescription 对课程精彩瞬间取消点赞
-     * @apiGroup courses/message
+     * @apiGroup Course/Message
      * @apiParam {Integer} video_id
      * @apiParam {Integer} user_id
      */
@@ -96,6 +96,7 @@ public class CourseGreatMomentController {
      * @return
      * @api {post} /courses/moments/comment
      * @apiName commentCourseMoment
+     * @apiGroup CourseMessage
      * @apiDescription 评论课程精彩瞬间
      * @apiSuccessExample Post-Example:
      * {
@@ -112,12 +113,11 @@ public class CourseGreatMomentController {
     }
 
     /**
-     * @param courseMoment
-     * @return
+     /**
      * @api {post} courses/moments/post
      * @apiName postCourseMoment
      * @apiDescription 发布课程精彩瞬间
-     * @apiGroup CoursesMessage
+     * @apiGroup CourseMessage
      * @apiSuccessExample Post-Example:
      * {
      * "user_id":"01231",
@@ -125,6 +125,8 @@ public class CourseGreatMomentController {
      * "video_type":"i",   //i:图片，v:视频，n:无
      * "image_url":"ipads.sjtu.edu.cn/se101"
      * }
+     * @param courseMoment
+     * @return
      */
     @RequestMapping(value = "post", method = RequestMethod.POST)
     @ResponseBody
@@ -172,6 +174,7 @@ public class CourseGreatMomentController {
      * @api {get} images/
      * @apiName getFile
      * @apiDescription 获取图片或者视频文件
+     * @apiGroup CourseMessage
      * @apiParam http://47.103.30.166:8000/images/e88affabfdb142d2b70e13bf9ea086d7.mp4
      */
 

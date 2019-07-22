@@ -1,5 +1,6 @@
 package com.yoke.backend.Controller.Course.CourseMessage;
 
+import com.yoke.backend.Entity.CourseMessage.CourseEvaluation;
 import com.yoke.backend.Service.Course.CourseMessage.CourseEvaluationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -48,9 +49,9 @@ public class CourseEvaluateController {
      * @return
      */
     @GetMapping(value = "/find")
-    public List<Map> findEvaluationByCourseId(String course_id)
+    public List<CourseEvaluation> findEvaluationByCourseId(String course_id,String user_id)
     {
-        return courseEvaluationService.findEvaluationByCourseId(course_id);
+        return courseEvaluationService.findEvaluationByCourseId(course_id,user_id);
     }
 
     /**
@@ -76,7 +77,7 @@ public class CourseEvaluateController {
     }
 
     @GetMapping(value = "all")
-    public List<Map> allEvaluation()
+    public List<CourseEvaluation> allEvaluation()
     {
         return courseEvaluationService.allEvaluation();
     }

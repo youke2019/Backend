@@ -28,8 +28,8 @@ public class CourseAnswer {
     Date date = new Date();
 
     private Integer answer_id=0;
-    private Integer question_id;
-    private String user_id;
+    private Integer question_id=1;
+    private String user_id="01231";
     private String answer_content;
     private String answer_time=sdf.format(date);
     private Boolean answer_isbanned=false;
