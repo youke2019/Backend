@@ -14,6 +14,7 @@ import com.yoke.backend.Dao.CourseMessage.Praise.CourseEvaluatePraiseDao;
 import com.yoke.backend.Entity.CourseMessage.CourseEvaluation;
 import com.yoke.backend.Entity.CourseMessage.Praise.CourseEvaluationPraise;
 import com.yoke.backend.Service.Course.CourseMessage.CourseEvaluationService;
+import com.yoke.backend.Service.Course.CourseService;
 import com.yoke.backend.repository.CourseMessage.CourseEvaluationRepository;
 import org.bson.Document;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +31,8 @@ import java.util.Map;
  **/
 @Service
 public class CourseEvaluationServiceImpl implements CourseEvaluationService {
+    @Autowired
+    private CourseService courseService;
 
     @Autowired
     CourseEvaluateDao courseEvaluateDao;
