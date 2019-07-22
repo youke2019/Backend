@@ -1,8 +1,10 @@
 package com.yoke.backend.Controller.Course.CourseMessage;
 
 import com.yoke.backend.Entity.CourseMessage.CourseComment;
+import com.yoke.backend.Entity.CourseMessage.CourseCommentReply;
 import com.yoke.backend.Service.Course.CourseMessage.CourseCommentService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -30,7 +32,7 @@ public class CourseCommentController {
      * @apiDescription 获得课程评论
      * @apiParam {String} course_id
      * @apiParam {String} user_id
-     * @apiGroup CourseMessage
+     * @apiGroup CourseComment
      * @apiSampleRequest 47.103.30.166:8000/courses/comments/find?course_id=41899
      * @apiSuccessExample Response-Example:
      *[
@@ -60,7 +62,7 @@ public class CourseCommentController {
      * @api {post} /course/comments/add:
      * @apiName addComment
      * @apiDescription 添加评论
-     * @apiGroup CourseMessage
+     * @apiGroup CourseComment
      * @apiSampleRequest 47.103.30.166:8000/courses/comments/add
      * @apiSuccessExample Post-Example:
      *     {
@@ -85,7 +87,7 @@ public class CourseCommentController {
      * @apiDescription 删除评论
      * @apiParam {Interger} user_id
      * @apiName deleteComment
-     * @apiGroup CourseMessage
+     * @apiGroup CourseComment
      * @apiSampleRequest 47.103.30.166:8000/courses/comments/delete?comment_id=3
      * @param comment_id
      * @return
@@ -102,7 +104,7 @@ public class CourseCommentController {
      * @apiDescription 封禁评论
      * @apiParam {Interger} comment_id
      * @apiName banComment
-     * @apiGroup CourseMessage
+     * @apiGroup CourseComment
      * @apiSampleRequest 47.103.30.166:8000/courses/comments/ban?comment_id=2
      * @param comment_id
      * @return
@@ -119,7 +121,7 @@ public class CourseCommentController {
      * @apiDescription 解禁评论
      * @apiParam {Interger} comment_id
      * @apiName unbanComment
-     * @apiGroup CourseMessage
+     * @apiGroup CourseComment
      * @apiSampleRequest 47.103.30.166:8000/courses/comments/unban?comment_id=2
      * @param comment_id
      * @return
@@ -137,7 +139,7 @@ public class CourseCommentController {
      * @apiParam {String} user_id
      * @apiParam {Interger} course_comment_id
      * @apiName praiseComment
-     * @apiGroup CourseMessage
+     * @apiGroup CourseComment
      * @apiSampleRequest example: /course/comments/praise?user_id=1&course_comment_id=2
      * @param user_id
      * @param course_comment_id
@@ -156,7 +158,7 @@ public class CourseCommentController {
      * @apiParam {String} user_id
      * @apiParam {Interger} course_comment_id
      * @apiName unpraiseComment
-     * @apiGroup CourseMessage
+     * @apiGroup CourseComment
      * @apiSampleRequest  example: /course/comments/unpraise?user_id=1&course_comment_id=2
      * @param user_id
      * @param course_comment_id
@@ -167,6 +169,27 @@ public class CourseCommentController {
     {
         courseCommentService.unpraiseCourseComment(user_id,course_comment_id);
         return "successs";
+    }
+
+    /**
+     * @api {post} /courses/comments/reply:
+     * @apiDescription 回复
+     * @apiName replyComment
+     * @apiGroup CourseComment
+     * @apiSuccessExample Post-Example:
+     *     {
+     * 	"course_comment_id":1,
+     * 	"user_id":84514,
+     * 	"course_comment_reply_content":"说的很中肯"
+     * }
+     * @param courseCommentReply
+     * @return
+     */
+    @RequestMapping(value = "/reply",method = RequestMethod.POST)
+    @ResponseBody
+    public String replyCourseComment(@RequestBody CourseCommentReply courseCommentReply)
+    {
+        return courseCommentService.replyCourseComment(courseCommentReply);
     }
 
 }

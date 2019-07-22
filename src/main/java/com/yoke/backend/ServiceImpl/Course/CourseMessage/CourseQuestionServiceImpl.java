@@ -41,7 +41,7 @@ public class CourseQuestionServiceImpl implements CourseQuestionService {
         {
             for(CourseQuestionPraise courseQuestionPraise :courseQuestion.getCourseQuestionPraiseList())
             {
-                if(courseQuestionPraise.getUser_id().equals(user_id))
+                if(courseQuestionPraise.getUser_id()!=null&&courseQuestionPraise.getUser_id().equals(user_id))
                     courseQuestion.setCurrent_user_praise(true);
             }
             List<CourseAnswer> courseAnswerList=courseQuestion.getCourseAnswerList();
@@ -53,6 +53,7 @@ public class CourseQuestionServiceImpl implements CourseQuestionService {
                         courseAnswer.setCurrent_user_praise(true);
                 }
             }
+            courseQuestion.setCourseAnswerList(courseAnswerList);
         }
         return courseQuestionList;
     }

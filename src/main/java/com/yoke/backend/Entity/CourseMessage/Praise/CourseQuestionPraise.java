@@ -2,6 +2,7 @@ package com.yoke.backend.Entity.CourseMessage.Praise;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import javax.persistence.*;
@@ -18,6 +19,7 @@ import javax.persistence.*;
         generator = ObjectIdGenerators.PropertyGenerator.class,
         property = "question_praise_id"
 )
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class CourseQuestionPraise {
     private Integer question_praise_id;
     private Integer question_id;
@@ -61,5 +63,14 @@ public class CourseQuestionPraise {
 
     public void setUser_id(String user_id) {
         this.user_id = user_id;
+    }
+
+    @Override
+    public String toString() {
+        return "CourseQuestionPraise{" +
+                "question_praise_id=" + question_praise_id +
+                ", question_id=" + question_id +
+                ", user_id='" + user_id + '\'' +
+                '}';
     }
 }

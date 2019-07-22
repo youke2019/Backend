@@ -24,7 +24,7 @@ public class CourseQuestionController {
      * @api {get} /courses/questions/find
      * @apiDescription 查找课程提问
      * @apiName findQuestion
-     * @apiGroup CourseMessage
+     * @apiGroup CourseQuestion
      * @apiParam {String} course_id
      * @apiParam {String} user_id
      * @apiSampleRequest 47.103.30.166:8000/courses/questions/find?course_id=66974&user_id=01231
@@ -87,7 +87,7 @@ public class CourseQuestionController {
      * @api {post} /courses/questions/add
      * @apiDescription 添加提问
      * @apiName addQuestion
-     * @apiGroup CourseMessage
+     * @apiGroup CourseQuestion
      * @apiSampleRequest 47.103.30.166:8000/courses/questions/add
      * @apiSuccessExample Request-Example:
      * {
@@ -111,7 +111,7 @@ public class CourseQuestionController {
      * @api {post} /courses/answers/add
      * @apiDescription 添加回答
      * @apiName addAnswer
-     * @apiGroup CourseMessage
+     * @apiGroup CourseQuestion
      * @apiSampleRequest 47.103.30.166:8000/courses/answers/add
      * @apiSuccessExample Post-Example:
      * {
@@ -134,7 +134,7 @@ public class CourseQuestionController {
      * @api {get} /courses/questions/praise
      * @apiDescription 对问题点赞
      * @apiName praiseQuestion
-     * @apiGroup CourseMessage
+     * @apiGroup CourseQuestion
      * @apiParam {Integer} question_id
      * @apiParam {String} user_id
      * @apiSampleRequest 47.103.30.166:8000/courses/questions/praise?question_id=3&user_id=01231
@@ -153,7 +153,7 @@ public class CourseQuestionController {
      * @api {get} /courses/answers/praise
      * @apiDescription 点赞回答
      * @apiName praiseAnswers
-     * @apiGroup CourseMessage
+     * @apiGroup CourseQuestion
      * @apiParam {Integer} answer_id
      * @apiParam {String}  user_id
      * @apiSampleRequest 47.103.30.166:8000/courses/answers/praise?answer_id=3&user_id=01231
@@ -172,7 +172,7 @@ public class CourseQuestionController {
      * @api {get} /courses/questions/unpraise
      * @apiDescription 取消问题点赞
      * @apiName unpraiseQuestion
-     * @apiGroup CourseMessage
+     * @apiGroup CourseQuestion
      * @apiParam {Integer} question_id
      * @apiParam {String} user_id
      * @apiSampleRequest 47.103.30.166:8000/courses/questions/unpraise?question_id=3&user_id=01231
@@ -191,7 +191,7 @@ public class CourseQuestionController {
      * @api {get} /courses/answers/unpraise
      * @apiDescription 取消回答点赞
      * @apiName unpraiseAnswers
-     * @apiGroup CourseMessage
+     * @apiGroup CourseQuestion
      * @apiParam {Integer} answer_id
      * @apiParam {String } user_id
      * @apiSampleRequest 47.103.30.166:8000/courses/answers/unpraise?answer_id=3&user_id=01231
