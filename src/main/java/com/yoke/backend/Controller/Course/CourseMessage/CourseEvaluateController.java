@@ -25,7 +25,7 @@ public class CourseEvaluateController {
      * @apiName findEvaluation
      * @apiDescription 获取课程评测
      * @apiParam {String} course_id
-     * @apiGroup CourseMessage
+     * @apiGroup CourseEvaluate
      * @apiSampleRequest /course/evaluates/find?course_id=SE101
      * @param course_id
      * @apiSuccessExample Request-Example:
@@ -58,7 +58,7 @@ public class CourseEvaluateController {
      * @api {post} /course/evaluates/add:
      * @apiName addEvaluation
      * @apiDescription 添加评测
-     * @apiGroup CourseMessage
+     * @apiGroup CourseEvaluate
      * @apiSampleRequest /course/evaluates/add
      * @apiSuccessExample Request-Example:
      *     {
@@ -85,7 +85,7 @@ public class CourseEvaluateController {
 
     /**
      * @api {get} /courses/evaluates/praise
-     * @apiGroup CourseMessage
+     * @apiGroup CourseEvaluate
      * @apiName praiseEvaluation
      * @apiParam {Interger} course_evaluate_id
      * @apiParam {String}  user_id
@@ -105,7 +105,7 @@ public class CourseEvaluateController {
 
     /**
      * @api {get} /courses/evaluates/unpraise
-     * @apiGroup CourseMessage
+     * @apiGroup CourseEvaluate
      * @apiName unpraiseEvaluation
      * @apiDescription 取消点赞
      * @apiParam {Interger} course_evaluate_id

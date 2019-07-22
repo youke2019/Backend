@@ -2,13 +2,16 @@ package com.yoke.backend.ServiceImpl.Course.CourseMessage;
 
 import com.yoke.backend.Dao.CourseMessage.CourseAnswerDao;
 import com.yoke.backend.Dao.CourseMessage.CourseCommentDao;
+import com.yoke.backend.Dao.CourseMessage.CourseCommentReplyDao;
 import com.yoke.backend.Dao.CourseMessage.Praise.CourseCommentPraiseDao;
 import com.yoke.backend.Entity.CourseMessage.CourseComment;
+import com.yoke.backend.Entity.CourseMessage.CourseCommentReply;
 import com.yoke.backend.Entity.CourseMessage.Praise.CourseCommentPraise;
 import com.yoke.backend.Service.Course.CourseMessage.CourseCommentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.OneToMany;
 import java.util.List;
 
 /**
@@ -24,6 +27,9 @@ public class CourseCommentServiceImpl implements CourseCommentService {
 
     @Autowired
     CourseCommentPraiseDao courseCommentPraiseDao;
+
+    @Autowired
+    CourseCommentReplyDao courseCommentReplyDao;
 
     @Override
     public List<CourseComment> allComment()
@@ -99,6 +105,18 @@ public class CourseCommentServiceImpl implements CourseCommentService {
         courseComment.setCourse_comment_praise_point(courseComment.getCourse_comment_praise_point()-1);
         courseCommentDao.save(courseComment);
         return true;
+    }
+
+    @Override
+    public String replyCourseComment(CourseCommentReply courseCommentReply)
+    {
+        if(courseCommentReply.getCourse_comment_id()==null||courseCommentReply.getUser_id()==null)
+        {
+            return "param is not correct";
+        }
+
+        courseCommentReplyDao.save(courseCommentReply);
+        return "success";
     }
 
 }
