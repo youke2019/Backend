@@ -51,6 +51,8 @@ public class UserServiceImpl implements UserService {
             System.out.println("Error: user's ID is compulsory");
             return;
         }
+        User oldUser = userDao.findUserByID(user.getId());
+        if (oldUser != null) return;
         if (user.getNickname() == null) {
             user.setNickname(getRandomName());
         }
