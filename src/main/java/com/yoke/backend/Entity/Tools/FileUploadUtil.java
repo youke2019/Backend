@@ -37,12 +37,16 @@ public class FileUploadUtil {
         try {
             //保存文件
             file.transferTo(dest);
+            System.out.println(dest.getName());
             return true;
         } catch (IllegalStateException e) {
             e.printStackTrace();
+            System.out.println(file.getName());
+            System.out.println("illegalstateexception");
             return false;
         } catch (IOException e) {
             e.printStackTrace();
+            System.out.println("ioexception");
             return false;
         }
 

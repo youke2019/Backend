@@ -31,8 +31,8 @@ public class CourseQuestion {
     Date date = new Date();
 
     private Integer question_id=0;
-    private String user_id;
-    private String course_id;
+    private String user_id="01231";
+    private String course_id="11004";
     private String question_content;
     private String question_time=sdf.format(date);
     private Boolean question_isbanned=false;
