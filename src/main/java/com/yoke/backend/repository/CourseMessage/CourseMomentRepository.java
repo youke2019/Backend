@@ -14,4 +14,7 @@ import java.util.List;
 public interface CourseMomentRepository extends JpaRepository<CourseMoment,Integer> {
     @Query(value = "select * from (select * from video order by video.post_time desc limit ?2) as m order by m.post_time limit ?1; ",nativeQuery = true)
     List<CourseMoment> findByTimeOrder(Integer serialNumber1,Integer serialNumber2);
+
+    @Query(value = "select * from video order by video.post_time desc",nativeQuery = true)
+    List<CourseMoment> findCourseMoment();
 }

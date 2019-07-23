@@ -28,7 +28,7 @@ public class CourseMomentDaoImpl implements CourseMomentDao {
     @Override
     public List<CourseMoment> findAll()
     {
-        return courseMomentRepository.findAll();
+        return courseMomentRepository.findCourseMoment();
     }
 
     @Override

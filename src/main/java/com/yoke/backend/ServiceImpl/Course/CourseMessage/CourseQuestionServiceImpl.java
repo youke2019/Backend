@@ -49,7 +49,7 @@ public class CourseQuestionServiceImpl implements CourseQuestionService {
             {
                 for(CourseAnswerPraise courseAnswerPraise:courseAnswer.getCourseAnswerPraiseList())
                 {
-                    if(courseAnswerPraise.getUser_id().equals(user_id))
+                    if(courseAnswerPraise.getUser_id()!=null&&courseAnswerPraise.getUser_id().equals(user_id))
                         courseAnswer.setCurrent_user_praise(true);
                 }
             }

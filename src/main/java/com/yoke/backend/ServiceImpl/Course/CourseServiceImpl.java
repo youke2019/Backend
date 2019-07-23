@@ -97,7 +97,7 @@ public class CourseServiceImpl implements CourseService {
         if(strs.length == 4) segment.setEnd_week(Integer.valueOf(strs[3]));
           //表明只有一周上课
         else segment.setEnd_week(Integer.valueOf(strs[4]));
-        if(strs.length == 6){                                                表明是单双周的课
+        if(strs.length == 6){                                                /*表明是单双周的课*/
             Character ch = strs[5].charAt(1);
             if (ch == '单') segment.setOdd_or_even('o');
             else segment.setOdd_or_even('e');
