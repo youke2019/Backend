@@ -43,6 +43,7 @@ public class CourseComment {
     private Boolean current_user_praise=false;
     List<CourseCommentPraise> courseCommentPraises=new ArrayList<>();
     List<CourseCommentReport> courseCommentReportList=new ArrayList<>();
+    List<CourseCommentReply> courseCommentReplyList=new ArrayList<>();
 
     public CourseComment(){
 
@@ -156,5 +157,14 @@ public class CourseComment {
 
     public void setCourseCommentReportList(List<CourseCommentReport> courseCommentReportList) {
         this.courseCommentReportList = courseCommentReportList;
+    }
+
+    @OneToMany(fetch = FetchType.LAZY,mappedBy = "course_comment_id",cascade = CascadeType.ALL)
+    public List<CourseCommentReply> getCourseCommentReplyList() {
+        return courseCommentReplyList;
+    }
+
+    public void setCourseCommentReplyList(List<CourseCommentReply> courseCommentReplyList) {
+        this.courseCommentReplyList = courseCommentReplyList;
     }
 }

@@ -40,8 +40,7 @@ testreport/
 target/
 .idea/
 /src/test/
-/src/main/resources/application.properties
+
 /src/main/resources/application.yml
-/src/main/java/resources/application.properties
 src/main/java/resources/
 backend.iml
