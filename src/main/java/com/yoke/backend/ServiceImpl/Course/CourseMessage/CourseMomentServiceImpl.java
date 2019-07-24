@@ -30,9 +30,18 @@ public class CourseMomentServiceImpl implements CourseMomentService {
     CourseMomentCommentDao courseMomentCommentDao;
 
     @Override
-    public List<CourseMoment> findByTimeOrder(Integer serialNumber1,Integer serialNubmer2)
+    public List<CourseMoment> findByTimeOrder(Integer serialNumber1,Integer serialNumber2,String user_id)
     {
-        return courseMomentDao.findByTimeOrder(serialNumber1, serialNubmer2);
+        List<CourseMoment> courseMomentList=courseMomentDao.findByTimeOrder(serialNumber1, serialNumber2);
+        for(CourseMoment courseMoment:courseMomentList) {
+            for (CourseMomentPraise courseMomentPraise : courseMoment.getCourseMomentPraiseList()) {
+                if (courseMomentPraise.getUser_id() != null && courseMomentPraise.getUser_id().equals(user_id)) {
+                    courseMoment.setCurrent_user_praise(true);
+                }
+            }
+            courseMoment.setCourseMomentPraiseList(null);
+        }
+        return courseMomentList;
     }
 
     @Override

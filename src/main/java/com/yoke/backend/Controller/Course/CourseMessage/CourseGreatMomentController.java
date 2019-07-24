@@ -32,13 +32,19 @@ public class CourseGreatMomentController {
 
 
     /**
+     * @api {get} /courses/moments/find
+     * @apiGroup CourseMoment
+     * @apiDescription 精彩瞬间获取部分序列
+     * @apiParam {Integer} serialNumber1
+     * @apiParam {Integer} serialNumber2
      * @param serialNumber1
      * @param serialNumber2
+     * @param user_id
      * @return
      */
     @RequestMapping(value = "find")
-    public List<CourseMoment> findByTimeOrder(Integer serialNumber1, Integer serialNumber2) {
-        return courseMomentService.findByTimeOrder(serialNumber1, serialNumber2);
+    public List<CourseMoment> findByTimeOrder(Integer serialNumber1, Integer serialNumber2,String user_id) {
+        return courseMomentService.findByTimeOrder(serialNumber1, serialNumber2,user_id);
     }
 
     /**
