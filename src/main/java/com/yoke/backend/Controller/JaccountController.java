@@ -27,7 +27,7 @@ public class JaccountController {
     private String client_id = "k8vX4aeVqZc0VCP1rSaG";
     private String client_secret = "E0C775E0A140B98F4A083EA876F2FDD5629B38E9F8C7088A";
     private String grant_type = "authorization_code";
-    private String base_url = "http://47.103.30.166:8000";
+    private String base_url = "http://192.168.42.163:8000";
 
     /**
      * @api {get} /login
@@ -117,6 +117,8 @@ public class JaccountController {
 
         // save user data into database.
         User new_user = userService.generateUserIfNoUserLike(user);
+        System.out.println(user.getNickname());
+        System.out.println(new_user.getNickname());
         return new_user;
     }
 }
