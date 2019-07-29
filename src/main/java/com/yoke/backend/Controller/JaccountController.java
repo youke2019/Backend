@@ -116,7 +116,7 @@ public class JaccountController {
         }
 
         // save user data into database.
-        userService.generateUserIfNoUserLike(user);
-        return user;
+        User new_user = userService.generateUserIfNoUserLike(user);
+        return new_user;
     }
 }

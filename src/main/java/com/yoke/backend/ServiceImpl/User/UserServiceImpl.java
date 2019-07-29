@@ -42,21 +42,22 @@ public class UserServiceImpl implements UserService {
         return sb.toString();
     }
     @Override
-    public void generateUserIfNoUserLike(User user) {
+    public User generateUserIfNoUserLike(User user) {
         if (user == null) {
             System.out.println("Error: user should not be null");
-            return;
+            return null;
         }
         if (user.getId() == null) {
             System.out.println("Error: user's ID is compulsory");
-            return;
+            return null;
         }
         User oldUser = userDao.findUserByID(user.getId());
-        if (oldUser != null) return;
+        if (oldUser != null) return oldUser;
         if (user.getNickname() == null) {
             user.setNickname(getRandomName());
         }
         userDao.save(user); //Is it necessary to Update Information ?
+        return user;
     }
 
     @Override

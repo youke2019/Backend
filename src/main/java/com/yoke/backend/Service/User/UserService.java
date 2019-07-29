@@ -10,7 +10,8 @@ public interface UserService {
 
     List<User> findAll();
     void save(User user);
-    void generateUserIfNoUserLike(User user);
+
+    User generateUserIfNoUserLike(User user);
 
     void banUser(String id);
 
