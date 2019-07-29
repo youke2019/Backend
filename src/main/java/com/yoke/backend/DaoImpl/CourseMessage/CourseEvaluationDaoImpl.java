@@ -33,4 +33,9 @@ public class CourseEvaluationDaoImpl implements CourseEvaluateDao {
         return courseEvaluationRepository.findById(course_evaluate_id).get();
     }
 
+    public List<CourseEvaluation> findAll()
+    {
+        return courseEvaluationRepository.findAll();
+    }
+
 }

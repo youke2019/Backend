@@ -15,6 +15,7 @@ public class UploadFileConfig extends WebMvcConfigurationSupport {
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry){
         registry.addResourceHandler("/images/**").addResourceLocations("file:/media/images/");
+        registry.addResourceHandler("/avatars/**").addResourceLocations("file:/media/avatars/");
         super.addResourceHandlers(registry);
     }
 

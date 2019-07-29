@@ -15,12 +15,10 @@ import com.yoke.backend.Entity.CourseMessage.CourseEvaluation;
 import com.yoke.backend.Entity.CourseMessage.Praise.CourseEvaluationPraise;
 import com.yoke.backend.Service.Course.CourseMessage.CourseEvaluationService;
 import com.yoke.backend.Service.Course.CourseService;
-import com.yoke.backend.repository.CourseMessage.CourseEvaluationRepository;
 import org.bson.Document;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -42,20 +40,7 @@ public class CourseEvaluationServiceImpl implements CourseEvaluationService {
     @Override
     public List<CourseEvaluation> allEvaluation()
     {
-        /*MongoClient mongoClient=new MongoClient(new MongoClientURI("mongodb://root:XunKeTeam2019@127.0.0.1:27017/"));
-        MongoDatabase mongoDatabase=mongoClient.getDatabase("yoke");
-        MongoCollection<Document> collection=mongoDatabase.getCollection("evaluation");
-        FindIterable<Document> findIterable=collection.find();
-        MongoCursor<Document> iterator=findIterable.iterator();
-        List<Map> result=new ArrayList<>();
-        while(iterator.hasNext())
-        {
-            Map map=iterator.next();
-            map.remove("_id");
-            result.add(map);
-        }
-        return result;*/
-        return null;
+        return courseEvaluateDao.findAll();
     }
 
     @Override
@@ -64,7 +49,7 @@ public class CourseEvaluationServiceImpl implements CourseEvaluationService {
         /**
          * 服务器 mongodb://root:XunKeTeam2019@127.0.0.1:27017/
          */
-        MongoClient mongoClient=new MongoClient(new MongoClientURI("mongodb://root:XunKeTeam2019@127.0.0.1:27017/"));
+        MongoClient mongoClient=new MongoClient(new MongoClientURI("mongodb://127.0.0.1:27017/"));
         MongoDatabase mongoDatabase=mongoClient.getDatabase("yoke");
         MongoCollection<Document> collection=mongoDatabase.getCollection("evaluation");
         List<CourseEvaluation> courseEvaluationList=courseEvaluateDao.findByCourse(course_id);
@@ -94,7 +79,7 @@ public class CourseEvaluationServiceImpl implements CourseEvaluationService {
         CourseEvaluation courseEvaluation=new CourseEvaluation(jsonObject.getString("course_id"),jsonObject.getString("user_id"));
         courseEvaluation=courseEvaluateDao.save(courseEvaluation);
         jsonObject.put("evaluate_id",courseEvaluation.getEvaluate_id());
-        MongoClient mongoClient=new MongoClient(new MongoClientURI("mongodb://root:XunKeTeam2019@127.0.0.1:27017/"));
+        MongoClient mongoClient=new MongoClient(new MongoClientURI("mongodb://127.0.0.1:27017/"));
         MongoDatabase mongoDatabase=mongoClient.getDatabase("yoke");
         MongoCollection<Document> collection=mongoDatabase.getCollection("evaluation");
         json=JSON.toJSONString(jsonObject);

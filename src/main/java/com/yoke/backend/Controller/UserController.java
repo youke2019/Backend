@@ -1,10 +1,16 @@
 package com.yoke.backend.Controller;
 
 import com.alibaba.fastjson.JSONObject;
+import com.yoke.backend.Entity.Tools.FileNameUtil;
+import com.yoke.backend.Entity.Tools.FileUploadUtil;
 import com.yoke.backend.Entity.User.User;
 import com.yoke.backend.Service.User.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+
+import javax.servlet.http.HttpServletRequest;
+import java.io.File;
 import java.util.List;
 
 @RestController
@@ -100,7 +106,9 @@ public class UserController {
     public String updateUserInfo(@RequestBody User user) {
         JSONObject resp = new JSONObject();
         User userByNickname = userService.findByNickname(user.getNickname());
-        if (userByNickname != null && userByNickname.getId() != user.getId()) {
+        System.out.println(user.getId());
+       if(userByNickname!=null) System.out.println(userByNickname.getId());
+       if (userByNickname != null && !userByNickname.getId().equals( user.getId())) {
             System.out.println("Duplicate Nickname");
             resp.put("success", false);
             resp.put("error_msg", "Duplicate Nickname");
@@ -111,4 +119,46 @@ public class UserController {
         resp.put("success", true);
         return resp.toJSONString();
     }
+
+    /**
+     * @api {post}  /users/avatar/upload
+     * @apiName uploadFile
+     * @apiDescription 上传头像
+     * @apiGroup users
+     * @apiParam {file} file
+     * @param file
+     * @param request
+     * @return
+     */
+    @RequestMapping(value = "/avatar/upload",method = RequestMethod.POST)
+    @ResponseBody
+    public String uploadImg(@RequestParam("file") MultipartFile file, HttpServletRequest request)
+    {
+        System.out.println("here");
+        System.out.println(file.getOriginalFilename());
+        String localPath="/media/avators";
+        String fileName=file.getOriginalFilename();
+        fileName= FileNameUtil.getFileName(fileName);
+        File dest=new File(localPath+fileName);
+        if(FileUploadUtil.upload(file, localPath, fileName)){
+            // 将上传的文件写入到服务器端文件夹
+            // 获取当前项目运气的完整url
+            String requestURL = request.getRequestURL().toString();
+            // 获取当前项目的请求路径url
+            String requestURI = request.getRequestURI();
+            // 得到去掉了uri的路径
+            String url = requestURL.substring(0, requestURL.length()-requestURI.length() + 1);
+            url+="avators/"+ fileName;
+            System.out.println(url);
+            return  url;
+
+        }
+        else{
+            System.out.println("未进入upload函数");
+        }
+        // 返回
+        return "fault";
+
+    }
+
 }
