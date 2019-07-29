@@ -15,4 +15,5 @@ public interface CourseEvaluateDao {
     CourseEvaluation save(CourseEvaluation courseEvaluation);
     List<CourseEvaluation> findByCourse(String course_id);
     CourseEvaluation findById(Integer course_evaluate_id);
+    List<CourseEvaluation> findAll();
 }

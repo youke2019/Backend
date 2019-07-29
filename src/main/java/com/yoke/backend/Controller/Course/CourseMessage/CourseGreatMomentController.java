@@ -37,14 +37,14 @@ public class CourseGreatMomentController {
      * @apiDescription 精彩瞬间获取部分序列
      * @apiParam {Integer} serialNumber1
      * @apiParam {Integer} serialNumber2
-     * @param serialNumber1
-     * @param serialNumber2
+     * @param base
+     * @param size
      * @param user_id
      * @return
      */
     @RequestMapping(value = "find")
-    public List<CourseMoment> findByTimeOrder(Integer serialNumber1, Integer serialNumber2,String user_id) {
-        return courseMomentService.findByTimeOrder(serialNumber1, serialNumber2,user_id);
+    public List<CourseMoment> findByTimeOrder(Integer base, Integer size,String user_id) {
+        return courseMomentService.findByTimeOrder(base, size,user_id);
     }
 
     /**
@@ -140,7 +140,7 @@ public class CourseGreatMomentController {
     }
 
     /**
-     * @api {post}  courses/moment/upload
+     * @api {post}  /courses/moments/upload
      * @apiName uploadFile
      * @apiDescription 上传图片或者视频文件
      * @apiGroup CourseMoment

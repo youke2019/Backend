@@ -22,6 +22,7 @@ public class User {
     private Character sex;  /*m,f,u*/
     private Integer admissionYear;
     private Boolean banned;
+    private String avator_url;
 
 
     @Id
@@ -105,5 +106,15 @@ public class User {
 
     public void setMajor(String major) {
         this.major = major;
+    }
+
+    @Basic
+    @Column(name = "avator_url")
+    public String getAvator_url() {
+        return avator_url;
+    }
+
+    public void setAvator_url(String avator_url) {
+        this.avator_url = avator_url;
     }
 }

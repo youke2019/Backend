@@ -21,7 +21,7 @@ public class CourseEvaluateController {
     CourseEvaluationService courseEvaluationService;
 
     /**
-     * @api {get} /course/evaluates/find
+     * @api {get} /courses/evaluates/find
      * @apiName findEvaluation
      * @apiDescription 获取课程评测
      * @apiParam {String} course_id
@@ -55,7 +55,7 @@ public class CourseEvaluateController {
     }
 
     /**
-     * @api {post} /course/evaluates/add:
+     * @api {post} /courses/evaluates/add:
      * @apiName addEvaluation
      * @apiDescription 添加评测
      * @apiGroup CourseEvaluate
@@ -64,7 +64,7 @@ public class CourseEvaluateController {
      *     {
      * 	"course_id":"SE101",  //必填
      * 	"user_id":"01231",   //必填
-     * 	"evaluate_point":5,
+     * 	"evaluate_point":5,   //必填
      * 	"给分情况":"给分高"
      * }
      * @param json

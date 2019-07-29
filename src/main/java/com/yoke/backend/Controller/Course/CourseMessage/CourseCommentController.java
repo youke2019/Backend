@@ -33,7 +33,7 @@ public class CourseCommentController {
      * @apiParam {String} course_id
      * @apiParam {String} user_id
      * @apiGroup CourseComment
-     * @apiSampleRequest 47.103.30.166:8000/courses/comments/find?course_id=41899
+     * @apiSampleRequest 47.103.30.166:8000/courses/comments/find
      * @apiSuccessExample Response-Example:
      *[
      *     {
@@ -134,7 +134,7 @@ public class CourseCommentController {
     }
 
     /**
-     * @api {get} /course/comments/praise:
+     * @api {get} /courses/comments/praise:
      * @apiDescription 点赞评论
      * @apiParam {String} user_id
      * @apiParam {Interger} course_comment_id

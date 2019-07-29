@@ -5,7 +5,6 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.yoke.backend.Entity.CourseMessage.Praise.CourseEvaluationPraise;
-import org.hibernate.annotations.GeneratorType;
 
 import javax.persistence.*;
 import java.text.SimpleDateFormat;
@@ -36,6 +35,7 @@ public class CourseEvaluation {
     private String user_id="01231";
     private String course_id="11004";
     private Map evaluate_content;
+    private Integer evaluate_point=0;
     private Integer evaluate_praise_point=0;
     private Boolean current_user_praise=false;
     List<CourseEvaluationPraise> courseEvaluationPraiseList=new ArrayList<>();
@@ -130,5 +130,15 @@ public class CourseEvaluation {
 
     public void setEvaluate_praise_point(Integer evaluate_praise_point) {
         this.evaluate_praise_point = evaluate_praise_point;
+    }
+
+    @Basic
+    @Column(name = "course_evaluate_point")
+    public Integer getEvaluate_point() {
+        return evaluate_point;
+    }
+
+    public void setEvaluate_point(Integer evaluate_point) {
+        this.evaluate_point = evaluate_point;
     }
 }
