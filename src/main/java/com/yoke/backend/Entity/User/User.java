@@ -22,7 +22,7 @@ public class User {
     private Character sex;  /*m,f,u*/
     private Integer admissionYear;
     private Boolean banned;
-    private String avator_url;
+    private String avatar_url;
 
 
     @Id
@@ -109,12 +109,16 @@ public class User {
     }
 
     @Basic
-    @Column(name = "avator_url")
-    public String getAvator_url() {
-        return avator_url;
+    @Column(name = "avatar_url")
+    public String getAvatar_url() {
+        return avatar_url;
     }
 
-    public void setAvator_url(String avator_url) {
-        this.avator_url = avator_url;
+    public void setAvatar_url(String avatar_url) {
+        this.avatar_url = avatar_url;
     }
+
+
+
+
 }

@@ -4,15 +4,15 @@ package com.yoke.backend.Controller.Course;
 import com.alibaba.fastjson.JSON;
 import com.yoke.backend.Entity.Course.CourseInfo;
 import com.yoke.backend.Entity.Course.SearchCourseInfoParams;
+import com.yoke.backend.Service.Course.CourseRecommendService;
 import com.yoke.backend.Service.Course.CourseService;
+import org.apache.mahout.cf.taste.common.TasteException;
+import org.apache.mahout.cf.taste.recommender.RecommendedItem;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.io.*;
-import java.text.SimpleDateFormat;
+import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -22,6 +22,8 @@ public class CourseController {
     @Autowired
     CourseService courseService;
 
+    @Autowired
+    CourseRecommendService courseRecommendService;
     /**
      * @api {get} /courses/update
      * @apiDescription 拉取并更新教务处数据
@@ -139,11 +141,14 @@ public class CourseController {
      * @return
      */
     @RequestMapping(value="/specific",method = RequestMethod.GET)
-    public CourseInfo SpecificCourseInfo(String course_id)
+    public CourseInfo SpecificCourseInfo(String course_id) throws TasteException
     {
+        List<RecommendedItem> recommendedItemList= courseRecommendService.userBasedRecommend(1111,5);
+        /*for(int i=0;i<recommendedItemList.size();++i) {
+            System.out.println(recommendedItemList.get(i).getItemID());
+        }*/
         return courseService.findCourseInfoByCourseId(course_id);
     }
-
 
 
 }

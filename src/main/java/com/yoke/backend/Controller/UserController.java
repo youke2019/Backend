@@ -106,7 +106,9 @@ public class UserController {
     public String updateUserInfo(@RequestBody User user) {
         JSONObject resp = new JSONObject();
         User userByNickname = userService.findByNickname(user.getNickname());
-        if (userByNickname != null && userByNickname.getId() != user.getId()) {
+        System.out.println(user.getId());
+       if(userByNickname!=null) System.out.println(userByNickname.getId());
+       if (userByNickname != null && !userByNickname.getId().equals( user.getId())) {
             System.out.println("Duplicate Nickname");
             resp.put("success", false);
             resp.put("error_msg", "Duplicate Nickname");
@@ -119,16 +121,16 @@ public class UserController {
     }
 
     /**
-     * @api {post}  /courses/avatar/upload
+     * @api {post}  /users/avatar/upload
      * @apiName uploadFile
      * @apiDescription 上传头像
-     * @apiGroup CourseMoment
+     * @apiGroup users
      * @apiParam {file} file
      * @param file
      * @param request
      * @return
      */
-    @RequestMapping(value = "/upload",method = RequestMethod.POST)
+    @RequestMapping(value = "/avatar/upload",method = RequestMethod.POST)
     @ResponseBody
     public String uploadImg(@RequestParam("file") MultipartFile file, HttpServletRequest request)
     {
