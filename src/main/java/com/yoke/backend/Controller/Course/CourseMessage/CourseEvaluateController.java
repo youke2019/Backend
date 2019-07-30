@@ -1,12 +1,13 @@
 package com.yoke.backend.Controller.Course.CourseMessage;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.yoke.backend.Entity.CourseMessage.CourseEvaluation;
 import com.yoke.backend.Service.Course.CourseMessage.CourseEvaluationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Map;
 
 /**
  * @AUTHOR: Guozhi
@@ -73,6 +74,9 @@ public class CourseEvaluateController {
     @ResponseBody
     public String addEvaluation(@RequestBody String json)
     {
+        JSONObject jsonObject= JSON.parseObject(json);
+        if(jsonObject.getString("user_id")==null||jsonObject.getString("course_id")==null||jsonObject.getInteger("evaluate_point")==null)
+            return "parameter is not correct";
         courseEvaluationService.addCourseEvaluation(json);
         return "success";
     }

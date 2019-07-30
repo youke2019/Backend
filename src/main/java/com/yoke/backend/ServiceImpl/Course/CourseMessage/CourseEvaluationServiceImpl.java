@@ -9,12 +9,16 @@ import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoCursor;
 import com.mongodb.client.MongoDatabase;
+import com.yoke.backend.Dao.Course.CourseRecommendDao;
 import com.yoke.backend.Dao.CourseMessage.CourseEvaluateDao;
 import com.yoke.backend.Dao.CourseMessage.Praise.CourseEvaluatePraiseDao;
+import com.yoke.backend.Entity.Course.CourseRecommendModel;
 import com.yoke.backend.Entity.CourseMessage.CourseEvaluation;
 import com.yoke.backend.Entity.CourseMessage.Praise.CourseEvaluationPraise;
+import com.yoke.backend.Entity.Tools.TimeUtil;
 import com.yoke.backend.Service.Course.CourseMessage.CourseEvaluationService;
 import com.yoke.backend.Service.Course.CourseService;
+import org.apache.mahout.cf.taste.impl.model.MemoryIDMigrator;
 import org.bson.Document;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -37,6 +41,10 @@ public class CourseEvaluationServiceImpl implements CourseEvaluationService {
 
     @Autowired
     CourseEvaluatePraiseDao courseEvaluatePraiseDao;
+
+    @Autowired
+    private CourseRecommendDao courseRecommendDao;
+
     @Override
     public List<CourseEvaluation> allEvaluation()
     {
@@ -85,7 +93,23 @@ public class CourseEvaluationServiceImpl implements CourseEvaluationService {
         /**
          * 存放在mysql中的course_recommend_data_model表中，用来作为课程推荐的数据源
          */
-        //String course
+        String suser_id,scourse_id,sevaluate_time;
+        Integer evaluate_point;
+        long luser_id,lcourse_id,levaluate_time;
+
+        suser_id=jsonObject.getString("user_id");
+        scourse_id=jsonObject.getString("course_id");
+        evaluate_point=jsonObject.getInteger("evaluate_point");
+        sevaluate_time= TimeUtil.CurrentTime();
+
+        MemoryIDMigrator stringToLong=new MemoryIDMigrator();
+        luser_id=stringToLong.toLongID(suser_id);
+        lcourse_id=stringToLong.toLongID(scourse_id);
+        levaluate_time=stringToLong.toLongID(sevaluate_time);
+
+        CourseRecommendModel courseRecommendModel=new CourseRecommendModel(luser_id,lcourse_id,evaluate_point,levaluate_time);
+        courseRecommendDao.save(courseRecommendModel);
+
         /**
          * 存放在mongodb中的evaluate文档中，用来存储评测的用户自定义扩展项
          */

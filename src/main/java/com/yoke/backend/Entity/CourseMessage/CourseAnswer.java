@@ -4,11 +4,10 @@ import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.yoke.backend.Entity.CourseMessage.Praise.CourseAnswerPraise;
+import com.yoke.backend.Entity.Tools.TimeUtil;
 
 import javax.persistence.*;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -24,14 +23,13 @@ import java.util.List;
         property = "answer_id"
 )
 public class CourseAnswer {
-    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");// 格式化时间
-    Date date = new Date();
+
 
     private Integer answer_id=0;
     private Integer question_id=1;
     private String user_id="01231";
     private String answer_content;
-    private String answer_time=sdf.format(date);
+    private String answer_time= TimeUtil.CurrentTime();
     private Boolean answer_isbanned=false;
     private Integer answer_praise_point=0;
     private Boolean current_user_praise=false;
@@ -50,7 +48,7 @@ public class CourseAnswer {
         this.answer_isbanned=false;
         this.answer_praise_point=0;
         this.current_user_praise=false;
-        this.answer_time=sdf.format(date);
+        this.answer_time= TimeUtil.CurrentTime();
     }
     @Id
     @Column(name = "answer_id")

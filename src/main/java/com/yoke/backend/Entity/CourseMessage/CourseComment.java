@@ -6,12 +6,10 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.yoke.backend.Entity.CourseMessage.Praise.CourseCommentPraise;
 import com.yoke.backend.Entity.CourseMessage.Report.CourseCommentReport;
+import com.yoke.backend.Entity.Tools.TimeUtil;
 
 import javax.persistence.*;
-import javax.transaction.Transactional;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -29,13 +27,9 @@ import java.util.List;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class CourseComment {
 
-    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");// 格式化时间
-    Date date = new Date();
-
-
     private Integer course_comment_id=0;
     private String course_id;
-    private String course_comment_time=sdf.format(date);/*此处的初始化是为了post参数传入时设置默认参数*/
+    private String course_comment_time= TimeUtil.CurrentTime();/*此处的初始化是为了post参数传入时设置默认参数*/
     private String course_comment_content;
     private String user_id;
     private Boolean isbanned=false;
@@ -51,9 +45,7 @@ public class CourseComment {
     public CourseComment(String user_id,String course_id,String content){
         this.course_comment_id=0;
         this.course_comment_content=content;
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");// 格式化时间
-        Date date = new Date();
-        this.course_comment_time=sdf.format(date);
+        this.course_comment_time= TimeUtil.CurrentTime();
         this.course_id=course_id;
         this.user_id=user_id;
         this.isbanned=false;

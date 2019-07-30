@@ -5,11 +5,10 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.yoke.backend.Entity.CourseMessage.Praise.CourseQuestionPraise;
+import com.yoke.backend.Entity.Tools.TimeUtil;
 
 import javax.persistence.*;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -27,14 +26,12 @@ import java.util.List;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class CourseQuestion {
 
-    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");// 格式化时间
-    Date date = new Date();
 
     private Integer question_id=0;
     private String user_id="01231";
     private String course_id="11004";
     private String question_content;
-    private String question_time=sdf.format(date);
+    private String question_time= TimeUtil.CurrentTime();
     private Boolean question_isbanned=false;
     private Integer question_praise_point=0;
     private List<CourseAnswer>  courseAnswerList=new ArrayList<>();
@@ -53,7 +50,7 @@ public class CourseQuestion {
         this.question_isbanned=false;
         this.question_id=0;
         this.question_praise_point=0;
-        this.question_time=sdf.format(date);
+        this.question_time=TimeUtil.CurrentTime();
         this.current_user_praise=false;
     }
 

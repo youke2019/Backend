@@ -5,11 +5,10 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.yoke.backend.Entity.CourseMessage.Praise.CourseEvaluationPraise;
+import com.yoke.backend.Entity.Tools.TimeUtil;
 
 import javax.persistence.*;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -27,11 +26,9 @@ import java.util.Map;
 )
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class CourseEvaluation {
-    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");// 格式化时间
-    Date date = new Date();
 
     private Integer evaluate_id=0;
-    private String evaluate_time=sdf.format(date);
+    private String evaluate_time= TimeUtil.CurrentTime();
     private String user_id="01231";
     private String course_id="11004";
     private Map evaluate_content;
@@ -50,7 +47,7 @@ public class CourseEvaluation {
         this.user_id = user_id;
         this.course_id=course_id;
         this.evaluate_praise_point=0;
-        this.evaluate_time=sdf.format(date);
+        this.evaluate_time=TimeUtil.CurrentTime();
     }
 
     @Id
