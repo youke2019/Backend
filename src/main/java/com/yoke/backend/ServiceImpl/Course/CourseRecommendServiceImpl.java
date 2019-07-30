@@ -51,7 +51,9 @@ public class CourseRecommendServiceImpl implements CourseRecommendService {
              */
             MemoryIDMigrator stringToLong=new MemoryIDMigrator();
             long luser_id=stringToLong.toLongID(user_id);
+            System.out.println(luser_id);
             recommendedItems = recommender.recommend(luser_id, size);
+            System.out.println(recommendedItems.size());
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -67,6 +69,8 @@ public class CourseRecommendServiceImpl implements CourseRecommendService {
     @Override
     public List<CourseInfo> courseRecommend(String user_id,Integer size)
     {
+
+
         /**
          * 课程号字符型数组，从RecommendedItem中抽取转换获得
          */
@@ -92,6 +96,8 @@ public class CourseRecommendServiceImpl implements CourseRecommendService {
             long lcourse_id=recommendedItem.getItemID();
             MemoryIDMigrator stringToLong=new MemoryIDMigrator();
             String scourse_id=stringToLong.toStringID(lcourse_id);
+            System.out.println(lcourse_id);
+            System.out.println(scourse_id);
             userBasedRecommenedIdList.add(scourse_id);
         }
 

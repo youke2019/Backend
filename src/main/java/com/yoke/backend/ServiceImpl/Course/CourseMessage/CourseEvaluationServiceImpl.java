@@ -106,6 +106,9 @@ public class CourseEvaluationServiceImpl implements CourseEvaluationService {
         luser_id=stringToLong.toLongID(suser_id);
         lcourse_id=stringToLong.toLongID(scourse_id);
         levaluate_time=stringToLong.toLongID(sevaluate_time);
+        stringToLong.storeMapping(luser_id,suser_id);
+        stringToLong.storeMapping(lcourse_id,scourse_id);     //保存映射关系
+        stringToLong.storeMapping(levaluate_time,sevaluate_time);
 
         CourseRecommendModel courseRecommendModel=new CourseRecommendModel(luser_id,lcourse_id,evaluate_point,levaluate_time);
         courseRecommendDao.save(courseRecommendModel);
