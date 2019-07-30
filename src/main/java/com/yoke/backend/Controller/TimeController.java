@@ -1,16 +1,13 @@
 package com.yoke.backend.Controller;
 
+import com.yoke.backend.Service.SensitiveFilter.FilterService;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
-import java.util.Scanner;
-
 @RestController
 @RequestMapping(value = "/time")
 public class TimeController {
@@ -28,5 +25,16 @@ public class TimeController {
             e.printStackTrace();
         }
         return week;
+    }
+
+    @RequestMapping(value = "/test", method = RequestMethod.GET)
+    public void test() throws Exception {
+        FilterService filter = FilterService.getInstance();
+        filter.filter("fadsfa包夜sefaefaefaefaef");
+        filter.filter("fadsfa网络sefaefaefaefaef");
+        filter.filter("fadsfa技!师sefaefaefaefaef");
+        filter.filter("fadsfa包夜sefaefaefaefaef");
+        filter.filter("fadsfa口交sefaefaefaefaef");
+        return;
     }
 }
