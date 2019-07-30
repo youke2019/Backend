@@ -6,8 +6,6 @@ import com.yoke.backend.Entity.Course.CourseInfo;
 import com.yoke.backend.Entity.Course.SearchCourseInfoParams;
 import com.yoke.backend.Service.Course.CourseRecommendService;
 import com.yoke.backend.Service.Course.CourseService;
-import org.apache.mahout.cf.taste.common.TasteException;
-import org.apache.mahout.cf.taste.recommender.RecommendedItem;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -141,13 +139,25 @@ public class CourseController {
      * @return
      */
     @RequestMapping(value="/specific",method = RequestMethod.GET)
-    public CourseInfo SpecificCourseInfo(String course_id) throws TasteException
+    public CourseInfo SpecificCourseInfo(String course_id)
     {
-        List<RecommendedItem> recommendedItemList= courseRecommendService.userBasedRecommend(1111,5);
-        /*for(int i=0;i<recommendedItemList.size();++i) {
-            System.out.println(recommendedItemList.get(i).getItemID());
-        }*/
         return courseService.findCourseInfoByCourseId(course_id);
+    }
+
+    /**
+     *
+     * @param user_id
+     * @param size
+     * @return
+     */
+    @RequestMapping(value = "/recommend",method = RequestMethod.GET)
+    public List<CourseInfo> recommendCourseInfo(String user_id,Integer size) {
+        if(user_id!=null&&size!=null)
+        return courseRecommendService.courseRecommend(user_id,size);
+        else {
+            System.out.println("参数错误");
+            return null;
+        }
     }
 
 

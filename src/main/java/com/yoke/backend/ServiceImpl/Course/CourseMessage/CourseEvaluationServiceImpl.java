@@ -77,7 +77,18 @@ public class CourseEvaluationServiceImpl implements CourseEvaluationService {
     {
         JSONObject jsonObject= JSON.parseObject(json);
         CourseEvaluation courseEvaluation=new CourseEvaluation(jsonObject.getString("course_id"),jsonObject.getString("user_id"));
+        /**
+         * 存放在mysql 的course_evaluate中，用作数据存储与表关联
+          */
         courseEvaluation=courseEvaluateDao.save(courseEvaluation);
+
+        /**
+         * 存放在mysql中的course_recommend_data_model表中，用来作为课程推荐的数据源
+         */
+        //String course
+        /**
+         * 存放在mongodb中的evaluate文档中，用来存储评测的用户自定义扩展项
+         */
         jsonObject.put("evaluate_id",courseEvaluation.getEvaluate_id());
         MongoClient mongoClient=new MongoClient(new MongoClientURI("mongodb://127.0.0.1:27017/"));
         MongoDatabase mongoDatabase=mongoClient.getDatabase("yoke");
@@ -85,6 +96,9 @@ public class CourseEvaluationServiceImpl implements CourseEvaluationService {
         json=JSON.toJSONString(jsonObject);
         Document document=Document.parse(json);
         collection.insertOne(document);
+
+
+
     }
 
     public void praiseCourseEvaluation(Integer course_evaluate_id,String user_id)

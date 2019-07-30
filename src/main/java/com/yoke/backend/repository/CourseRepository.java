@@ -1,12 +1,8 @@
 package com.yoke.backend.repository;
 import com.yoke.backend.Entity.Course.CourseInfo;
-import org.springframework.context.annotation.Bean;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
-import org.springframework.stereotype.Repository;
 
-import javax.annotation.security.PermitAll;
 import java.util.List;
 
 /**
@@ -24,4 +20,7 @@ public interface CourseRepository extends JpaRepository<CourseInfo,Integer> {
 
     @Query(value="select * from course where course_id=?1",nativeQuery = true)
     CourseInfo findByCourse_id(String course_id);
+
+    @Query(value = "select course.* from course,course_evaluate where general=1 and course.course_id = course_evaluate.course_id and ID != ?1 group by course.course_id order by avg(course_evaluate_point) desc limit ?2",nativeQuery = true)
+    List<CourseInfo> findPopularGeneralCourse(String user_id,Integer size);
 }

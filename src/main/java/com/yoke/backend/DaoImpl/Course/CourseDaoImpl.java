@@ -21,29 +21,25 @@ public class CourseDaoImpl implements CourseDao {
     private CourseRepository courseRepository;
 
     @Override
-    public List<CourseInfo> findAll()
-    {
+    public List<CourseInfo> findAll() {
         return courseRepository.findAll();
     }
 
     @Override
-    public void save(CourseInfo courseInfo)
-    {
+    public void save(CourseInfo courseInfo) {
         courseRepository.save(courseInfo);
     }
 
     @Override
-    public List<CourseInfo> findCourse(SearchCourseInfoParams searchCourseInfoParams)
-    {
-        List<CourseInfo> courseInfoList= courseRepository.findCourse(searchCourseInfoParams.getCourse_id(),
-                searchCourseInfoParams.getCourse_name(),searchCourseInfoParams.getTeacher_name(),
-                searchCourseInfoParams.getCourse_types(),searchCourseInfoParams.getGeneral_types(),
-                searchCourseInfoParams.getWeekdays(),searchCourseInfoParams.getBegin_secs(),
-                searchCourseInfoParams.getEnd_secs(),searchCourseInfoParams.getBuilding(),
-                searchCourseInfoParams.getCourse_credits(),searchCourseInfoParams.getDept_name(),
-                searchCourseInfoParams.getYears(),searchCourseInfoParams.getSemester());
-        for(int i=0;i<courseInfoList.size();++i)
-        {
+    public List<CourseInfo> findCourse(SearchCourseInfoParams searchCourseInfoParams) {
+        List<CourseInfo> courseInfoList = courseRepository.findCourse(searchCourseInfoParams.getCourse_id(),
+                searchCourseInfoParams.getCourse_name(), searchCourseInfoParams.getTeacher_name(),
+                searchCourseInfoParams.getCourse_types(), searchCourseInfoParams.getGeneral_types(),
+                searchCourseInfoParams.getWeekdays(), searchCourseInfoParams.getBegin_secs(),
+                searchCourseInfoParams.getEnd_secs(), searchCourseInfoParams.getBuilding(),
+                searchCourseInfoParams.getCourse_credits(), searchCourseInfoParams.getDept_name(),
+                searchCourseInfoParams.getYears(), searchCourseInfoParams.getSemester());
+        for (int i = 0; i < courseInfoList.size(); ++i) {
             courseInfoList.get(i).setClasses(null);
         }
         return courseInfoList;
@@ -51,9 +47,14 @@ public class CourseDaoImpl implements CourseDao {
     }
 
     @Override
-    public CourseInfo findCourseInfoByCourseId(String course_id)
-    {
+    public CourseInfo findCourseInfoByCourseId(String course_id) {
         return courseRepository.findByCourse_id(course_id);
         //return courseRepository.findCouresInfoByCourseId(course_id);
+    }
+
+    @Override
+    public List<CourseInfo> popularGeneralCourse(String user_id, Integer size)
+    {
+        return courseRepository.findPopularGeneralCourse(user_id, size);
     }
 }

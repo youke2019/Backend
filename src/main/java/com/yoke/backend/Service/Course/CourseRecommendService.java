@@ -1,6 +1,6 @@
 package com.yoke.backend.Service.Course;
 
-import org.apache.mahout.cf.taste.common.TasteException;
+import com.yoke.backend.Entity.Course.CourseInfo;
 import org.apache.mahout.cf.taste.recommender.RecommendedItem;
 
 import java.util.List;
@@ -11,5 +11,7 @@ import java.util.List;
  * @description:
  **/
 public interface CourseRecommendService {
-    List<RecommendedItem> userBasedRecommend(long user_id,Integer size) throws TasteException;
+    List<RecommendedItem> userBasedRecommend(String user_id,Integer size);
+    List<CourseInfo> popularRecommend(String user_id,Integer size);
+    List<CourseInfo> courseRecommend(String user_id,Integer size);
 }

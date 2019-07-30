@@ -19,13 +19,13 @@ public class MahoutConfig {
         MysqlDataSource dataSource=new MysqlDataSource();
         dataSource.setServerName("127.0.0.1");
         dataSource.setUser("root");
-        dataSource.setDatabaseName("yoketest");
+        dataSource.setDatabaseName("yoke");
         return dataSource;
     }
 
     @Bean(value = "mysqlDataModel")
     public DataModel getMysqlDataModel(){
-        DataModel dataModel=new MySQLJDBCDataModel(getDataSource(),"course_evaluate","ID","course_id_int","course_evaluate_point","course_evaluate_time");
+        DataModel dataModel=new MySQLJDBCDataModel(getDataSource(),"course_recommend_data_source","user_id","course_id","evaluate_point","evaluate_time");
         return dataModel;
     }
 
