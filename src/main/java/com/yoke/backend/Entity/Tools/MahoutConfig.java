@@ -19,6 +19,7 @@ public class MahoutConfig {
         MysqlDataSource dataSource=new MysqlDataSource();
         dataSource.setServerName("127.0.0.1");
         dataSource.setUser("root");
+        dataSource.setPassword("110157");
         dataSource.setDatabaseName("yoke");
         return dataSource;
     }

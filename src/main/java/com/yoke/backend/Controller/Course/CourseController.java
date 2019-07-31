@@ -2,12 +2,10 @@ package com.yoke.backend.Controller.Course;
 
 
 import com.alibaba.fastjson.JSON;
-import com.yoke.backend.Dao.Course.CourseRecommendDao;
 import com.yoke.backend.Entity.Course.CourseInfo;
 import com.yoke.backend.Entity.Course.SearchCourseInfoParams;
 import com.yoke.backend.Service.Course.CourseRecommendService;
 import com.yoke.backend.Service.Course.CourseService;
-import com.yoke.backend.Service.User.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -144,38 +142,6 @@ public class CourseController {
     public CourseInfo SpecificCourseInfo(String course_id)
     {
         return courseService.findCourseInfoByCourseId(course_id);
-    }
-
-    /**
-     *
-     * @param user_id
-     * @param size
-     * @return
-     */
-    @RequestMapping(value = "/recommend",method = RequestMethod.GET)
-    public List<CourseInfo> recommendCourseInfo(String user_id,Integer size) {
-        if(user_id!=null&&size!=null)
-        return courseRecommendService.courseRecommend(user_id,size);
-        else {
-            System.out.println("参数错误");
-            return null;
-        }
-    }
-
-    @Autowired
-    UserService userService;
-
-    @Autowired
-    CourseRecommendDao courseRecommendDao;
-
-    /**
-     * 生成测试数据
-     * @return
-     */
-    @RequestMapping(value = "/recommendtest",method = RequestMethod.GET)
-    public String recommendTest()
-    {
-        return courseRecommendService.generateData();
     }
 
 

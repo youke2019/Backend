@@ -4,6 +4,7 @@ import com.yoke.backend.Dao.Course.CourseDao;
 import com.yoke.backend.Dao.Course.CourseRecommendDao;
 import com.yoke.backend.Entity.Course.CourseInfo;
 import com.yoke.backend.Entity.Course.CourseRecommendModel;
+import com.yoke.backend.Entity.CourseMessage.CourseEvaluation;
 import com.yoke.backend.Entity.Tools.TimeUtil;
 import com.yoke.backend.Entity.User.User;
 import com.yoke.backend.Service.Course.CourseMessage.CourseEvaluationService;
@@ -177,6 +178,22 @@ public class CourseRecommendServiceImpl implements CourseRecommendService {
         courseRecommendDao.save(courseRecommendModel);
     }
 
+    @Override
+    public void saveDataModel(String suser_id,String scourse_id,Integer evaluate_point,String evaluate_time)
+    {
+        long luser_id,lcourse_id,levaluate_time;
+
+        luser_id=stringToLong.toLongID(suser_id);
+        lcourse_id=stringToLong.toLongID(scourse_id);
+        levaluate_time=stringToLong.toLongID(evaluate_time);
+        stringToLong.storeMapping(luser_id,suser_id);
+        stringToLong.storeMapping(lcourse_id,scourse_id);     //保存映射关系
+        stringToLong.storeMapping(levaluate_time,evaluate_time);
+
+        CourseRecommendModel courseRecommendModel=new CourseRecommendModel(luser_id,lcourse_id,evaluate_point,levaluate_time);
+        courseRecommendDao.save(courseRecommendModel);
+    }
+
     public String generateData()
     {
         List<User> userList=userService.findAll();
@@ -189,11 +206,10 @@ public class CourseRecommendServiceImpl implements CourseRecommendService {
         CourseRecommendModel courseRecommendModel;
         for(User user:userList)
         {
-            random=new Random();
             for(CourseInfo courseInfo:courseInfoList)
             {
                 random=new Random();
-                if(Math.abs(random.nextInt())%5!=0)
+                if(Math.abs(random.nextInt())%15!=0)
                     continue;
                 String suser_id,scourse_id,sevaluate_time;
                 Integer evaluate_point;
@@ -219,5 +235,22 @@ public class CourseRecommendServiceImpl implements CourseRecommendService {
             }
         }
         return "success";
+    }
+
+    public Integer loadData()
+    {
+        List<CourseEvaluation> courseEvaluationList=courseEvaluationService.allEvaluation();
+        if(courseEvaluationList!=null)
+        {
+            for(CourseEvaluation courseEvaluation:courseEvaluationList)
+            {
+                String user_id=courseEvaluation.getUser_id();
+                String course_id=courseEvaluation.getCourse_id();
+                Integer evaluate_point=courseEvaluation.getEvaluate_point();
+                String evaluate_time=courseEvaluation.getEvaluate_time();
+                saveDataModel(user_id,course_id,evaluate_point,evaluate_time);
+            }
+        }
+        return courseEvaluationList.size();
     }
 }

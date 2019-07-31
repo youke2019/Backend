@@ -15,5 +15,7 @@ public interface CourseRecommendService {
     List<CourseInfo> popularRecommend(String user_id,Integer size);
     List<CourseInfo> courseRecommend(String user_id,Integer size);
     void saveDataModel(String user_id,String course_id,Integer evaluate_point);
+    void saveDataModel(String user_id,String course_id,Integer evaluate_point,String evaluate_time);
     String generateData();
+    Integer loadData();
 }
