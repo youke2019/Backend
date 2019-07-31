@@ -11,11 +11,12 @@ import com.yoke.backend.Service.Course.CourseRecommendService;
 import com.yoke.backend.Service.Course.CourseService;
 import com.yoke.backend.Service.User.UserService;
 import org.apache.mahout.cf.taste.impl.model.MemoryIDMigrator;
+import org.apache.mahout.cf.taste.impl.model.jdbc.ReloadFromJDBCDataModel;
 import org.apache.mahout.cf.taste.impl.neighborhood.NearestNUserNeighborhood;
 import org.apache.mahout.cf.taste.impl.recommender.CachingRecommender;
 import org.apache.mahout.cf.taste.impl.recommender.GenericUserBasedRecommender;
 import org.apache.mahout.cf.taste.impl.similarity.EuclideanDistanceSimilarity;
-import org.apache.mahout.cf.taste.model.DataModel;
+import org.apache.mahout.cf.taste.model.JDBCDataModel;
 import org.apache.mahout.cf.taste.recommender.RecommendedItem;
 import org.apache.mahout.cf.taste.recommender.Recommender;
 import org.apache.mahout.cf.taste.similarity.UserSimilarity;
@@ -51,26 +52,6 @@ public class CourseRecommendServiceImpl implements CourseRecommendService {
     @Autowired
     UserService userService;
 
-    final private Integer NEIGHBORHOOD_NUM = 10;
-
-    UserSimilarity similarity;
-    NearestNUserNeighborhood neighborhood;
-    Recommender recommender;
-
-    /**
-     * 用来实现每一天之训练一次的功能
-     */
-    String data;
-    Boolean firstTrain;
-
-    @Resource(name = "mysqlDataModel")
-    private DataModel dataModel;
-
-    public CourseRecommendServiceImpl()
-    {
-        firstTrain=true;
-        data=TimeUtil.CurrentTime();
-    }
     /**
      * 作为全局变量，保持映射的一致性与可返回性
      */
@@ -78,28 +59,26 @@ public class CourseRecommendServiceImpl implements CourseRecommendService {
 
 
 
+    final private Integer NEIGHBORHOOD_NUM = 10;
+
+    @Resource(name = "mysqlDataModel")
+    private JDBCDataModel jdbcDataModel;
+
     @Override
     public List<RecommendedItem> userBasedRecommend(String user_id,Integer size) {
         List<RecommendedItem> recommendedItems=null;
         try {
-            String current=TimeUtil.CurrentTime();
             /**
-             * 时间过了一天，重新进行训练，否则不再训练
+             * 将数据拿入内存，提升性能
              */
-            if(firstTrain==true||!data.substring(0,10).equals(current.substring(0,10)))
-            {
-                similarity = new EuclideanDistanceSimilarity(dataModel);
-                neighborhood = new NearestNUserNeighborhood(NEIGHBORHOOD_NUM, similarity, dataModel);
-                recommender = new CachingRecommender(new GenericUserBasedRecommender(dataModel, neighborhood, similarity));
-                data=current;
-                firstTrain=false;
-                System.out.println("here");
-            }
+            ReloadFromJDBCDataModel dataModel = new ReloadFromJDBCDataModel(jdbcDataModel);
+            UserSimilarity similarity = new EuclideanDistanceSimilarity(dataModel);
+            NearestNUserNeighborhood neighborhood = new NearestNUserNeighborhood(NEIGHBORHOOD_NUM, similarity, dataModel);
+            Recommender recommender = new CachingRecommender(new GenericUserBasedRecommender(dataModel, neighborhood, similarity));
 
             /**
              * 由于mahout的协同过滤包只支持long型的参数与long型的数据源，这里需要对用户ID进行转换
              */
-
             long luser_id=stringToLong.toLongID(user_id);
             System.out.println(luser_id);
             recommendedItems = recommender.recommend(luser_id, size);
@@ -139,29 +118,35 @@ public class CourseRecommendServiceImpl implements CourseRecommendService {
         /**
          * recommendedItem转化为IDstring
          */
-        for(RecommendedItem recommendedItem:recommendedItemList)
-        {
-            long lcourse_id=recommendedItem.getItemID();
-            String scourse_id=stringToLong.toStringID(lcourse_id);
-            System.out.println(lcourse_id);
-            System.out.println(scourse_id);
-            userBasedRecommenedIdList.add(scourse_id);
-        }
+        if(recommendedItemList!=null) {
+            for (RecommendedItem recommendedItem : recommendedItemList) {
+                long lcourse_id = recommendedItem.getItemID();
+                String scourse_id = stringToLong.toStringID(lcourse_id);
+                System.out.println(lcourse_id);
+                System.out.println(scourse_id);
+                userBasedRecommenedIdList.add(scourse_id);
+            }
 
-        /**
-         * IDstrings 转化为课程列表
-         */
-        for(String course_id:userBasedRecommenedIdList)
-        {
-            CourseInfo courseInfo=courseDao.findCourseInfoByCourseId(course_id);
-            courseInfo.setClasses(null);                  //统一设置class为null
-            courseRecommendList.add(courseInfo);
+            /**
+             * IDstrings 转化为课程列表
+             */
+            for (String course_id : userBasedRecommenedIdList) {
+                if (course_id == null) continue;
+                CourseInfo courseInfo = courseDao.findCourseInfoByCourseId(course_id);
+                courseInfo.setClasses(null);                  //统一设置class为null
+                courseRecommendList.add(courseInfo);
+            }
         }
 
         /**
          * 如果推荐课程不足，补充热门课程
          */
-        int userBasedSize=recommendedItemList.size();
+        int userBasedSize;
+        if(recommendedItemList!=null)
+             userBasedSize=recommendedItemList.size();
+        else
+            userBasedSize=0;
+
         if(userBasedSize<size)
         {
             popularRecommendList=popularRecommend(user_id,size-userBasedSize);
@@ -205,11 +190,10 @@ public class CourseRecommendServiceImpl implements CourseRecommendService {
         for(User user:userList)
         {
             random=new Random();
-            if(Math.abs(random.nextInt())%5==0)
             for(CourseInfo courseInfo:courseInfoList)
             {
                 random=new Random();
-                if(Math.abs(random.nextInt())%15!=0)
+                if(Math.abs(random.nextInt())%5!=0)
                     continue;
                 String suser_id,scourse_id,sevaluate_time;
                 Integer evaluate_point;
