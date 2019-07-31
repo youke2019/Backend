@@ -59,7 +59,8 @@ public class CourseCommentServiceImpl implements CourseCommentService {
     @Override
     public void userCommentCourse(CourseComment courseComment)
     {
-        courseComment.setCourse_comment_content(filterService.filter(courseComment.getCourse_comment_content()));
+        String content=courseComment.getCourse_comment_content();
+        courseComment.setCourse_comment_content(filterService.filter(content));
         courseCommentDao.save(courseComment);
     }
 

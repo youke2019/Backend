@@ -6,6 +6,8 @@ import com.yoke.backend.repository.CourseRecommendRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 /**
  * @AUTHOR: Guozhi
  * @DATE : 2019/7/30
@@ -20,5 +22,11 @@ public class CourseRecommendDaoImpl implements CourseRecommendDao {
     public void save(CourseRecommendModel courseRecommendModel)
     {
         courseRecommendRepository.save(courseRecommendModel);
+    }
+
+    @Override
+    public List<CourseRecommendModel> findAll()
+    {
+        return courseRecommendRepository.findAll();
     }
 }
