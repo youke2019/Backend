@@ -147,34 +147,34 @@ public class SensitiveWordResult implements Serializable {
             this.startPosition = startPosition;
             this.endPosition = endPosition;
         }
-
-        /**
-         * @return the startPosition
-         */
-        public int getStartPosition() {
-            return startPosition;
-        }
-
-        /**
-         * @param startPosition the startPosition to set
-         */
-        public void setStartPosition(int startPosition) {
-            this.startPosition = startPosition;
-        }
-
-        /**
-         * @return the endPosition
-         */
-        public int getEndPosition() {
-            return endPosition;
-        }
-
-        /**
-         * @param endPosition the endPosition to set
-         */
-        public void setEndPosition(int endPosition) {
-            this.endPosition = endPosition;
-        }
+//
+//        /**
+//         * @return the startPosition
+//         */
+//        public int getStartPosition() {
+//            return startPosition;
+//        }
+//
+//        /**
+//         * @param startPosition the startPosition to set
+//         */
+//        public void setStartPosition(int startPosition) {
+//            this.startPosition = startPosition;
+//        }
+//
+//        /**
+//         * @return the endPosition
+//         */
+//        public int getEndPosition() {
+//            return endPosition;
+//        }
+//
+//        /**
+//         * @param endPosition the endPosition to set
+//         */
+//        public void setEndPosition(int endPosition) {
+//            this.endPosition = endPosition;
+//        }
 
         /*
          * (non-Javadoc)

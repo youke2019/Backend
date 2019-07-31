@@ -29,12 +29,5 @@ public class TimeController {
 
     @RequestMapping(value = "/test", method = RequestMethod.GET)
     public void test() throws Exception {
-        FilterService filter = FilterService.getInstance();
-        filter.filter("fadsfa包夜sefaefaefaefaef");
-        filter.filter("fadsfa网络sefaefaefaefaef");
-        filter.filter("fadsfa技!师sefaefaefaefaef");
-        filter.filter("fadsfa包夜sefaefaefaefaef");
-        filter.filter("fadsfa口交sefaefaefaefaef");
-        return;
     }
 }

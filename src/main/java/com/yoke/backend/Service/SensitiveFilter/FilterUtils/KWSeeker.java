@@ -53,7 +53,7 @@ public class KWSeeker {
      * 添加一个或多个新的关键词。
      *
      * @param newWord
-     */
+     *//*
     public void addWord(KeyWord... newWord) {
         if (newWord != null && newWord.length > 0) {
             for (KeyWord kw : newWord) {
@@ -63,28 +63,28 @@ public class KWSeeker {
             }
             reloadKWSeeker();
         }
-    }
+    }*/
 
     /**
      * 清除所有的关键词
-     */
+     *//*
     public void clear() {
         sensitiveWords.clear();
         reloadKWSeeker();
-    }
+    }*/
 
     /**
      * 是否包含指定的词
      *
      * @param word 指定的关键词
      * @return true:包含,false:不包含
-     */
+     *//*
     public boolean contains(String word) {
         if (sensitiveWords.isEmpty() || StringUtils.isEmpty(word)) {
             return false;
         }
         return sensitiveWords.contains(word);
-    }
+    }*/
 
     /**
      * 含有敏感的个数
@@ -100,13 +100,13 @@ public class KWSeeker {
      *
      * @param word 指定需要被移除的关键词
      * @return true:移除成功,false:移除失败
-     */
+     *//*
     public boolean remove(String word) {
         if (sensitiveWords.isEmpty() || StringUtils.isEmpty(word)) {
             return false;
         }
         return sensitiveWords.remove(new KeyWord(word));
-    }
+    }*/
 
     // *************************操作接口****************************//
 
@@ -121,17 +121,6 @@ public class KWSeeker {
     public Object process(Processor proc, String text, AbstractFragment fragment) {
         text = EmojiUtil.filterEmoji(text);
         return proc.process(wordsTree, text, fragment, wordLeastLen);
-    }
-
-    /**
-     * 高亮处理器
-     *
-     * @param text
-     * @param fragment
-     * @return
-     */
-    public String highlightWords(String text, AbstractFragment fragment) {
-        return (String) process(new Highlight(), text, fragment);
     }
 
     /**
@@ -150,11 +139,6 @@ public class KWSeeker {
      * @param text 传入需要处理的字符串。
      * @return 返回处理后的结果。
      */
-    public String htmlHighlightWords(String text) {
-        return (String) process(new Highlight(), text, new HTMLFragment("<font color='red'>",
-                "</font>"));
-    }
-
     /**
      * 返回替换后的处理结果
      *
