@@ -39,7 +39,6 @@ buildNumber.properties
 testreport/
 target/
 .idea/
-/src/test/
 
 /src/main/resources/application.yml
 src/main/java/resources/

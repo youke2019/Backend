@@ -47,12 +47,12 @@ public class KeyWord implements Serializable {
      * @param word
      * @param pre
      * @param sufix
-     *//*
+     */
     public KeyWord(String word, String pre, String sufix) {
         this(word);
         this.pre = pre;
         this.sufix = sufix;
-    }*/
+    }
 
     /**
      * @return the word
@@ -63,10 +63,10 @@ public class KeyWord implements Serializable {
 
     /**
      * @param word the word to set
-     *//*
+     */
     public void setWord(String word) {
         this.word = word;
-    }*/
+    }
 
     /**
      * @return the wordLength
@@ -77,10 +77,10 @@ public class KeyWord implements Serializable {
 
     /**
      * @param wordLength the wordLength to set
-     *//*
+     */
     public void setWordLength(int wordLength) {
         this.wordLength = wordLength;
-    }*/
+    }
 
     /**
      * @return the pre
@@ -91,10 +91,10 @@ public class KeyWord implements Serializable {
 
     /**
      * @param pre the pre to set
-     *//*
+     */
     public void setPre(String pre) {
         this.pre = pre;
-    }*/
+    }
 
     /**
      * @return the sufix
@@ -105,10 +105,10 @@ public class KeyWord implements Serializable {
 
     /**
      * @param sufix the sufix to set
-     *//*
+     */
     public void setSufix(String sufix) {
         this.sufix = sufix;
-    }*/
+    }
 
     /*
      * (non-Javadoc)
