@@ -4,21 +4,16 @@ package com.yoke.backend.Controller.Course;
 import com.alibaba.fastjson.JSON;
 import com.yoke.backend.Dao.Course.CourseRecommendDao;
 import com.yoke.backend.Entity.Course.CourseInfo;
-import com.yoke.backend.Entity.Course.CourseRecommendModel;
 import com.yoke.backend.Entity.Course.SearchCourseInfoParams;
-import com.yoke.backend.Entity.Tools.TimeUtil;
-import com.yoke.backend.Entity.User.User;
 import com.yoke.backend.Service.Course.CourseRecommendService;
 import com.yoke.backend.Service.Course.CourseService;
 import com.yoke.backend.Service.User.UserService;
-import org.apache.mahout.cf.taste.impl.model.MemoryIDMigrator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 @RestController
 @RequestMapping(value = "/courses")
@@ -180,43 +175,7 @@ public class CourseController {
     @RequestMapping(value = "/recommendtest",method = RequestMethod.GET)
     public String recommendTest()
     {
-        List<User> userList=userService.findAll();
-        List<CourseInfo> courseInfoList=courseService.findAll();
-        Random random;
-        CourseRecommendModel courseRecommendModel;
-        for(User user:userList)
-        {
-
-            for(CourseInfo courseInfo:courseInfoList)
-            {
-                random=new Random();
-                if(Math.abs(random.nextInt())%2==0)
-                    continue;
-                String suser_id,scourse_id,sevaluate_time;
-                Integer evaluate_point;
-                long luser_id,lcourse_id,levaluate_time;
-
-                suser_id=user.getId();
-                System.out.println(suser_id);
-                scourse_id=courseInfo.getCourse_id();
-                random=new Random();
-                evaluate_point=Math.abs(random.nextInt())%10;
-                sevaluate_time= TimeUtil.CurrentTime();
-
-                MemoryIDMigrator stringToLong=new MemoryIDMigrator();
-                luser_id=stringToLong.toLongID(suser_id);
-                System.out.println(luser_id);
-                lcourse_id=stringToLong.toLongID(scourse_id);
-                levaluate_time=stringToLong.toLongID(sevaluate_time);
-                stringToLong.storeMapping(luser_id,suser_id);
-                stringToLong.storeMapping(lcourse_id,scourse_id);     //保存映射关系
-                stringToLong.storeMapping(levaluate_time,sevaluate_time);
-
-                courseRecommendModel=new CourseRecommendModel(luser_id,lcourse_id,evaluate_point,levaluate_time);
-                courseRecommendDao.save(courseRecommendModel);
-            }
-        }
-        return "success";
+        return courseRecommendService.generateData();
     }
 
 
