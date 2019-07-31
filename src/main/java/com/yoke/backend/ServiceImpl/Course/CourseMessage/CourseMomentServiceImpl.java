@@ -7,8 +7,8 @@ import com.yoke.backend.Entity.CourseMessage.CourseMoment;
 import com.yoke.backend.Entity.CourseMessage.CourseMomentComment;
 import com.yoke.backend.Entity.CourseMessage.Praise.CourseMomentPraise;
 import com.yoke.backend.Service.Course.CourseMessage.CourseMomentService;
+import com.yoke.backend.Service.SensitiveFilter.FilterService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -28,6 +28,9 @@ public class CourseMomentServiceImpl implements CourseMomentService {
 
     @Autowired
     CourseMomentCommentDao courseMomentCommentDao;
+
+    @Autowired
+    FilterService filterService;
 
     @Override
     public List<CourseMoment> findByTimeOrder(Integer serialNumber1,Integer serialNumber2,String user_id)
@@ -64,6 +67,7 @@ public class CourseMomentServiceImpl implements CourseMomentService {
     @Override
     public void commentCourseMoment(CourseMomentComment courseMomentComment)
     {
+        courseMomentComment.setVideo_comment_content(filterService.filter(courseMomentComment.getVideo_comment_content()));
         courseMomentCommentDao.save(courseMomentComment);
     }
 
@@ -83,6 +87,7 @@ public class CourseMomentServiceImpl implements CourseMomentService {
     @Override
     public void postCourseMoment(CourseMoment courseMoment)
     {
+        courseMoment.setPost_text(filterService.filter(courseMoment.getPost_text()));
         courseMomentDao.save(courseMoment);
     }
 

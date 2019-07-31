@@ -15,7 +15,7 @@ import com.yoke.backend.Entity.CourseMessage.CourseEvaluation;
 import com.yoke.backend.Entity.CourseMessage.Praise.CourseEvaluationPraise;
 import com.yoke.backend.Service.Course.CourseMessage.CourseEvaluationService;
 import com.yoke.backend.Service.Course.CourseRecommendService;
-import com.yoke.backend.Service.Course.CourseService;
+import com.yoke.backend.Service.SensitiveFilter.FilterService;
 import org.bson.Document;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -31,7 +31,7 @@ import java.util.Map;
 @Service
 public class CourseEvaluationServiceImpl implements CourseEvaluationService {
     @Autowired
-    private CourseService courseService;
+    FilterService filterService;
 
     @Autowired
     CourseEvaluateDao courseEvaluateDao;
@@ -41,6 +41,7 @@ public class CourseEvaluationServiceImpl implements CourseEvaluationService {
 
     @Autowired
     private CourseRecommendService courseRecommendService;
+
 
     @Override
     public List<CourseEvaluation> allEvaluation()
@@ -54,7 +55,7 @@ public class CourseEvaluationServiceImpl implements CourseEvaluationService {
         /**
          * 服务器 mongodb://root:XunKeTeam2019@127.0.0.1:27017/
          */
-        MongoClient mongoClient=new MongoClient(new MongoClientURI("mongodb://root:XunKeTeam2019@127.0.0.1:27017/"));
+        MongoClient mongoClient=new MongoClient(new MongoClientURI("mongodb://root:127.0.0.1:27017/"));
         MongoDatabase mongoDatabase=mongoClient.getDatabase("yoke");
         MongoCollection<Document> collection=mongoDatabase.getCollection("evaluation");
         List<CourseEvaluation> courseEvaluationList=courseEvaluateDao.findByCourse(course_id);
@@ -81,7 +82,7 @@ public class CourseEvaluationServiceImpl implements CourseEvaluationService {
     public void addCourseEvaluation(String json)
     {
         JSONObject jsonObject= JSON.parseObject(json);
-        CourseEvaluation courseEvaluation=new CourseEvaluation(jsonObject.getString("course_id"),jsonObject.getString("user_id"));
+        CourseEvaluation courseEvaluation=new CourseEvaluation(jsonObject.getString("course_id"),jsonObject.getString("user_id"),jsonObject.getInteger("evaluate_point"));
         /**
          * 存放在mysql 的course_evaluate中，用作数据存储与表关联
           */
@@ -99,10 +100,16 @@ public class CourseEvaluationServiceImpl implements CourseEvaluationService {
         courseRecommendService.saveDataModel(suser_id,scourse_id,evaluate_point);
 
         /**
+         * 过滤敏感词汇
+         */
+        json=filterService.filter(json);
+        jsonObject=JSON.parseObject(json);
+
+        /**
          * 存放在mongodb中的evaluate文档中，用来存储评测的用户自定义扩展项
          */
         jsonObject.put("evaluate_id",courseEvaluation.getEvaluate_id());
-        MongoClient mongoClient=new MongoClient(new MongoClientURI("mongodb://root:XunKeTeam2019@127.0.0.1:27017/"));
+        MongoClient mongoClient=new MongoClient(new MongoClientURI("mongodb://root:127.0.0.1:27017/"));
         MongoDatabase mongoDatabase=mongoClient.getDatabase("yoke");
         MongoCollection<Document> collection=mongoDatabase.getCollection("evaluation");
         json=JSON.toJSONString(jsonObject);

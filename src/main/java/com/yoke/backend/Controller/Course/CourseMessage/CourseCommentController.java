@@ -4,7 +4,6 @@ import com.yoke.backend.Entity.CourseMessage.CourseComment;
 import com.yoke.backend.Entity.CourseMessage.CourseCommentReply;
 import com.yoke.backend.Service.Course.CourseMessage.CourseCommentService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -19,6 +18,7 @@ import java.util.List;
 public class CourseCommentController {
     @Autowired
     CourseCommentService courseCommentService;
+
 
     @GetMapping(value = "/all")
     public List<CourseComment> allComment()

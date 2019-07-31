@@ -9,6 +9,7 @@ import com.yoke.backend.Entity.CourseMessage.CourseQuestion;
 import com.yoke.backend.Entity.CourseMessage.Praise.CourseAnswerPraise;
 import com.yoke.backend.Entity.CourseMessage.Praise.CourseQuestionPraise;
 import com.yoke.backend.Service.Course.CourseMessage.CourseQuestionService;
+import com.yoke.backend.Service.SensitiveFilter.FilterService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -32,6 +33,9 @@ public class CourseQuestionServiceImpl implements CourseQuestionService {
 
     @Autowired
     CourseAnswerPraiseDao courseAnswerPraiseDao;
+
+    @Autowired
+    FilterService filterService;
 
     @Override
     public List<CourseQuestion> findQuestionByCourse(String course_id,String user_id)
@@ -61,12 +65,14 @@ public class CourseQuestionServiceImpl implements CourseQuestionService {
     @Override
     public void addQuestion(CourseQuestion courseQuestion)
     {
+        courseQuestion.setQuestion_content(filterService.filter(courseQuestion.getQuestion_content()));
         courseQuestionDao.save(courseQuestion);
     }
 
     @Override
     public void addAnswer(CourseAnswer courseAnswer)
     {
+        courseAnswer.setAnswer_content(filterService.filter(courseAnswer.getAnswer_content()));
         courseAnswerDao.save(courseAnswer);
     }
 

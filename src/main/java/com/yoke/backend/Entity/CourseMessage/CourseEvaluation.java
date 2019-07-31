@@ -41,12 +41,13 @@ public class CourseEvaluation {
     {
 
     }
-    public CourseEvaluation(String course_id,String user_id)
+    public CourseEvaluation(String course_id,String user_id,Integer evaluate_point)
     {
         this.evaluate_id=0;
         this.user_id = user_id;
         this.course_id=course_id;
         this.evaluate_praise_point=0;
+        this.evaluate_point=evaluate_point;
         this.evaluate_time=TimeUtil.CurrentTime();
     }
 

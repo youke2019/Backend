@@ -4,6 +4,7 @@ package com.yoke.backend.Service.SensitiveFilter;
 import com.yoke.backend.Service.SensitiveFilter.FilterUtils.KWSeeker;
 import com.yoke.backend.Service.SensitiveFilter.FilterUtils.KeyWord;
 import com.yoke.backend.Service.SensitiveFilter.FilterUtils.SensitiveWordResult;
+import org.springframework.stereotype.Service;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -12,6 +13,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+@Service
 public class FilterService {
 
     private static FilterService filterService;
@@ -31,9 +33,14 @@ public class FilterService {
 
     }
 
-    public static FilterService getInstance() throws Exception {
-        if (filterService == null) {
-            filterService = new FilterService();
+    public static FilterService getInstance()  {
+        try {
+            if (filterService == null) {
+                filterService = new FilterService();
+            }
+        }
+        catch (Exception e){
+            e.printStackTrace();
         }
         return filterService;
     }
