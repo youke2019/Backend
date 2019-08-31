@@ -40,7 +40,7 @@ public class ReportController {
 
     /**
      *@api {post} /report/answer
-     *@apiDescription 举报课程评论
+     *@apiDescription 举报课程回答
      *@apiName reportAnswer
      *@apiGroup report
      *@apiVersion 1.0.0
@@ -62,7 +62,7 @@ public class ReportController {
     }
     /**
      *@api {post} /report/question
-     *@apiDescription 举报课程评论
+     *@apiDescription 举报课程问题
      *@apiName reportQuestion
      *@apiGroup report
      *@apiVersion 1.0.0

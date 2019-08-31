@@ -3,10 +3,9 @@ package com.yoke.backend.Entity.CourseMessage.Report;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import com.yoke.backend.Entity.Tools.TimeUtil;
 
 import javax.persistence.*;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 /**
  * @AUTHOR: Guozhi
@@ -21,13 +20,12 @@ import java.util.Date;
         property = "question_report_id"
 )
 public class CourseQuestionReport {
-    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");// 格式化时间
-    Date date = new Date();
+
     private Integer question_report_id=0;
     private Integer question_id;
     private String user_id;
     private String question_report_reason;
-    private String question_report_time=sdf.format(date);
+    private String question_report_time= TimeUtil.CurrentTime();
     private Integer question_report_ishandled;
 
     @Id
