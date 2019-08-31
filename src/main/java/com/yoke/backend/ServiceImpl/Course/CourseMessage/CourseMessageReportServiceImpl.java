@@ -2,15 +2,19 @@ package com.yoke.backend.ServiceImpl.Course.CourseMessage;
 
 import com.yoke.backend.Dao.CourseMessage.CourseAnswerDao;
 import com.yoke.backend.Dao.CourseMessage.CourseCommentDao;
+import com.yoke.backend.Dao.CourseMessage.CourseMomentDao;
 import com.yoke.backend.Dao.CourseMessage.CourseQuestionDao;
 import com.yoke.backend.Dao.CourseMessage.Report.CourseAnswerReportDao;
 import com.yoke.backend.Dao.CourseMessage.Report.CourseCommentReportDao;
+import com.yoke.backend.Dao.CourseMessage.Report.CourseMomentReportDao;
 import com.yoke.backend.Dao.CourseMessage.Report.CourseQuestionReportDao;
 import com.yoke.backend.Entity.CourseMessage.CourseAnswer;
 import com.yoke.backend.Entity.CourseMessage.CourseComment;
+import com.yoke.backend.Entity.CourseMessage.CourseMoment;
 import com.yoke.backend.Entity.CourseMessage.CourseQuestion;
 import com.yoke.backend.Entity.CourseMessage.Report.CourseAnswerReport;
 import com.yoke.backend.Entity.CourseMessage.Report.CourseCommentReport;
+import com.yoke.backend.Entity.CourseMessage.Report.CourseMomentReport;
 import com.yoke.backend.Entity.CourseMessage.Report.CourseQuestionReport;
 import com.yoke.backend.Service.Course.CourseMessage.CourseMessageReportService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,6 +43,10 @@ public class CourseMessageReportServiceImpl implements CourseMessageReportServic
     CourseQuestionReportDao courseQuestionReportDao;
     @Autowired
     CourseQuestionDao courseQuestionDao;
+    @Autowired
+    CourseMomentReportDao courseMomentReportDao;
+    @Autowired
+    CourseMomentDao courseMomentDao;
 
     @Override
     public String reportQuestion(CourseQuestionReport courseQuestionReport)
@@ -62,6 +70,12 @@ public class CourseMessageReportServiceImpl implements CourseMessageReportServic
     }
 
     @Override
+    public String reportMoment(CourseMomentReport courseMomentReport)
+    {
+        courseMomentReportDao.save(courseMomentReport);
+        return "success";
+    }
+    @Override
     public List<CourseAnswerReport> getAnswerReportsReported(){ return courseAnswerReportDao.findAllReported();}
 
     @Override
@@ -71,6 +85,10 @@ public class CourseMessageReportServiceImpl implements CourseMessageReportServic
     public List<CourseQuestionReport> getQuestionReportsReported(){return courseQuestionReportDao.findAllReported();}
 
     @Override
+    public List<CourseMomentReport> getMomentReportsReported(){
+        return courseMomentReportDao.findAllReported();
+    }
+    @Override
     public List<CourseAnswerReport> getAnswerReportsHandled(){return courseAnswerReportDao.findAllHandled();}
 
     @Override
@@ -78,6 +96,11 @@ public class CourseMessageReportServiceImpl implements CourseMessageReportServic
 
     @Override
     public List<CourseQuestionReport> getQuestionReportsHandled(){return courseQuestionReportDao.findAllHandled();}
+
+    @Override
+    public List<CourseMomentReport> getMomentReportsHandled(){
+        return  courseMomentReportDao.findAllHandled();
+    }
 
     @Override
     public Boolean handleAnswerReport(Integer answer_report_id, Integer handler){
@@ -117,4 +140,13 @@ public class CourseMessageReportServiceImpl implements CourseMessageReportServic
         courseQuestionReportDao.save(courseQuestionReport);
         return courseQuestionDao.findQuestionById(tmpInt).getQuestion_isbanned();
     }
+
+    /*@Override
+    public Boolean handleMomentReport(Integer moment_report_id,Integer handler)
+    {
+        CourseMomentReport courseMomentReport=courseMomentReportDao.findById(moment_report_id);
+        courseMomentReport.setVideo_report_ishandled(1);
+        CourseMoment courseMoment=courseMomentDao.find
+    }*/
+
 }
