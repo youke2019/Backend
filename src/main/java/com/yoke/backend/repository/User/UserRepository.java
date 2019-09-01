@@ -1,4 +1,4 @@
-package com.yoke.backend.repository;
+package com.yoke.backend.repository.User;
 
 import com.yoke.backend.Entity.User.User;
 import org.springframework.data.jpa.repository.JpaRepository;

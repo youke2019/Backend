@@ -2,7 +2,7 @@ package com.yoke.backend.Controller;
 
 import com.alibaba.fastjson.JSON;
 import com.yoke.backend.Entity.User.User;
-import com.yoke.backend.repository.UserRepository;
+import com.yoke.backend.repository.User.UserRepository;
 import org.junit.Test;
 import org.junit.Before;
 import org.junit.After;
@@ -16,7 +16,6 @@ import org.springframework.test.context.junit4.SpringRunner;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import static org.junit.Assert.*;
 
 import static org.junit.Assert.assertEquals;
 

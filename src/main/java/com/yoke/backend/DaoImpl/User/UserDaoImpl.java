@@ -2,7 +2,7 @@ package com.yoke.backend.DaoImpl.User;
 
 import com.yoke.backend.Dao.User.UserDao;
 import com.yoke.backend.Entity.User.User;
-import com.yoke.backend.repository.UserRepository;
+import com.yoke.backend.repository.User.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
