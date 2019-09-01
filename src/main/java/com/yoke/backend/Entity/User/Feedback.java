@@ -12,9 +12,9 @@ import javax.persistence.*;
 @Entity
 @Table(name = "feedback", schema = "yoke", catalog = "")
 public class Feedback {
-    private Integer feedback_id;
-    private String user_id;
-    private String content;
+    private Integer feedback_id=0;
+    private String user_id="";
+    private String content="";
     private String time= TimeUtil.CurrentTime();
 
     @Basic

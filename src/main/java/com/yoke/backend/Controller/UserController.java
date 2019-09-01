@@ -3,7 +3,9 @@ package com.yoke.backend.Controller;
 import com.alibaba.fastjson.JSONObject;
 import com.yoke.backend.Entity.Tools.FileNameUtil;
 import com.yoke.backend.Entity.Tools.FileUploadUtil;
+import com.yoke.backend.Entity.User.Feedback;
 import com.yoke.backend.Entity.User.User;
+import com.yoke.backend.Service.User.FeedbackService;
 import com.yoke.backend.Service.User.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -18,6 +20,9 @@ import java.util.List;
 public class UserController {
     @Autowired
     UserService userService;
+    @Autowired
+    FeedbackService feedbackService;
+
     /**
      * @api {get} /users/specific
      * @apiDescription 根据Id获取用户信息
@@ -161,4 +166,29 @@ public class UserController {
 
     }
 
+    @RequestMapping(value = "/feedback/add",method = RequestMethod.POST)
+    @ResponseBody
+    public String uploadFeedback(@RequestBody Feedback feedback)
+    {
+        JSONObject response=new JSONObject();
+        if(feedback.getUser_id()=="")
+        {
+            response.put("error_msg","none user_id");
+            return  response.toJSONString();
+        }
+        if(feedback.getContent()=="")
+        {
+            response.put("error_msg","no content");
+            return response.toJSONString();
+        }
+        feedbackService.save(feedback);
+        response.put("success",true);
+        return response.toJSONString();
+    }
+
+    @RequestMapping(value = "feedback/all",method = RequestMethod.GET)
+    public List<Feedback> allFeedback()
+    {
+        return feedbackService.findAll();
+    }
 }
