@@ -11,5 +11,5 @@ import java.util.List;
  **/
 public interface SystemMessageService {
     List<SystemMessage> findSystemMessage(Integer number);
-    void addSystemMessage(SystemMessage systemMessage);
+    String addSystemMessage(SystemMessage systemMessage);
 }

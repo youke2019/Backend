@@ -12,6 +12,6 @@ import java.util.List;
  * @description:
  **/
 public interface SystemMessageRepository extends JpaRepository<SystemMessage,Integer> {
-    @Query(value = "select * from system_message limit ?1 order by time desc",nativeQuery = true)
+    @Query(value = "select * from system_message order by message_id desc limit ?1 ",nativeQuery = true)
     List<SystemMessage> findSystemMessage(Integer number);
 }

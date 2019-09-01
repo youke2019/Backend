@@ -12,10 +12,10 @@ import javax.persistence.*;
 @Entity
 @Table(name = "system_message",schema = "yoke")
 public class SystemMessage {
-    private Integer message_id;
-    private Integer admin_id;
-    private String content;
-    private String image_url;
+    private Integer message_id=0;
+    private Integer admin_id=0;
+    private String content="";
+    private String image_url="";
     private String time= TimeUtil.CurrentTime();
 
     @Basic
