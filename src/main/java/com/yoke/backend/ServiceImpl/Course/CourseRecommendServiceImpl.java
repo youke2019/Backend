@@ -93,7 +93,12 @@ public class CourseRecommendServiceImpl implements CourseRecommendService {
     @Override
     public List<CourseInfo> popularRecommend(String user_id,Integer size)
     {
-        return courseDao.popularGeneralCourse(user_id, size);
+        List<CourseInfo> popularCourses=courseDao.popularGeneralCourse(user_id,size);
+        for(CourseInfo course:popularCourses)
+        {
+            course.setClasses(null);
+        }
+        return popularCourses;
     }
 
     @Override
@@ -153,7 +158,6 @@ public class CourseRecommendServiceImpl implements CourseRecommendService {
             popularRecommendList=popularRecommend(user_id,size-userBasedSize);
             for(CourseInfo courseInfo:popularRecommendList)
             {
-                courseInfo.setClasses(null);            //统一设置class为null
                 courseRecommendList.add(courseInfo);
             }
         }

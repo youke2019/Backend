@@ -144,6 +144,23 @@ public class CourseController {
         return courseService.findCourseInfoByCourseId(course_id);
     }
 
+    /**
+     * @api {get} courses/hot
+     * @apiDescription 获取热门课程
+     * @apiGroup courses
+     * @apiName hotCoursesInfo
+     * @apiParam {String} user_id
+     * @apiParam {Integer} number
+     * @param user_id
+     * @param number
+     * @return
+     */
+    @RequestMapping(value = "/hot",method = RequestMethod.GET)
+    public List<CourseInfo> HotCourseInfo(String user_id,Integer number)
+    {
+        return courseRecommendService.popularRecommend(user_id,number);
+    }
+
 
 }
 
