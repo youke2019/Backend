@@ -166,6 +166,19 @@ public class UserController {
 
     }
 
+    /**
+     * @api {post} /users/feedback/add
+     * @apiName addFeedback
+     * @apiDescription 添加反馈
+     * @apiGroup users
+     * @apiSuccessExample Request-Example:
+     *     {
+     *         "user_id": "ID001",
+     *         "content": "我不要你觉得，我要我觉得"
+     *     }
+     * @param feedback
+     * @return
+     */
     @RequestMapping(value = "/feedback/add",method = RequestMethod.POST)
     @ResponseBody
     public String uploadFeedback(@RequestBody Feedback feedback)
@@ -186,6 +199,13 @@ public class UserController {
         return response.toJSONString();
     }
 
+    /**
+     * @api {get} /users/feedback/all
+     * @apiName allFeedback
+     * @apiDescription 查看所有反馈
+     * @apiGroup users
+     * @return
+     */
     @RequestMapping(value = "feedback/all",method = RequestMethod.GET)
     public List<Feedback> allFeedback()
     {

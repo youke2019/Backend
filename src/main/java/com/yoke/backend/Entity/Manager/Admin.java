@@ -8,11 +8,20 @@ import javax.persistence.*;
  * @description:
  **/
 @Entity
-@Table(name = "admin",schema = "yoke")
+@Table(name = "admins",schema = "yoke")
 public class Admin {
     private Integer admin_id;
     private String account;
     private String password;
+
+    public Admin(){}
+
+    public Admin(String account,String password)
+    {
+        this.account=account;
+        this.password=password;
+        this.admin_id=0;
+    }
 
     @Id
     @Column(name = "admin_id")
