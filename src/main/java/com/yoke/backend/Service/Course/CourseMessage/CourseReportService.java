@@ -12,7 +12,7 @@ import java.util.List;
  * @DATE : 2019/7/18
  * @description:
  **/
-public interface CourseMessageReportService {
+public interface CourseReportService {
 
     /**
      * functions for client to report message of course
@@ -46,5 +46,5 @@ public interface CourseMessageReportService {
     Boolean handleAnswerReport(Integer answer_report_id, Integer handler);
     Boolean handleCommentReport(Integer comment_report_id, Integer handler);
     Boolean handleQuestionReport(Integer question_report_id, Integer handler);
-   // Boolean handledMomentReport(Integer video_report_id,Integer handler);
+    Boolean handleMomentReport(Integer video_report_id,Integer handler);
 }

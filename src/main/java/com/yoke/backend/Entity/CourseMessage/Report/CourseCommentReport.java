@@ -26,7 +26,7 @@ public class CourseCommentReport {
     private String user_id;
     private String course_comment_report_reason;
     private String course_comment_report_time= TimeUtil.CurrentTime();
-    private Integer course_comment_report_ishandled;
+    private Integer course_comment_report_ishandled=0;
 
     @Id
     @Column(name = "course_comment_report_id")

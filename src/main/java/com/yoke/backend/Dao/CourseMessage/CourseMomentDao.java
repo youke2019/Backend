@@ -2,7 +2,6 @@ package com.yoke.backend.Dao.CourseMessage;
 
 import com.yoke.backend.Entity.CourseMessage.CourseMoment;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -14,4 +13,5 @@ public interface CourseMomentDao{
     List<CourseMoment> findByTimeOrder(Integer serialNumber1,Integer serialNumber2);
     List<CourseMoment> findAll();
     void save(CourseMoment courseMoment);
+    CourseMoment findById(Integer id);
 }

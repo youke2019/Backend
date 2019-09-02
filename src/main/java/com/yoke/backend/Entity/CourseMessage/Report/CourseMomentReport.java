@@ -17,7 +17,7 @@ public class CourseMomentReport {
     private String user_id;
     private String video_report_time= TimeUtil.CurrentTime();
     private String video_report_reason;
-    private Integer video_report_ishandled;
+    private Integer video_report_ishandled=0;
 
     @Id
     @Column(name="video_report_id")

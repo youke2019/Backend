@@ -26,7 +26,7 @@ public class CourseAnswerReport {
     private String user_id;
     private String answer_report_reason;
     private String answer_report_time= TimeUtil.CurrentTime();
-    private Integer answer_report_ishandled;
+    private Integer answer_report_ishandled=0;
 
     @Id
     @Column(name = "answer_report_id")

@@ -6,7 +6,6 @@ import com.yoke.backend.repository.CourseMessage.CourseMomentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import javax.persistence.OneToMany;
 import java.util.List;
 
 /**
@@ -35,5 +34,11 @@ public class CourseMomentDaoImpl implements CourseMomentDao {
     public void save(CourseMoment courseMoment)
     {
         courseMomentRepository.save(courseMoment);
+    }
+
+    @Override
+    public CourseMoment findById(Integer id)
+    {
+        return courseMomentRepository.findById(id).get();
     }
 }

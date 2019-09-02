@@ -16,11 +16,10 @@ import com.yoke.backend.Entity.CourseMessage.Report.CourseAnswerReport;
 import com.yoke.backend.Entity.CourseMessage.Report.CourseCommentReport;
 import com.yoke.backend.Entity.CourseMessage.Report.CourseMomentReport;
 import com.yoke.backend.Entity.CourseMessage.Report.CourseQuestionReport;
-import com.yoke.backend.Service.Course.CourseMessage.CourseMessageReportService;
+import com.yoke.backend.Service.Course.CourseMessage.CourseReportService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.persistence.criteria.CriteriaBuilder;
 import java.util.List;
 
 /**
@@ -29,7 +28,7 @@ import java.util.List;
  * @description:
  **/
 @Service
-public class CourseMessageReportServiceImpl implements CourseMessageReportService {
+public class CourseReportServiceImpl implements CourseReportService {
 
     @Autowired
     CourseCommentReportDao courseCommentReportDao;
@@ -141,12 +140,17 @@ public class CourseMessageReportServiceImpl implements CourseMessageReportServic
         return courseQuestionDao.findQuestionById(tmpInt).getQuestion_isbanned();
     }
 
-    /*@Override
+    @Override
     public Boolean handleMomentReport(Integer moment_report_id,Integer handler)
     {
         CourseMomentReport courseMomentReport=courseMomentReportDao.findById(moment_report_id);
         courseMomentReport.setVideo_report_ishandled(1);
-        CourseMoment courseMoment=courseMomentDao.find
-    }*/
+        CourseMoment courseMoment=courseMomentDao.findById(courseMomentReport.getVideo_id());
+        Boolean isban=(handler==1);
+        courseMoment.setIsbanned(isban);
+        courseMomentDao.save(courseMoment);
+        courseMomentReportDao.save(courseMomentReport);
+        return courseMomentDao.findById(courseMoment.getVideo_id()).getIsbanned();
+    }
 
 }
