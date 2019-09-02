@@ -1,8 +1,12 @@
 package com.yoke.backend.Controller;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
+import com.yoke.backend.Entity.User.Feedback;
 import com.yoke.backend.Entity.User.User;
+import com.yoke.backend.repository.User.FeedbackRepository;
 import com.yoke.backend.repository.User.UserRepository;
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.Before;
 import org.junit.After;
@@ -33,6 +37,9 @@ public class UserControllerTest {
 private TestRestTemplate restTemplate;
 @Autowired
 private UserRepository userRepository;
+
+@Autowired
+private FeedbackRepository feedbackRepository;
 @Before
 public void before() throws Exception {
 }
@@ -117,5 +124,25 @@ public void testLoginWithJaccount() throws Exception {
 
 }
 
+@Test
+public void testUploadFeedback(){
+    JSONObject requeset=new JSONObject();
+    requeset.put("user_id","ID001");
+    String response=restTemplate.postForObject("users/feedback/add",requeset,String.class);
+    JSONObject response_json=JSONObject.parseObject(response);
+    Assert.assertEquals(false,response_json.get("success"));
 
+    requeset.put("content","按我说的去做");
+    response=restTemplate.postForObject("users/feedback/add",requeset,String.class);
+    response_json=JSONObject.parseObject(response);
+    Assert.assertEquals(true,response_json.get("success"));
+}
+
+@Test
+public void testAllFeedback()
+{
+    String response=restTemplate.getForObject("users/feedback/all",String.class);
+    List<Feedback> feedbacks=JSON.parseArray(response,Feedback.class);
+    Assert.assertEquals(feedbackRepository.findAll().size(),feedbacks.size());
+}
 }
