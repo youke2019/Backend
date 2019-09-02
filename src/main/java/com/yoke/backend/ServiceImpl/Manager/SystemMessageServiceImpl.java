@@ -40,4 +40,18 @@ public class SystemMessageServiceImpl implements SystemMessageService {
             return null;
         return systemMessageDao.findSystemMessage(number);
     }
+
+    public String deleteSystemMessage(Integer message_id)
+    {
+        JSONObject result=new JSONObject();
+        if(systemMessageDao.findSystemMessage(message_id).size()==0)
+        {
+            result.put("error_msg","id not exists");
+            result.put("success",false);
+            return result.toJSONString();
+        }
+        systemMessageDao.delete(message_id);
+        result.put("success",true);
+        return result.toJSONString();
+    }
 }

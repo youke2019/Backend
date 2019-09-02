@@ -28,4 +28,8 @@ public class SystemMessageDaoImpl implements SystemMessageDao {
         return systemMessageRepository.findSystemMessage(number);
     }
 
+    public void delete(Integer message_id)
+    {
+        systemMessageRepository.deleteById(message_id);
+    }
 }

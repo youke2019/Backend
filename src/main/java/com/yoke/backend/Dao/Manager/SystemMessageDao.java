@@ -12,4 +12,5 @@ import java.util.List;
 public interface SystemMessageDao {
     void save(SystemMessage systemMessage);
     List<SystemMessage> findSystemMessage(Integer number);
+    void delete(Integer message_id);
 }
