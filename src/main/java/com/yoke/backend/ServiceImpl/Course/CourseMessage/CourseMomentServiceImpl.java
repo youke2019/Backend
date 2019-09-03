@@ -91,4 +91,12 @@ public class CourseMomentServiceImpl implements CourseMomentService {
         courseMomentDao.save(courseMoment);
     }
 
+    @Override
+    public CourseMoment findMomentById(Integer id)
+    {
+        CourseMoment courseMoment=courseMomentDao.findById(id);
+        courseMoment.setCourseMomentPraiseList(null);
+        courseMoment.setCourseMomentCommentList(null);
+        return courseMoment;
+    }
 }

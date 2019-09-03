@@ -8,13 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.awt.*;
 import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.List;
 
 /**
@@ -187,5 +182,21 @@ public class CourseGreatMomentController {
      * @apiGroup CourseMoment
      * @apiParam http://47.103.30.166:8000/images/e88affabfdb142d2b70e13bf9ea086d7.mp4
      */
+
+
+    /**
+     * @api {get} /courses/moments/findById
+     * @apiName findMomentById
+     * @apiGroup CourseMoment
+     * @apiDescription 通过ID查找课程精彩瞬间（无回复）
+     * @apiParam {Integer} moment_id
+     * @param moment_id
+     * @return
+     */
+    @RequestMapping(value = "/findById",method = RequestMethod.GET)
+    public CourseMoment findMomentById(Integer moment_id)
+    {
+        return courseMomentService.findMomentById(moment_id);
+    }
 
 }

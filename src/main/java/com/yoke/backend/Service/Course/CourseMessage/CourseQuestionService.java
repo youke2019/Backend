@@ -3,7 +3,6 @@ package com.yoke.backend.Service.Course.CourseMessage;
 import com.yoke.backend.Entity.CourseMessage.CourseAnswer;
 import com.yoke.backend.Entity.CourseMessage.CourseQuestion;
 
-import javax.persistence.Id;
 import java.util.List;
 
 /**
@@ -13,6 +12,8 @@ import java.util.List;
  **/
 public interface CourseQuestionService {
     List<CourseQuestion> findQuestionByCourse(String course_id,String user_id);
+    CourseQuestion findQuestionById(Integer id);
+    CourseAnswer findAnswerById(Integer id);
     void addQuestion(CourseQuestion courseQuestion);
     void addAnswer(CourseAnswer courseAnswer);
     void praiseQuestion(Integer question_id,String user_id);

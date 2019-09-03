@@ -13,6 +13,7 @@ import java.util.List;
 public interface CourseMomentService {
     List<CourseMoment> findByTimeOrder(Integer serialNumber1,Integer serialNumber2,String user_id);
     List<CourseMoment> findAll(String user_id);
+    CourseMoment findMomentById(Integer id);
     void commentCourseMoment(CourseMomentComment courseMomentComment);
     void praiseCourseMoment(Integer video_id,String user_id);
     void unpraiseCourseMoment(Integer video_id,String user_id);

@@ -192,4 +192,18 @@ public class CourseCommentController {
         return courseCommentService.replyCourseComment(courseCommentReply);
     }
 
+    /**
+     * @api {get} /courses/comments/findById
+     * @apiName findCommentById
+     * @apiGroup CourseComment
+     * @apiDescription 通过ID查找课程评论（无回复）
+     * @apiParam {Integer} comment_id
+     * @param comment_id
+     * @return
+     */
+    @RequestMapping(value = "/findById",method = RequestMethod.GET)
+    public CourseComment findCourseCommentById(Integer comment_id)
+    {
+        return courseCommentService.findCommentById(comment_id);
+    }
 }

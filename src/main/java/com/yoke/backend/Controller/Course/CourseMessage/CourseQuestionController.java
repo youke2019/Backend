@@ -206,6 +206,37 @@ public class CourseQuestionController {
         return "success";
     }
 
+    /**
+     * @api {get} /courses/questions/findById
+     * @apiName findQuestionById
+     * @apiGroup CourseQuestion
+     * @apiDescription 通过ID查找课程问题（无回答）
+     * @apiParam {Integer} question_id
+     * @param question_id
+     * @return
+     */
+    @RequestMapping(value = "courses/questions/findById")
+    CourseQuestion findQuestionById(Integer question_id)
+    {
+        return courseQuestionService.findQuestionById(question_id);
+    }
+
+
+    /**
+     * @api {get} /courses/answers/findById
+     * @apiName findAnswerById
+     * @apiGroup CourseAnswer
+     * @apiDescription 通过ID查找课程问题回答
+     * @apiParam {Integer} answer_id
+     * @param answer_id
+     * @return
+     */
+    @RequestMapping(value = "courses/answers/findById")
+    CourseAnswer findAnswerById(Integer answer_id)
+    {
+        return courseQuestionService.findAnswerById(answer_id);
+    }
+
 
 
 

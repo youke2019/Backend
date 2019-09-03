@@ -123,4 +123,14 @@ public class CourseCommentServiceImpl implements CourseCommentService {
         return "success";
     }
 
+    @Override
+    public CourseComment findCommentById(Integer id)
+    {
+        CourseComment courseComment=courseCommentDao.findCourseCommentById(id);
+        courseComment.setCourseCommentReplyList(null);
+        courseComment.setCourseCommentPraises(null);
+        courseComment.setCourseCommentReportList(null);
+        return courseComment;
+    }
+
 }

@@ -116,4 +116,22 @@ public class CourseQuestionServiceImpl implements CourseQuestionService {
         courseAnswerDao.save(courseAnswer);
         courseAnswerPraiseDao.delete(answer_id,user_id);
     }
+
+    @Override
+    public CourseQuestion findQuestionById(Integer id)
+    {
+        CourseQuestion courseQuestion;
+        courseQuestion= courseQuestionDao.findQuestionById(id);
+        courseQuestion.setCourseQuestionPraiseList(null);
+        courseQuestion.setCourseAnswerList(null);
+        return  courseQuestion;
+    }
+
+    @Override
+    public CourseAnswer findAnswerById(Integer id)
+    {
+        CourseAnswer courseAnswer=courseAnswerDao.findAnswerById(id);
+        courseAnswer.setCourseAnswerPraiseList(null);
+        return courseAnswer;
+    }
 }
