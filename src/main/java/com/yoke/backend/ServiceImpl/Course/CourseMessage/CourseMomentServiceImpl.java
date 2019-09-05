@@ -74,6 +74,9 @@ public class CourseMomentServiceImpl implements CourseMomentService {
     @Override
     public void praiseCourseMoment(Integer video_id,String user_id)
     {
+        CourseMoment courseMoment=courseMomentDao.findById(video_id);
+        courseMoment.setVideo_praise_point(courseMoment.getVideo_praise_point()+1);
+        courseMomentDao.save(courseMoment);
         CourseMomentPraise courseMomentPraise=new CourseMomentPraise(video_id,user_id);
         courseMomentPraiseDao.save(courseMomentPraise);
     }
@@ -81,6 +84,9 @@ public class CourseMomentServiceImpl implements CourseMomentService {
     @Override
     public void unpraiseCourseMoment(Integer video_id,String user_id)
     {
+        CourseMoment courseMoment=courseMomentDao.findById(video_id);
+        courseMoment.setVideo_praise_point(courseMoment.getVideo_praise_point()-1);
+        courseMomentDao.save(courseMoment);
         courseMomentPraiseDao.delete(video_id, user_id);
     }
 

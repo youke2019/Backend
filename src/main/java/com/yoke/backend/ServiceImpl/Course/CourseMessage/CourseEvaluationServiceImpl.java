@@ -126,12 +126,14 @@ public class CourseEvaluationServiceImpl implements CourseEvaluationService {
         courseEvaluatePraiseDao.save(courseEvaluationPraise);
         CourseEvaluation courseEvaluation=courseEvaluateDao.findById(course_evaluate_id);
         courseEvaluation.setEvaluate_praise_point(courseEvaluation.getEvaluate_praise_point()+1);
+        courseEvaluateDao.save(courseEvaluation);
     }
     public void unpraiseCourseEvaluation(Integer coures_evaluate_id,String user_id)
     {
         courseEvaluatePraiseDao.delete(coures_evaluate_id, user_id);
         CourseEvaluation courseEvaluation=courseEvaluateDao.findById(coures_evaluate_id);
         courseEvaluation.setEvaluate_praise_point(courseEvaluation.getEvaluate_praise_point()-1);
+        courseEvaluateDao.save(courseEvaluation);
     }
 
 }
