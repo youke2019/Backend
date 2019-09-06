@@ -27,6 +27,7 @@ public class CourseQuestionDaoImpl implements CourseQuestionDao {
     @Override
     public void save(CourseQuestion courseQuestion)
     {
+        System.out.println(courseQuestion.getQuestion_content());
         courseQuestionRepository.save(courseQuestion);
     }
 

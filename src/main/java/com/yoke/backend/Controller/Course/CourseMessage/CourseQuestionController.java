@@ -218,6 +218,7 @@ public class CourseQuestionController {
     @RequestMapping(value = "courses/questions/findById")
     CourseQuestion findQuestionById(Integer question_id)
     {
+        System.out.println("问题在这");
         return courseQuestionService.findQuestionById(question_id);
     }
 

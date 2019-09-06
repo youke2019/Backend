@@ -1,4 +1,5 @@
 package com.yoke.backend.Controller.Course.CourseMessage;
+
 import com.yoke.backend.Entity.CourseMessage.CourseMoment;
 import com.yoke.backend.Entity.CourseMessage.CourseMomentComment;
 import com.yoke.backend.Entity.Tools.FileNameUtil;
@@ -10,6 +11,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.File;
+import java.net.InetAddress;
 import java.util.List;
 
 /**
@@ -146,7 +148,7 @@ public class CourseGreatMomentController {
      */
     @RequestMapping(value = "/upload",method = RequestMethod.POST)
     @ResponseBody
-    public String uploadImg(@RequestParam("file")MultipartFile file, HttpServletRequest request)
+    public String uploadImg(@RequestParam("file")MultipartFile file, HttpServletRequest request) throws Exception
     {
         System.out.println("here");
         System.out.println(file.getOriginalFilename());
@@ -155,14 +157,10 @@ public class CourseGreatMomentController {
         fileName= FileNameUtil.getFileName(fileName);
         File dest=new File(localPath+fileName);
         if(FileUploadUtil.upload(file, localPath, fileName)){
-            // 将上传的文件写入到服务器端文件夹
-            // 获取当前项目运气的完整url
-            String requestURL = request.getRequestURL().toString();
-            // 获取当前项目的请求路径url
-            String requestURI = request.getRequestURI();
-            // 得到去掉了uri的路径
-            String url = requestURL.substring(0, requestURL.length()-requestURI.length() + 1);
-            url+="images/"+ fileName;
+            InetAddress address = InetAddress.getLocalHost();
+
+            String url = "http://"+address.getHostAddress();
+            url+="/images/"+ fileName;
             System.out.println(url);
             return  url;
 
