@@ -149,13 +149,12 @@ public class ReportController {
     }
     @RequestMapping(value = "/handle/answer", method = RequestMethod.GET)
     public Boolean handleAnswer(@RequestParam Integer course_answer_report_id,@RequestParam Integer handler) {
-        return courseReportService.handleCommentReport(course_answer_report_id, handler);
+        return courseReportService.handleAnswerReport(course_answer_report_id, handler);
     }
     @RequestMapping(value = "/handle/question", method = RequestMethod.GET)
     public Boolean handleQuestion(@RequestParam Integer course_question_report_id,@RequestParam Integer handler) {
-        return courseReportService.handleCommentReport(course_question_report_id, handler);
+        return courseReportService.handleQuestionReport(course_question_report_id, handler);
     }
-
     /**
      *
      * @param report_id
