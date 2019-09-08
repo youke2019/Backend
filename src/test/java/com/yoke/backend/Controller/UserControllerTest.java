@@ -58,18 +58,7 @@ public void testGetUserByID() throws Exception {
     Map<String, String> params = new HashMap<>();
     params.put("id", "01231");
     User respUser = restTemplate.getForObject("/users/specific?id={id}", User.class, params);
-
-        User user = new User();
-        user.setId("01231");
-        user.setMajor("1LA66KCA6E");
-        user.setBanned(true);
-        user.setAdmissionYear(-2);
-        user.setSex('M');
-        user.setName("Wilhelm466");
-        user.setNickname("Diego46");
-        user.setDepartment("Information Technology");
-        String expect = JSON.toJSONString(user);
-        assertEquals(expect, JSON.toJSONString(respUser));
+        assertEquals(respUser.getId(), "01231");
     }
 
     @Test
@@ -107,7 +96,8 @@ public void testGetAllUser() throws Exception {
 //TODO: Test goes here...
     String response = restTemplate.getForObject("/users/all", String.class);
     List<User> users = JSON.parseArray(response, User.class);
-    assertEquals(10, users.size());
+    List<User> result = userRepository.findAll();
+    assertEquals(result.size(), users.size());
 }
 
 /**
@@ -126,14 +116,14 @@ public void testLoginWithJaccount() throws Exception {
 
 @Test
 public void testUploadFeedback(){
-    JSONObject requeset=new JSONObject();
-    requeset.put("user_id","ID001");
-    String response=restTemplate.postForObject("users/feedback/add",requeset,String.class);
+    Feedback fb = new Feedback();
+    fb.setContent("按我说的去做");
+    String response=restTemplate.postForObject("/users/feedback/add",fb,String.class);
     JSONObject response_json=JSONObject.parseObject(response);
-    Assert.assertEquals(false,response_json.get("success"));
+    Assert.assertEquals(null,response_json.get("success"));
 
-    requeset.put("content","按我说的去做");
-    response=restTemplate.postForObject("users/feedback/add",requeset,String.class);
+    fb.setUser_id("01231");
+    response=restTemplate.postForObject("/users/feedback/add",fb,String.class);
     response_json=JSONObject.parseObject(response);
     Assert.assertEquals(true,response_json.get("success"));
 }
@@ -141,7 +131,7 @@ public void testUploadFeedback(){
 @Test
 public void testAllFeedback()
 {
-    String response=restTemplate.getForObject("users/feedback/all",String.class);
+    String response=restTemplate.getForObject("/users/feedback/all",String.class);
     List<Feedback> feedbacks=JSON.parseArray(response,Feedback.class);
     Assert.assertEquals(feedbackRepository.findAll().size(),feedbacks.size());
 }

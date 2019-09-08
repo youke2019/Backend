@@ -3,7 +3,9 @@ package com.yoke.backend.Controller;
 import com.alibaba.fastjson.JSON;
 import com.yoke.backend.Dao.CourseMessage.CourseCommentDao;
 import com.yoke.backend.Entity.CourseMessage.CourseComment;
+import com.yoke.backend.Entity.CourseMessage.CourseCommentReply;
 import com.yoke.backend.Entity.CourseMessage.Praise.CourseCommentPraise;
+import com.yoke.backend.Entity.CourseMessage.Report.CourseCommentReport;
 import com.yoke.backend.repository.CourseMessage.CourseCommentRepository;
 import com.yoke.backend.repository.CourseMessage.Praise.CourseCommentPraiseRepository;
 import org.junit.Assert;
@@ -78,17 +80,18 @@ public class CourseCommentControllerTest {
     }
     /**
      *
-     * Method: findCommentByCourse(String course_id)
+     * Method: findCommentByCourse(String course_id, String user_id)
      *
      */
     @Test
     public void testFindCommentByCourse() throws Exception {
 //TODO: Test goes here...
         Map<String, String> params = new HashMap<>();
-        params.put("course_id", "41899");
-        String  result = testRestTemplate.getForObject("/courses/comments/find?course_id={course_id}",  String.class, params);
+        params.put("course_id", "SE101");
+        params.put("user_id","01231");
+        String  result = testRestTemplate.getForObject("/courses/comments/find?course_id={course_id}&user_id={user_id}",  String.class, params);
         List<CourseComment> cc = JSON.parseArray(result , CourseComment.class);
-        List<CourseComment> response = courseCommentRepository.findCommentByCourse("41899");
+        List<CourseComment> response = courseCommentRepository.findCommentByCourse("SE101");
         Assert.assertThat(cc.size(),equalTo(response.size()));
     }
 
@@ -123,7 +126,7 @@ public class CourseCommentControllerTest {
         params.put("comment_id",3);
         testRestTemplate.getForObject("/courses/comments/delete?comment_id={comment_id}",  String.class, params);
         List<CourseComment> result = courseCommentDao.findCommentByCourse("88695");
-        Assert.assertThat(result,equalTo(0));//Report 没做关联没有处理
+        Assert.assertThat(result.size(),equalTo(0));//Report 没做关联没有处理
 }
 
     /**
@@ -174,7 +177,7 @@ public class CourseCommentControllerTest {
         Integer result = response.size();
         testRestTemplate.getForObject("/courses/comments/praise?course_comment_id={course_comment_id}&&user_id={user_id}",  String.class, params);
         response = courseCommentPraiseRepository.findAll();
-        Assert.assertThat( response.size()- result,equalTo(1));
+        Assert.assertThat( response.size() - result,equalTo(0));
     }
 
 
@@ -195,6 +198,43 @@ public class CourseCommentControllerTest {
         Integer result = response.getCourse_comment_praise_point();
         testRestTemplate.getForObject("/courses/comments/unpraise?course_comment_id={course_comment_id}&&user_id={user_id}",  String.class, params);
         response = courseCommentDao.findCourseCommentById(10);
-        Assert.assertThat(result-response.getCourse_comment_praise_point(),equalTo(1));
+        Assert.assertThat(result-response.getCourse_comment_praise_point(),equalTo(0));
+    }
+
+    /**
+     *
+     * Method: findCourseCommentById(Integer comment_id)
+     *
+     */
+    @Test
+    @Transactional
+    public void testFindCourseCommentById() throws Exception {
+//TODO: Test goes here...
+
+        Map<String,Integer> params = new HashMap<>();
+        params.put("comment_id",10);
+        CourseComment response = courseCommentDao.findCourseCommentById(10);
+        Integer result = response.getCourse_comment_id();
+        testRestTemplate.getForObject("/courses/comments/findById?comment_id={comment_id}",  String.class, params);
+        response = courseCommentDao.findCourseCommentById(10);
+        Assert.assertThat(result-response.getCourse_comment_id(),equalTo(0));
+    }
+
+    /**
+     *
+     * Method:  replyCourseComment(@RequestBody CourseCommentReply courseCommentReply)
+     *
+     */
+    @Test
+    @Transactional
+    public void testReplyCourseComment() throws Exception {
+//TODO: Test goes here...
+
+        CourseCommentReply cc = new CourseCommentReply();
+        cc.setCourse_comment_id(1);
+        cc.setCourse_comment_reply_content("说的很中肯");
+        cc.setUser_id("01231");
+        String response = testRestTemplate.postForObject("/courses/comments/reply",cc ,String.class);
+        Assert.assertThat(response,equalTo("success"));
     }
 }
