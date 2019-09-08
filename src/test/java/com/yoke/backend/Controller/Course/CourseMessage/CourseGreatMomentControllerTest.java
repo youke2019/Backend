@@ -62,11 +62,11 @@ public void after() throws Exception {
 public void testFindByTimeOrder() throws Exception {
     Map<String,String> params = new HashMap<>();
     params.put("base","0");
-    params.put("size","5");
+    params.put("size","1");
     params.put("user_id","01231");
     String response = testRestTemplate.getForObject("/courses/moments/find?base={base}&size={size}&user_id={user_id}",  String.class, params);
     List<CourseMoment> result = JSON.parseArray(response,CourseMoment.class);
-    Assert.assertThat(result.size(),equalTo(5));
+    Assert.assertThat(result.size(),equalTo(1));
 } 
 
 /** 
@@ -95,7 +95,7 @@ public void testFindAll() throws Exception {
 @Transactional
 public void testPraiseCourseMoment() throws Exception {
     Map<String,String> params = new HashMap<>();
-    params.put("video_id","46");
+    params.put("video_id","19011");
     params.put("user_id","01231");
     String response = testRestTemplate.getForObject("/courses/moments/praise?video_id={video_id}&&user_id={user_id}",  String.class, params);
     Assert.assertThat( response,equalTo("success"));
@@ -110,7 +110,7 @@ public void testPraiseCourseMoment() throws Exception {
 @Transactional
 public void testUnpraiseCourseMoment() throws Exception {
     Map<String,String> params = new HashMap<>();
-    params.put("video_id","46");
+    params.put("video_id","19011");
     params.put("user_id","01231");
     String response = testRestTemplate.getForObject("/courses/moments/unpraise?video_id={video_id}&&user_id={user_id}",  String.class, params);
     Assert.assertThat( response,equalTo("success"));
@@ -126,7 +126,7 @@ public void testUnpraiseCourseMoment() throws Exception {
 public void testCommentCourseMoment() throws Exception {
     CourseMomentComment cmc = new CourseMomentComment();
     cmc.setUser_id("01231");
-    cmc.setVideo_id(46);
+    cmc.setVideo_id(19011);
     cmc.setVideo_comment_content("ÄãÕæ°ô");
     String response = testRestTemplate.postForObject("/courses/moments/comment",cmc ,String.class);
     Assert.assertThat(response,equalTo("success"));
@@ -168,10 +168,10 @@ public void testUploadImg() throws Exception {
 @Transactional
 public void testFindMomentById() throws Exception {
     Map<String,Integer> params = new HashMap<>();
-    params.put("moment_id",46);
+    params.put("moment_id",19011);
     String responce = testRestTemplate.getForObject("/courses/moments/findById?moment_id={moment_id}",  String.class, params);
     CourseMoment cm = JSON.parseObject(responce,CourseMoment.class);
-    Assert.assertThat(cm.getVideo_id(),equalTo(46));
+    Assert.assertThat(cm.getVideo_id(),equalTo(19011));
 } 
 
 

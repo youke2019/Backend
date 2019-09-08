@@ -123,7 +123,7 @@ public void testReportMoment() throws Exception {
     CourseMomentReport courseAnswerReport = new CourseMomentReport();
     courseAnswerReport.setUser_id("01231");
     courseAnswerReport.setVideo_report_reason("");
-    courseAnswerReport.setVideo_id(46);
+    courseAnswerReport.setVideo_id(19011);
     String responce = testRestTemplate.postForObject("/report/report/moment",courseAnswerReport,String.class);
     Assert.assertThat(responce,equalTo("success"));
 } 
