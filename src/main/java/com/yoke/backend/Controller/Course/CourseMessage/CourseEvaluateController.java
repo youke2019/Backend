@@ -14,6 +14,7 @@ import java.util.List;
  * @DATE : 2019/7/15
  * @description:
  **/
+@CrossOrigin
 @RestController
 @RequestMapping(value = "/courses/evaluates")
 public class CourseEvaluateController {

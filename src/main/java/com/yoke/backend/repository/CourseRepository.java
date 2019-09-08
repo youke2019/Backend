@@ -21,6 +21,6 @@ public interface CourseRepository extends JpaRepository<CourseInfo,Integer> {
     @Query(value="select * from course where course_id=?1",nativeQuery = true)
     CourseInfo findByCourse_id(String course_id);
 
-    @Query(value = "select course.* from course,course_evaluate where general=1 and course.course_id = course_evaluate.course_id and ID != ?1 group by course.course_id order by avg(course_evaluate_point) desc limit ?2",nativeQuery = true)
+    @Query(value = "select course.* from course,course_evaluate where course.course_id = course_evaluate.course_id and ID != ?1 group by course.course_id order by avg(course_evaluate_point) desc limit ?2",nativeQuery = true)
     List<CourseInfo> findPopularGeneralCourse(String user_id,Integer size);
 }

@@ -13,6 +13,7 @@ import java.util.List;
  * @DATE : 2019/7/17
  * @description:
  **/
+@CrossOrigin
 @RestController
 public class CourseQuestionController {
     @Autowired
@@ -218,6 +219,7 @@ public class CourseQuestionController {
     @RequestMapping(value = "courses/questions/findById")
     CourseQuestion findQuestionById(Integer question_id)
     {
+        System.out.println("问题在这");
         return courseQuestionService.findQuestionById(question_id);
     }
 

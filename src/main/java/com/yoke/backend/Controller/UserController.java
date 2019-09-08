@@ -14,7 +14,7 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.servlet.http.HttpServletRequest;
 import java.io.File;
 import java.util.List;
-
+@CrossOrigin
 @RestController
 @RequestMapping("/users")
 public class UserController {

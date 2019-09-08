@@ -13,6 +13,7 @@ import java.util.List;
  * @DATE : 2019/7/12
  * @description:
  **/
+@CrossOrigin
 @RestController
 @RequestMapping(value = "/courses/comments")
 public class CourseCommentController {
