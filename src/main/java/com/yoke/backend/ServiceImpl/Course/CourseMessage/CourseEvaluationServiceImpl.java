@@ -55,7 +55,7 @@ public class CourseEvaluationServiceImpl implements CourseEvaluationService {
         /**
          * 服务器 mongodb://root:XunKeTeam2019@127.0.0.1:27017/
          */
-        MongoClient mongoClient=new MongoClient(new MongoClientURI("mongodb://root:XunKeTeam2019@127.0.0.1:27017/"));
+        MongoClient mongoClient=new MongoClient(new MongoClientURI("mongodb://root:XunKeTeam2019@47.103.30.166:27017/"));
         MongoDatabase mongoDatabase=mongoClient.getDatabase("yoke");
         MongoCollection<Document> collection=mongoDatabase.getCollection("evaluation");
         List<CourseEvaluation> courseEvaluationList=courseEvaluateDao.findByCourse(course_id);
@@ -109,7 +109,7 @@ public class CourseEvaluationServiceImpl implements CourseEvaluationService {
          * 存放在mongodb中的evaluate文档中，用来存储评测的用户自定义扩展项
          */
         jsonObject.put("evaluate_id",courseEvaluation.getEvaluate_id());
-        MongoClient mongoClient=new MongoClient(new MongoClientURI("mongodb://root:XunKeTeam2019@127.0.0.1:27017/"));
+        MongoClient mongoClient=new MongoClient(new MongoClientURI("mongodb://root:XunKeTeam2019@47.103.30.166:27017/"));
         MongoDatabase mongoDatabase=mongoClient.getDatabase("yoke");
         MongoCollection<Document> collection=mongoDatabase.getCollection("evaluation");
         json=JSON.toJSONString(jsonObject);
