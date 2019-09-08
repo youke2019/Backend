@@ -28,7 +28,4 @@ public class TimeController {
         return week;
     }
 
-    @RequestMapping(value = "/test", method = RequestMethod.GET)
-    public void test() throws Exception {
-    }
 }
