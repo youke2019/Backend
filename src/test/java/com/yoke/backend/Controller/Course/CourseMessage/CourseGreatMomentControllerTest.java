@@ -1,8 +1,28 @@
 package com.yoke.backend.Controller.Course.CourseMessage;
 
-import org.junit.Test; 
+import com.alibaba.fastjson.JSON;
+import com.yoke.backend.Dao.CourseMessage.CourseMomentDao;
+import com.yoke.backend.Dao.CourseMessage.Praise.CourseMomentPraiseDao;
+import com.yoke.backend.Entity.CourseMessage.CourseMoment;
+import com.yoke.backend.Entity.CourseMessage.CourseMomentComment;
+import com.yoke.backend.Entity.CourseMessage.Praise.CourseMomentPraise;
+import com.yoke.backend.repository.CourseMessage.Praise.CourseMomentPraiseRepository;
+import org.junit.Assert;
+import org.junit.Test;
 import org.junit.Before; 
-import org.junit.After; 
+import org.junit.After;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.web.client.TestRestTemplate;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+
+import javax.transaction.Transactional;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import static org.hamcrest.CoreMatchers.equalTo;
 
 /** 
 * CourseGreatMomentController Tester. 
@@ -10,7 +30,10 @@ import org.junit.After;
 * @author <Authors name> 
 * @since <pre>九月 8, 2019</pre> 
 * @version 1.0 
-*/ 
+*/
+
+@RunWith(SpringJUnit4ClassRunner.class)
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class CourseGreatMomentControllerTest { 
 
 @Before
@@ -19,16 +42,31 @@ public void before() throws Exception {
 
 @After
 public void after() throws Exception { 
-} 
+}
 
+    @Autowired
+    private TestRestTemplate testRestTemplate;
+
+    @Autowired
+    private CourseMomentDao courseMomentDao;
+
+    @Autowired
+    private CourseMomentPraiseRepository courseMomentPraiseRepository;
 /** 
 * 
 * Method: findByTimeOrder(Integer base, Integer size, String user_id) 
 * 
 */ 
 @Test
-public void testFindByTimeOrder() throws Exception { 
-//TODO: Test goes here... 
+@Transactional
+public void testFindByTimeOrder() throws Exception {
+    Map<String,String> params = new HashMap<>();
+    params.put("base","0");
+    params.put("size","5");
+    params.put("user_id","01231");
+    String response = testRestTemplate.getForObject("/courses/moments/find?base={base}&size={size}&user_id={user_id}",  String.class, params);
+    List<CourseMoment> result = JSON.parseArray(response,CourseMoment.class);
+    Assert.assertThat(result.size(),equalTo(5));
 } 
 
 /** 
@@ -37,7 +75,14 @@ public void testFindByTimeOrder() throws Exception {
 * 
 */ 
 @Test
-public void testFindAll() throws Exception { 
+@Transactional
+public void testFindAll() throws Exception {
+    Map<String,String> params = new HashMap<>();
+    params.put("user_id","01231");
+    String response = testRestTemplate.getForObject("/courses/moments/findAll?user_id={user_id}",  String.class, params);
+    List<CourseMoment> result = JSON.parseArray(response,CourseMoment.class);
+    List<CourseMoment> tmp = courseMomentDao.findAll();
+    Assert.assertThat(result.size(),equalTo(tmp.size()));
 //TODO: Test goes here... 
 } 
 
@@ -47,8 +92,13 @@ public void testFindAll() throws Exception {
 * 
 */ 
 @Test
-public void testPraiseCourseMoment() throws Exception { 
-//TODO: Test goes here... 
+@Transactional
+public void testPraiseCourseMoment() throws Exception {
+    Map<String,String> params = new HashMap<>();
+    params.put("video_id","46");
+    params.put("user_id","01231");
+    String response = testRestTemplate.getForObject("/courses/moments/praise?video_id={video_id}&&user_id={user_id}",  String.class, params);
+    Assert.assertThat( response,equalTo("success"));
 } 
 
 /** 
@@ -57,8 +107,13 @@ public void testPraiseCourseMoment() throws Exception {
 * 
 */ 
 @Test
-public void testUnpraiseCourseMoment() throws Exception { 
-//TODO: Test goes here... 
+@Transactional
+public void testUnpraiseCourseMoment() throws Exception {
+    Map<String,String> params = new HashMap<>();
+    params.put("video_id","46");
+    params.put("user_id","01231");
+    String response = testRestTemplate.getForObject("/courses/moments/unpraise?video_id={video_id}&&user_id={user_id}",  String.class, params);
+    Assert.assertThat( response,equalTo("success"));
 } 
 
 /** 
@@ -67,8 +122,14 @@ public void testUnpraiseCourseMoment() throws Exception {
 * 
 */ 
 @Test
-public void testCommentCourseMoment() throws Exception { 
-//TODO: Test goes here... 
+@Transactional
+public void testCommentCourseMoment() throws Exception {
+    CourseMomentComment cmc = new CourseMomentComment();
+    cmc.setUser_id("01231");
+    cmc.setVideo_id(46);
+    cmc.setVideo_comment_content("你真棒");
+    String response = testRestTemplate.postForObject("/courses/moments/comment",cmc ,String.class);
+    Assert.assertThat(response,equalTo("success"));
 } 
 
 /** 
@@ -77,8 +138,14 @@ public void testCommentCourseMoment() throws Exception {
 * 
 */ 
 @Test
+@Transactional
 public void testPostCourseMoment() throws Exception { 
-//TODO: Test goes here... 
+    CourseMoment cm = new CourseMoment();
+    cm.setUser_id("01231");
+    cm.setVideo_type('n');
+    cm.setPost_text("新学期又开始了");
+    String response = testRestTemplate.postForObject("/courses/moments/post",cm ,String.class);
+    Assert.assertThat(response,equalTo("success"));
 } 
 
 /** 
@@ -87,8 +154,9 @@ public void testPostCourseMoment() throws Exception {
 * 
 */ 
 @Test
+@Transactional
 public void testUploadImg() throws Exception { 
-//TODO: Test goes here... 
+
 } 
 
 /** 
@@ -97,8 +165,13 @@ public void testUploadImg() throws Exception {
 * 
 */ 
 @Test
-public void testFindMomentById() throws Exception { 
-//TODO: Test goes here... 
+@Transactional
+public void testFindMomentById() throws Exception {
+    Map<String,Integer> params = new HashMap<>();
+    params.put("moment_id",46);
+    String responce = testRestTemplate.getForObject("/courses/moments/findById?moment_id={moment_id}",  String.class, params);
+    CourseMoment cm = JSON.parseObject(responce,CourseMoment.class);
+    Assert.assertThat(cm.getVideo_id(),equalTo(46));
 } 
 
 
