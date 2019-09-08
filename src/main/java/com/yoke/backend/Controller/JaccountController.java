@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
 import javax.servlet.http.HttpServletResponse;
-
+@CrossOrigin
 @RestController
 @RequestMapping(value = "/jaccount")
 public class JaccountController {

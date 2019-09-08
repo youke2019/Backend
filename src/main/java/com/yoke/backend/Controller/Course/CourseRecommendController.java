@@ -3,6 +3,7 @@ package com.yoke.backend.Controller.Course;
 import com.yoke.backend.Entity.Course.CourseInfo;
 import com.yoke.backend.Service.Course.CourseRecommendService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -14,6 +15,7 @@ import java.util.List;
  * @DATE : 2019/7/31
  * @description:
  **/
+@CrossOrigin
 @RestController
 @RequestMapping("courses/recommend")
 public class CourseRecommendController {

@@ -13,6 +13,7 @@ import java.util.List;
  * @DATE : 2019/7/17
  * @description:
  **/
+@CrossOrigin
 @RestController
 public class CourseQuestionController {
     @Autowired

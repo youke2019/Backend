@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-
+@CrossOrigin
 @RestController
 @RequestMapping(value = "/courses")
 public class CourseController {

@@ -17,6 +17,7 @@ import java.util.List;
  * @DATE : 2019/7/19
  * @description:
  **/
+@CrossOrigin
 @RestController
 @RequestMapping(value = "courses/moments")
 public class CourseGreatMomentController {

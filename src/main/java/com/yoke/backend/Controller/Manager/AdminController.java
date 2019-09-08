@@ -18,6 +18,7 @@ import java.util.List;
  * @DATE : 2019/9/1
  * @description:
  **/
+@CrossOrigin
 @RestController
 @RequestMapping(value = "/manager")
 public class AdminController {
