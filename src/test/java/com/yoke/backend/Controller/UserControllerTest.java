@@ -6,22 +6,26 @@ import com.yoke.backend.Entity.User.Feedback;
 import com.yoke.backend.Entity.User.User;
 import com.yoke.backend.repository.User.FeedbackRepository;
 import com.yoke.backend.repository.User.UserRepository;
-import org.junit.Assert;
-import org.junit.Test;
-import org.junit.Before;
 import org.junit.After;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-
 import org.springframework.boot.test.web.client.TestRestTemplate;
+import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import static org.junit.Assert.assertEquals;
+import static org.springframework.http.MediaType.APPLICATION_OCTET_STREAM;
 
 /**
 * UserController Tester.
@@ -134,5 +138,19 @@ public void testAllFeedback()
     String response=restTemplate.getForObject("/users/feedback/all",String.class);
     List<Feedback> feedbacks=JSON.parseArray(response,Feedback.class);
     Assert.assertEquals(feedbackRepository.findAll().size(),feedbacks.size());
+}
+
+@Test
+public void testUploadAvator() throws Exception
+{
+    File file=new File("G:\\blog-images/cmu.jpg");
+    JSONObject jsonObject=new JSONObject();
+    FileInputStream fileInputStream=null;
+    fileInputStream =new FileInputStream(file);
+    MultipartFile multipartFile=new MockMultipartFile(file.getName(),file.getName(), APPLICATION_OCTET_STREAM.toString(),fileInputStream);
+    jsonObject.put("file", multipartFile);
+    String response=restTemplate.postForObject("/users/avatar/upload",jsonObject,String.class);
+    Assert.assertEquals(null,response);
+
 }
 }
