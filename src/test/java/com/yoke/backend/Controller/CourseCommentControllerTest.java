@@ -76,7 +76,7 @@ public class CourseCommentControllerTest {
         List<CourseComment> cc = JSON.parseArray(response, CourseComment.class);
         List<CourseComment> responce = courseCommentRepository.findAll();
         Integer size = cc.size();
-        Assert.assertThat(size,equalTo(responce.size()));
+        Assert.assertThat(responce.size(),equalTo(responce.size()));
     }
     /**
      *
