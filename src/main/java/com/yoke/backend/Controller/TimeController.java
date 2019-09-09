@@ -15,7 +15,7 @@ public class TimeController {
     @RequestMapping(value="/week",method = RequestMethod.GET)
     public long getWeek()
     {
-        String start = "2019-02-25";
+        String start = "2019-09-09";
         long week=0;
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
         try {

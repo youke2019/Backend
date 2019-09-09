@@ -12,7 +12,7 @@ import java.util.List;
  * @description:
  **/
 public interface CourseCommentRepository extends JpaRepository<CourseComment,Integer>{
-    @Query(value="select * from course_comment where course_id=?1",nativeQuery = true)
+    @Query(value="select * from course_comment where course_id=?1 and course_comment_isbanned=0",nativeQuery = true)
     List<CourseComment> findCommentByCourse(String course_id);
 
 }
