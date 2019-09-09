@@ -109,22 +109,38 @@ public void testPraiseQuestion() throws Exception {
     Assert.assertThat(result,equalTo("success"));
 } 
 
-/** 
-* 
-* Method: praiseAnswer(Integer answer_id, String user_id) 
-* 
-*/ 
+/**
+*
+* Method: praiseAnswer(Integer answer_id, String user_id)
+*
+*/
 @Test
-public void testPraiseAnswer() throws Exception { 
+public void testPraiseAnswer() throws Exception {
 //TODO: Test goes here...
     Map<String,String> params = new HashMap<>();
     params.put("answer_id","4");
     params.put("user_id","01231");
     String  result = restTemplate.getForObject("/courses/answers/praise?answer_id={answer_id}&&user_id={user_id}",  String.class, params);
     Assert.assertThat(result,equalTo("success"));
-} 
+}
 
-/** 
+
+     /**
+      *
+      * Method: unpraiseAnswer(Integer answer_id, String user_id)
+      *
+      */
+     @Test
+     public void testUnpraiseAnswer() throws Exception {
+//TODO: Test goes here...
+         Map<String,String> params = new HashMap<>();
+         params.put("answer_id","5555");
+         params.put("user_id","01231");
+         String  result = restTemplate.getForObject("/courses/answers/unpraise?answer_id={answer_id}&&user_id={user_id}",  String.class, params);
+         Assert.assertThat(result,equalTo("success"));
+     }
+
+     /**
 * 
 * Method: unpraiseQuestion(Integer question_id, String user_id) 
 * 
